@@ -8,20 +8,23 @@ from datetime import datetime
 
 ############################### dados da casa #################################
 
-
 dados_casa = []
 transicoes = []
 dias_casa = []
 
-arquivo = open("home.csv", "r")
+#Obs: sempre se atentar ao modelo de dados fornecido (quais colunas são fornecidas)
+arquivo = open("home.csv", "r") #leitura inicial do arquivo
+
+#Tratamento do cabeçalho
 line = arquivo.readline()
-lineSplit = line.split(",")
+lineSplit = line.split(",") #separa os campos do cabeçalho num vetor
 lineSplit[-1] = lineSplit[-1][:-1]
 dados_casa.append(lineSplit)
 
+#Tratamento dos dados de sensores
 for line in arquivo:
     lineSplit = line.split(",")
-    lineSplit[2:] =  list(map(int,lineSplit[2:]))
+    lineSplit[2:] =  list(map(int,lineSplit[2:])) #Conversão das leituras de sensores para int
     dados_casa.append(lineSplit)
 arquivo.close()
 
