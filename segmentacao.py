@@ -8,9 +8,9 @@ from datetime import datetime
 
 ############################### dados da casa #################################
 
-dados_casa = []
-transicoes = []
-dias_casa = []
+dados_casa = [] #Arquivo de entrada contendo os dados da casa
+transicoes = [] #Índices de mudança de estado de todos os sensores da presença
+dias_casa = [] #Índice no qual um dia acaba
 
 #Obs: sempre se atentar ao modelo de dados fornecido (quais colunas são fornecidas)
 arquivo = open("home.csv", "r") #leitura inicial do arquivo
@@ -28,16 +28,33 @@ for line in arquivo:
     dados_casa.append(lineSplit)
 arquivo.close()
 
+#Identificação de transições (escada, aquario, banho, presença)
+size_janela = 3
+
+add_transicao = True
 
 for j in [5,10,13,15, 16, 17, 18, 19, 20, 21, 22, 23]: 
 	transicao_col = [j]
-	for i in range(1, len(dados_casa)-3): 
-		if j > 14:
-			if dados_casa[i][j] > dados_casa[i+1][j] and dados_casa[i][j] > dados_casa[i+2][j] and dados_casa[i][j] > dados_casa[i+3][j]:
-				transicao_col.append(i+1)
-		else:
-			if (dados_casa[i][j] != dados_casa[i+1][j]) and (dados_casa[i][j] != dados_casa[i+2][j]) and (dados_casa[i][j] != dados_casa[i+3][j]):
-				transicao_col.append(i+1)
+	for i in range(1, len(dados_casa) - size_janela): 
+		if j > 14: #Presenças
+			for k in range(1,size_janela+1):
+				if dados_casa[i][j] <= dados_casa[i+k][j]:
+					add_transicao = False
+					break
+
+		else: #luz_escada, luz_aquario, luz_banho (Cômodos s/ sensor de presença)
+			for k in range(1,size_janela+1):
+				if dados_casa[i][j] == dados_casa[i+k][j]:
+					add_transicao = False
+					break
+			
+			#if (dados_casa[i][j] != dados_casa[i+1][j]) and (dados_casa[i][j] != dados_casa[i+2][j]) and (dados_casa[i][j] != dados_casa[i+3][j]):
+			#	transicao_col.append(i+1)
+			
+		if add_transicao:
+			transicao_col.append(i+1)
+		add_transicao = True
+
 	transicoes.append(transicao_col)
 
 for i in range(1,len(dados_casa)-1):
@@ -61,9 +78,7 @@ for i in range(len(dias_casa)-1):
 	print("\n\n")
 """
 
-
-
-
+#Índices do log de entrada por cômodo
 sala = [2,15,27]
 cozinha = [3,7,16,28]
 lavanderia = [4,17,29]
@@ -77,11 +92,13 @@ quarto3 = [14,23,26]
 banheiro = [13]
 aquario = [10]
 
+casa = [sala, cozinha, lavanderia, escada, garagem, cobertura, corredor, quarto1, quarto2, quarto3, banheiro, aquario]
 
-############################### dados de dados_acesso #################################
+
+############################### dados de acesso na casa #################################
 
 dados_acesso =[]
-dias_acesso = [1]
+dias_acesso = [] #Índice no qual um dia acaba
 
 arquivo = open("access.csv", "r")
 line = arquivo.readline()
@@ -90,11 +107,9 @@ dados_acesso.append(lineSplit)
 
 for line in arquivo:
     lineSplit = line.split(",")
-    lineSplit[1] =  time.strftime("%Y/%m/%d, %H:%M:%S", time.localtime(int(lineSplit[1])))
+    lineSplit[1] =  time.strftime("%Y/%m/%d, %H:%M:%S", time.localtime(int(lineSplit[1]))) #Timestamp UNIX p/ datetime
     dados_acesso.append(lineSplit)
 arquivo.close()
-
-
 
 for i in range(1,len(dados_acesso)-1):
 	datetime_dia = datetime.strptime(dados_acesso[i][1][:10], '%Y/%m/%d')
@@ -103,13 +118,25 @@ for i in range(1,len(dados_acesso)-1):
 		dias_acesso.append(i+1)
 dias_acesso.append(-1)
 print(dias_acesso)
+
+################### Extracao das features para classificacao #######################
+indice = transicoes[3][1]
+#vetor = [dados_casa[:indice][2],dados_casa[:indice][15],dados_casa[:indice][27]]
+segmento = dados_casa[:indice] 
+vetor = []
+for i in segmento:
+	aux = [i[2],i[15],i[27]]
+	vetor.append(aux)
+
+print(vetor)
+
+#def feature_vector(vetor):
+
 #for i in range(len(dias_acesso)-1):
 #	inicio = dias_acesso[i]
 #	fim = dias_acesso[i+1]
 #	print(dados_acesso[inicio:fim])
 #	print("\n\n")
-
-
 
 
 """
@@ -171,9 +198,6 @@ plt.plot(range(len(pres_sala[troca[i]:troca[i+3]])),norm.pdf(pres_sala[troca[i]:
 plt.subplot(224)
 plt.plot(range(len(pres_sala[troca[i]:troca[i+4]])),norm.pdf(pres_sala[troca[i]:troca[i+4]]))
 
-
-
-
 plt.figure(1)
 	plt.subplot(221)
 	plt.plot(range(len(window[i][0:1])),norm.pdf(window[[i][0:1]]))
@@ -184,7 +208,3 @@ plt.figure(1)
 	plt.subplot(224)
 	plt.plot(range(len(window[i][0:4])),norm.pdf(window[[i][0:4]]))
 """
-
-
-  
-
