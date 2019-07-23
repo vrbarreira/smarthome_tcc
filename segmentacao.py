@@ -4,7 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import integrate
 import time
-from datetime import datetime
+from datetime import datetime as dt
+import datetime
 
 ############################### dados da casa #################################
 
@@ -58,15 +59,15 @@ for j in [5,10,13,15, 16, 17, 18, 19, 20, 21, 22, 23]:
 	transicoes.append(transicao_col)
 
 for i in range(1,len(dados_casa)-1):
-	datetime_dia = datetime.strptime(dados_casa[i][1][1:11], '%Y-%m-%d')
-	datetime_prox_dia = datetime.strptime(dados_casa[i+1][1][1:11], '%Y-%m-%d')
+	datetime_dia = dt.strptime(dados_casa[i][1][1:11], '%Y-%m-%d')
+	datetime_prox_dia = dt.strptime(dados_casa[i+1][1][1:11], '%Y-%m-%d')
 	if datetime_prox_dia > datetime_dia:
 		dias_casa.append(i+1)
 
 
 dias_casa.append(-1)
-print(dias_casa)
-print(transicoes)
+#print(dias_casa)
+#print(transicoes)
 
 """
 for i in range(len(dias_casa)-1):
@@ -112,25 +113,103 @@ for line in arquivo:
 arquivo.close()
 
 for i in range(1,len(dados_acesso)-1):
-	datetime_dia = datetime.strptime(dados_acesso[i][1][:10], '%Y/%m/%d')
-	datetime_prox_dia = datetime.strptime(dados_acesso[i+1][1][:10], '%Y/%m/%d')
+	datetime_dia = dt.strptime(dados_acesso[i][1][:10], '%Y/%m/%d')
+	datetime_prox_dia = dt.strptime(dados_acesso[i+1][1][:10], '%Y/%m/%d')
 	if datetime_prox_dia > datetime_dia:
 		dias_acesso.append(i+1)
 dias_acesso.append(-1)
-print(dias_acesso)
+#print(dias_acesso)
 
 ################### Extracao das features para classificacao #######################
-indice = transicoes[3][1]
-#vetor = [dados_casa[:indice][2],dados_casa[:indice][15],dados_casa[:indice][27]]
-segmento = dados_casa[:indice] 
-vetor = []
-for i in segmento:
-	aux = [i[2],i[15],i[27]]
-	vetor.append(aux)
+indice = transicoes[3][2]
+vetor = dados_casa[4:indice] 
+
+print(dados_casa[0][2],dados_casa[0][15],dados_casa[0][27])
+#print(vetor)
+ 
+dias = [
+    'Segunda-feira',
+    'Terça-feira',
+    'Quarta-feira',
+    'Quinta-Feira',
+    'Sexta-feira',
+    'Sábado',
+    'Domingo'
+]
+
+"""
+
+entradas
+vetor: vetor de vetores
+vetor_col: vetor de indices
+
+esta funcao diz quantas transicoes do tipo on/off existem para todos os aparelhos presentes na entrada da funcao e
+mostra em forma de porcentagem o tempo que os aparelhos ficaram ligados
+"""
+def feature_vector_aparelho(vetor, vetor_col):
+	estado = []
+	vetor[0][2] = 0
+	vetor[0][27] = 1
+	vetor[7][2] = 0
+	vetor[8][27] = 1
+
+	for i in range(len(vetor[0])):
+		estado.append(vetor[0][i])
+	transicao_on_off = [0]*len(vetor[0])
+	tempo_ligado = [0]*len(vetor[0])
+
+	for aparelho in vetor:
+		for indice in vetor_col:
+			if aparelho[indice] == 1:
+				tempo_ligado[indice] += 1
+			if aparelho[indice] != estado[indice]:
+				transicao_on_off[indice] += 1 
+				estado[indice] = aparelho[indice]
+
+	for indice in vetor_col:
+		tempo_ligado[indice] = tempo_ligado[indice]/len(vetor)
+
+	return transicao_on_off, tempo_ligado
+
+print(feature_vector_aparelho(vetor,[2,27]))
+
+"""
+
+entradas
+vetor: vetor 
+vetor_col: vetor de indices
+
+esta funcao diz em qual dia da semana a atividade esta sendo realizada, horario de inicio, periodo e se o dia eh fim de semana ou nao 
+"""
+def feature_tempo(vetor, vetor_col):
+	ind_timestamp = vetor_col[0]
+	ind_tempo_inatividade = vetor_col[1]
+
+	dia_data = dt.strptime(vetor[ind_timestamp][1:-1], '%Y-%m-%d %H:%M') 
+	dia_semana = dias[dia_data.weekday()]
+	hora_inicio = datetime.time(dia_data.hour,dia_data.minute,)
+	
+	if hora_inicio.hour >= 0 and hora_inicio.hour <= 4:
+		periodo = "madrugada"
+	elif hora_inicio.hour >= 5 and hora_inicio.hour <= 11:
+		periodo = "manha"
+	elif hora_inicio.hour >= 12 and hora_inicio.hour <= 18:
+		periodo = "tarde"
+	elif hora_inicio.hour >= 19 and hora_inicio.hour <= 23:
+		periodo = "noite"
+
+	if dia_semana == "Domingo" or dia_semana == "Sábado":
+		fim_semana = True
+	else:
+		fim_semana = False
+
+	return hora_inicio, dia_semana, dia_data, periodo, fim_semana
+
+
 
 print(vetor)
-
-#def feature_vector(vetor):
+print(dados_casa[0][1],dados_casa[0][15])
+print(feature_tempo(vetor[0],[1,15]))
 
 #for i in range(len(dias_acesso)-1):
 #	inicio = dias_acesso[i]
