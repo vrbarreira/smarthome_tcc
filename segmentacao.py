@@ -176,14 +176,13 @@ print(feature_vector_aparelho(vetor,[2,27]))
 """
 
 entradas
-vetor: vetor 
-vetor_col: vetor de indices
+vetor: vetor de dados
+col: indice do vetor que contem a informacao de interesse
 
 esta funcao diz em qual dia da semana a atividade esta sendo realizada, horario de inicio, periodo e se o dia eh fim de semana ou nao 
 """
-def feature_tempo(vetor, vetor_col):
-	ind_timestamp = vetor_col[0]
-	ind_tempo_inatividade = vetor_col[1]
+def feature_tempo(vetor, col):
+	ind_timestamp = col[0]
 
 	dia_data = dt.strptime(vetor[ind_timestamp][1:-1], '%Y-%m-%d %H:%M') 
 	dia_semana = dias[dia_data.weekday()]
