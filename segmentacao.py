@@ -7,6 +7,41 @@ import time
 from datetime import datetime as dt
 import datetime
 
+############################### funcoes de ajuda deletar dps ##############################
+
+"""
+printa as linhas da matrix de dados onde ocorre trancao de estado 1-0 ou 0-1 junto com os indices 
+linhas: linhas da matrix 
+indice: indice da linha onde ocorreu a transicao 
+"""
+def imprimeTransicoes(matrix_dados, vetor_col):
+	estado = matrix_dados[0]
+	indice = [[0]]*len(matrix_dados[0])
+	linhas = [[0]]*len(matrix_dados[0])
+	entra = True
+	for i in range(len(matrix_dados)):
+		for j in vetor_col:
+			if entra and matrix_dados[i][j] != estado[j]:
+				print(i,"dasdas")
+				estado[j] = matrix_dados[i][j]
+				indice[j]= [i]
+				linhas[j]= [matrix_dados[i-1]]
+				linhas[j].append(matrix_dados[i])
+				linhas[j].append(matrix_dados[i+1]) 
+
+				entra = False
+			
+			elif matrix_dados[i][j] != estado[j]:
+				estado[j] = matrix_dados[i][j]
+				indice[j].append(i)
+				linhas[j].append(matrix_dados[i-1])
+				linhas[j].append(matrix_dados[i])
+				linhas[j].append(matrix_dados[i+1]) 
+	return linhas, indice
+
+
+
+
 ############################### dados da casa #################################
 
 dados_casa = [] #Arquivo de entrada contendo os dados da casa
@@ -118,6 +153,7 @@ for i in range(1,len(dados_acesso)-1):
 	if datetime_prox_dia > datetime_dia:
 		dias_acesso.append(i+1)
 dias_acesso.append(-1)
+escada_linha, escada_indie = imprimeTransicoes(dados_casa[1:], [5])
 #print(dias_acesso)
 
 ################### Extracao das features para classificacao #######################
