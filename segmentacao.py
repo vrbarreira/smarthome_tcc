@@ -7,45 +7,10 @@ import time
 from datetime import datetime as dt
 import datetime
 
+############################### dados da casa #################################
 id_luz_sala = 2
 id_pres_sala = 15
 id_tv_sala = 27
-############################### funcoes de ajuda deletar dps ##############################
-
-"""
-printa as linhas da matrix de dados onde ocorre trancao de estado 1-0 ou 0-1 junto com os indices 
-linhas: linhas da matrix 
-indice: indice da linha onde ocorreu a transicao 
-"""
-def imprimeTransicoes(matrix_dados, vetor_col):
-	estado = matrix_dados[0]
-	indice = [[0]]*len(matrix_dados[0])
-	linhas = [[0]]*len(matrix_dados[0])
-	entra = True
-	for i in range(len(matrix_dados)):
-		for j in vetor_col:
-			if entra and matrix_dados[i][j] != estado[j]:
-				print(i,"dasdas")
-				estado[j] = matrix_dados[i][j]
-				indice[j]= [i]
-				linhas[j]= [matrix_dados[i-1]]
-				linhas[j].append(matrix_dados[i])
-				linhas[j].append(matrix_dados[i+1]) 
-
-				entra = False
-			
-			elif matrix_dados[i][j] != estado[j]:
-				estado[j] = matrix_dados[i][j]
-				indice[j].append(i)
-				linhas[j].append(matrix_dados[i-1])
-				linhas[j].append(matrix_dados[i])
-				linhas[j].append(matrix_dados[i+1]) 
-	return linhas, indice
-
-
-
-
-############################### dados da casa #################################
 
 id_luz_cozinha = 3
 id_luz_dispensa = 7
@@ -108,29 +73,11 @@ dias_casa = [] #Índice no qual um dia acaba
 dados_acesso = []
 dias_acesso = [] #Índice no qual um dia acaba
 
+
 #Índices hardcode. Esta parte será customizável em versão futura
 #luz_escada, luz_aquario, luz_banho, pres_sala, pres_cozinha pres_lavanderia, pres_garagem, pres_quarto1, pres_quarto2, pres_quarto3
 indices_sensores = [5,10,13,15, 16, 17, 18, 19, 20, 21, 22, 23]
 #Foram escolhidos sensores de presença ou de luz, quando não há sensor de presença no cômodo
-arquivo = open("access.csv", "r")
-line = arquivo.readline()
-lineSplit = line.split(",")
-dados_acesso.append(lineSplit)
-
-for line in arquivo:
-    lineSplit = line.split(",")
-    lineSplit[1] =  time.strftime("%Y/%m/%d, %H:%M:%S", time.localtime(int(lineSplit[1]))) #Timestamp UNIX p/ datetime
-    dados_acesso.append(lineSplit)
-arquivo.close()
-
-for i in range(1,len(dados_acesso)-1):
-	datetime_dia = dt.strptime(dados_acesso[i][1][:10], '%Y/%m/%d')
-	datetime_prox_dia = dt.strptime(dados_acesso[i+1][1][:10], '%Y/%m/%d')
-	if datetime_prox_dia > datetime_dia:
-		dias_acesso.append(i+1)
-dias_acesso.append(-1)
-escada_linha, escada_indie = imprimeTransicoes(dados_casa[1:], [5])
-#print(dias_acesso)
 
 ################### Extracao das features para classificacao #######################
 indice = transicoes[3][2]
@@ -214,6 +161,7 @@ def init_dados_casa():
 		print(dados_casa[fim+1],fim)
 		print("\n\n")
 	"""
+
 def init_dados_acesso():
 	global dados_acesso
 	global dias_acesso
@@ -235,6 +183,7 @@ def init_dados_acesso():
 		if datetime_prox_dia > datetime_dia:
 			dias_acesso.append(i+1)
 	dias_acesso.append(-1)
+	escada_linha, escada_indie = imprimeTransicoes(dados_casa[1:], [5])
 	#print(dias_acesso)
 
 init_dados_casa()
@@ -247,6 +196,38 @@ vetor = dados_casa[4:indice]
 #Teste de verificação com dados da casa
 print(dados_casa[0][2],dados_casa[0][15],dados_casa[0][27])
 #print(vetor)
+
+############################### funcoes de ajuda deletar dps ##############################
+
+"""
+printa as linhas da matrix de dados onde ocorre trancao de estado 1-0 ou 0-1 junto com os indices 
+linhas: linhas da matrix 
+indice: indice da linha onde ocorreu a transicao 
+"""
+def imprimeTransicoes(matrix_dados, vetor_col):
+	estado = matrix_dados[0]
+	indice = [[0]]*len(matrix_dados[0])
+	linhas = [[0]]*len(matrix_dados[0])
+	entra = True
+	for i in range(len(matrix_dados)):
+		for j in vetor_col:
+			if entra and matrix_dados[i][j] != estado[j]:
+				print(i,"dasdas")
+				estado[j] = matrix_dados[i][j]
+				indice[j]= [i]
+				linhas[j]= [matrix_dados[i-1]]
+				linhas[j].append(matrix_dados[i])
+				linhas[j].append(matrix_dados[i+1]) 
+
+				entra = False
+			
+			elif matrix_dados[i][j] != estado[j]:
+				estado[j] = matrix_dados[i][j]
+				indice[j].append(i)
+				linhas[j].append(matrix_dados[i-1])
+				linhas[j].append(matrix_dados[i])
+				linhas[j].append(matrix_dados[i+1]) 
+	return linhas, indice
 
 """
 
