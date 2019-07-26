@@ -40950,7 +40950,7 @@
       <column-instance column='[vent_quarto1]' derivation='Sum' name='[sum:vent_quarto1:qk]' pivot='key' type='quantitative' />
       <column-instance column='[vent_quarto2]' derivation='Sum' name='[sum:vent_quarto2:qk]' pivot='key' type='quantitative' />
       <column-instance column='[vent_quarto3]' derivation='Sum' name='[sum:vent_quarto3:qk]' pivot='key' type='quantitative' />
-      <layout dim-ordering='alphabetic' dim-percentage='0.308411' measure-ordering='alphabetic' measure-percentage='0.579439' parameter-percentage='0.11215' show-structure='true' user-set-layout='true' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.30819' measure-ordering='alphabetic' measure-percentage='0.579741' parameter-percentage='0.112069' show-structure='true' user-set-layout='true' />
       <style>
         <style-rule element='mark'>
           <encoding attr='color' field='[:Measure Names]' type='palette'>
@@ -68392,6 +68392,7 @@
                 <format attr='border-style' value='none' />
                 <format attr='border-width' value='0' />
                 <format attr='margin' value='4' />
+                <format attr='background-color' value='#ffffff' />
               </zone-style>
             </zone>
           </zone>
@@ -68401,6 +68402,7 @@
               <format attr='border-style' value='none' />
               <format attr='border-width' value='0' />
               <format attr='margin' value='4' />
+              <format attr='background-color' value='#ffffff' />
             </zone-style>
           </zone>
           <zone h='8133' id='29' param='horz' type='layout-flow' w='84945' x='684' y='11200'>
@@ -68581,8 +68583,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='3000' minheight='3000' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='60' type='layout-basic' w='100000' x='0' y='0'>
-              <zone h='99288' id='61' param='vert' type='layout-flow' w='98632' x='684' y='356'>
+            <zone h='100000' id='62' type='layout-basic' w='100000' x='0' y='0'>
+              <zone h='99288' id='63' param='vert' type='layout-flow' w='98632' x='684' y='356'>
                 <zone h='2933' id='24' mode='compact' param='[Parameters].[Parâmetro 3]' type='paramctrl' w='49316' x='684' y='356'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -68590,6 +68592,7 @@
                     <format attr='border-width' value='0' />
                     <format attr='margin' value='4' />
                     <format attr='padding' value='0' />
+                    <format attr='background-color' value='#ffffff' />
                   </zone-style>
                 </zone>
                 <zone h='2933' id='25' mode='compact' param='[Parameters].[Parâmetro 4]' type='paramctrl' w='49316' x='50000' y='356'>
@@ -68599,6 +68602,7 @@
                     <format attr='border-width' value='0' />
                     <format attr='margin' value='4' />
                     <format attr='padding' value='0' />
+                    <format attr='background-color' value='#ffffff' />
                   </zone-style>
                 </zone>
                 <zone fixed-size='170' h='7911' id='12' is-fixed='true' name='Slider' show-title='false' w='84945' x='684' y='3289'>
@@ -69311,7 +69315,7 @@
           </highlight>
         </viewpoint>
       </viewpoints>
-      <active id='47' />
+      <active id='31' />
       <simple-id uuid='{63DB9BBD-34E9-4085-A6C1-7D7ECFE32EE6}' />
     </window>
   </windows>
