@@ -7,6 +7,38 @@ import time
 from datetime import datetime as dt
 import datetime
 
+############################### funcoes de ajuda deletar dps ##############################
+
+"""
+printa as linhas da matrix de dados onde ocorre trancao de estado 1-0 ou 0-1 junto com os indices 
+linhas: linhas da matrix 
+indice: indice da linha onde ocorreu a transicao 
+"""
+def imprimeTransicoes(matrix_dados, vetor_col):
+	estado = matrix_dados[0]
+	indice = [[0]]*len(matrix_dados[0])
+	linhas = [[0]]*len(matrix_dados[0])
+	entra = True
+	for i in range(len(matrix_dados)):
+		for j in vetor_col:
+			if entra and matrix_dados[i][j] != estado[j]:
+				print(i,"dasdas")
+				estado[j] = matrix_dados[i][j]
+				indice[j]= [i]
+				linhas[j]= [matrix_dados[i-1]]
+				linhas[j].append(matrix_dados[i])
+				linhas[j].append(matrix_dados[i+1]) 
+
+				entra = False
+			
+			elif matrix_dados[i][j] != estado[j]:
+				estado[j] = matrix_dados[i][j]
+				indice[j].append(i)
+				linhas[j].append(matrix_dados[i-1])
+				linhas[j].append(matrix_dados[i])
+				linhas[j].append(matrix_dados[i+1]) 
+	return linhas, indice
+
 ############################### dados da casa #################################
 id_luz_sala = 2
 id_pres_sala = 15
@@ -78,10 +110,6 @@ dias_acesso = [] #Índice no qual um dia acaba
 #luz_escada, luz_aquario, luz_banho, pres_sala, pres_cozinha pres_lavanderia, pres_garagem, pres_quarto1, pres_quarto2, pres_quarto3
 indices_sensores = [5,10,13,15, 16, 17, 18, 19, 20, 21, 22, 23]
 #Foram escolhidos sensores de presença ou de luz, quando não há sensor de presença no cômodo
-
-################### Extracao das features para classificacao #######################
-indice = transicoes[3][2]
-vetor = dados_casa[4:indice] 
 
 dias_da_semana = [
     'Segunda-feira',
@@ -183,7 +211,7 @@ def init_dados_acesso():
 		if datetime_prox_dia > datetime_dia:
 			dias_acesso.append(i+1)
 	dias_acesso.append(-1)
-	escada_linha, escada_indie = imprimeTransicoes(dados_casa[1:], [5])
+	#escada_linha, escada_indie = imprimeTransicoes(dados_casa[1:], [5]) 
 	#print(dias_acesso)
 
 init_dados_casa()
@@ -193,41 +221,7 @@ init_dados_acesso()
 indice = transicoes[3][2]
 vetor = dados_casa[4:indice] 
 
-#Teste de verificação com dados da casa
-print(dados_casa[0][2],dados_casa[0][15],dados_casa[0][27])
 #print(vetor)
-
-############################### funcoes de ajuda deletar dps ##############################
-
-"""
-printa as linhas da matrix de dados onde ocorre trancao de estado 1-0 ou 0-1 junto com os indices 
-linhas: linhas da matrix 
-indice: indice da linha onde ocorreu a transicao 
-"""
-def imprimeTransicoes(matrix_dados, vetor_col):
-	estado = matrix_dados[0]
-	indice = [[0]]*len(matrix_dados[0])
-	linhas = [[0]]*len(matrix_dados[0])
-	entra = True
-	for i in range(len(matrix_dados)):
-		for j in vetor_col:
-			if entra and matrix_dados[i][j] != estado[j]:
-				print(i,"dasdas")
-				estado[j] = matrix_dados[i][j]
-				indice[j]= [i]
-				linhas[j]= [matrix_dados[i-1]]
-				linhas[j].append(matrix_dados[i])
-				linhas[j].append(matrix_dados[i+1]) 
-
-				entra = False
-			
-			elif matrix_dados[i][j] != estado[j]:
-				estado[j] = matrix_dados[i][j]
-				indice[j].append(i)
-				linhas[j].append(matrix_dados[i-1])
-				linhas[j].append(matrix_dados[i])
-				linhas[j].append(matrix_dados[i+1]) 
-	return linhas, indice
 
 """
 
@@ -236,7 +230,8 @@ vetor: vetor de vetores
 vetor_col: vetor de indices
 
 esta funcao diz quantas transicoes do tipo on/off existem para todos os aparelhos presentes na entrada da funcao e
-mostra em forma de porcentagem o tempo que os aparelhos ficaram ligados
+mostra em forma de porcentagem o tempo que os aparelhos ficaram ligados. Retorna 2 vetores
+onde a resposta desejada esta no indice vetor_col
 """
 def feature_vector_aparelho(vetor, vetor_col):
 	estado = []
@@ -263,14 +258,13 @@ def feature_vector_aparelho(vetor, vetor_col):
 
 	return transicao_on_off, tempo_ligado
 
-print(feature_vector_aparelho(vetor,[2,27]))
-
 """
 entradas
 vetor: vetor de dados
 col: indice do vetor que contem a informacao de interesse
 
-esta funcao diz em qual dia da semana a atividade esta sendo realizada, horario de inicio, periodo e se o dia eh fim de semana ou nao 
+esta funcao diz em qual dia da semana a atividade esta sendo realizada, horario de inicio, periodo 
+e se o dia eh fim de semana ou nao.
 """
 def feature_tempo(vetor, col):
 	global dias_da_semana
@@ -298,8 +292,10 @@ def feature_tempo(vetor, col):
 	return hora_inicio, dia_semana, dia_data, periodo, fim_semana
 
 
-
-print(vetor)
+#Teste de verificação com dados da casa
+print(dados_casa[0][2],dados_casa[0][15],dados_casa[0][27])
+#print(vetor)
+print(feature_vector_aparelho(vetor,[2,27]))
 print(dados_casa[0][1],dados_casa[0][15])
 print(feature_tempo(vetor[0],[1,15]))
 
