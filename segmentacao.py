@@ -192,8 +192,7 @@ def init_dados_casa():
 
 def init_dados_acesso():
 	global dados_acesso
-	global dias_acesso
-
+	global dias_acesso # cada dois indices seguidos corresponde a um dia
 	arquivo = open("access.csv", "r")
 	line = arquivo.readline()
 	lineSplit = line.split(",")
@@ -204,13 +203,29 @@ def init_dados_acesso():
 		lineSplit[1] =  time.strftime("%Y/%m/%d, %H:%M:%S", time.localtime(int(lineSplit[1]))) #Timestamp UNIX p/ datetime
 		dados_acesso.append(lineSplit)
 	arquivo.close()
-
+	i = 1
+	dias_acesso.append(1)
+	while i < len(dados_acesso)-1:
+		dia_atual = dt.strptime(dados_acesso[i][1], '%Y/%m/%d, %H:%M:%S')
+		dia_seguinte = dt.strptime(dados_acesso[i+1][1], '%Y/%m/%d, %H:%M:%S')
+		if dia_seguinte.date() > dia_atual.date():
+			dias_acesso.append(i+1)
+		if dia_atual >= dia_seguinte:
+			del dados_acesso[i+1]
+		else:
+			i += 1
+		
+	
+	"""
+	funciona
 	for i in range(1,len(dados_acesso)-1):
 		datetime_dia = dt.strptime(dados_acesso[i][1][:10], '%Y/%m/%d')
 		datetime_prox_dia = dt.strptime(dados_acesso[i+1][1][:10], '%Y/%m/%d')
 		if datetime_prox_dia > datetime_dia:
 			dias_acesso.append(i+1)
-	dias_acesso.append(-1)
+	"""
+	dias_acesso.append(-1)# referencia para o ultimo indice da matrix dados_acesso
+
 	#escada_linha, escada_indie = imprimeTransicoes(dados_casa[1:], [5]) 
 	#print(dias_acesso)
 

@@ -23,12 +23,40 @@ def rotula_base(vetor_sensor):
 entrada
 vetor_sensor: vetor de dados contendo as informacoes brutas dos sensores da casa
 
-funcao que diz se trata-se de uma entrada de morador ou saida de morador
+funcao diz se o acesso trata-se de uma entrada de morador ou saida de morador
 """
 
+def entrada_saida(vetor_sensor, hora_entrada):
+    hora_acesso = dt.strptime(hora_entrada, '%Y/%m/%d, %H:%M:%S')
+    indice = 0
+    while True:
+        hora_casa = dt.strptime(vetor_sensor[indice][1][1:-1], '%Y-%m-%d %H:%M')
+        if hora_casa - hora_acesso >= timedelta(seconds = 0): #encontrou o horario imediatamente depois do acesso 
+            break
+        indice += 1
+    pres_anterior = vetor_sensor[0][18]
 
-def entrada_saida(vetor_sensor):
-       pass
+    for i in range(1,indice):
+        pres_atual = vetor_sensor[i][18]
+        if pres_atual < pres_anterior or pres_atual < 50:
+            saida = True
+            break
+        else:
+            saida = False
+        pres_anterior = pres_atual
+    
+    for i in range(indice, len(vetor_sensor)):
+        pres_atual = vetor_sensor[i][18] 
+        if pres_atual < pres_anterior or pres_atual < 50:
+            entrada = True
+            break
+        else:
+            entrada = False
+        pres_anterior = pres_atual
+
+    return entrada, saida
+        
+            
 
 """
 colocar esta funcao na segmentacao
@@ -44,16 +72,19 @@ def match_acesso_casa(dados_casa, dados_acesso):
     indice_atual = int(len(dados_casa)/2) #indice inicial para a busca do horario correspondente no vetor dados_acesso
     hora_casa = dt.strptime(dados_casa[indice_atual][1][1:-1], '%Y-%m-%d %H:%M')
     hora_acesso = dt.strptime(dados_acesso[1], '%Y/%m/%d, %H:%M:%S')
-    indice_passados = [indice_atual]
+    limite_inferior = 0 #limite inferior para a busca da faixa de horarios
+    limite_superior = len(dados_casa) #limite superior para a busca da faixa de horarios
+    #indice_passados = [indice_atual]
     while True:
-        print (indice_atual)
         if abs(hora_casa - hora_acesso) < timedelta(minutes = 10):
             break 
         elif hora_casa - hora_acesso < timedelta(seconds = 0): #hora_acesso esta depois de hora_casa
-            prox_indice = int((indice_atual + len(dados_casa))/2)
+            prox_indice = int((indice_atual + limite_superior)/2)
+            limite_inferior = indice_atual
         elif hora_casa - hora_acesso > timedelta(seconds = 0): #hora_acesso esta antes de hora_casa
-            prox_indice = int(indice_atual/2)
-        if insercao_binaria(indice_passados, prox_indice):
+            prox_indice = int((indice_atual + limite_inferior)/2)
+            limite_superior = indice_atual
+        if prox_indice == indice_atual:
             print("não existe faixa horario correspondente nos dados da casa")
             indice_atual = None
             break
@@ -68,57 +99,36 @@ def match_acesso_casa(dados_casa, dados_acesso):
     indice_final = indice_atual #indice no qual esta o primeira linha do vetor de retorno
     
     while True:
-        if abs(hora_casa - hora_acesso) < timedelta(minutes = 10):
+        prox_indice = indice_inicial - 1
+        hora_casa = dt.strptime(dados_casa[prox_indice][1][1:-1], '%Y-%m-%d %H:%M')
+        if abs(hora_casa - hora_acesso) > timedelta(minutes = 10):
             break
-        indice_inicial = indice_inicial - 1
-        hora_casa = dt.strptime(dados_casa[indice_inicial][1][1:-1], '%Y-%m-%d %H:%M')
+        indice_inicial = prox_indice
     while True:
-        if abs(hora_casa - hora_acesso) < timedelta(minutes = 10):
+        prox_indice = indice_final + 1 
+        hora_casa = dt.strptime(dados_casa[prox_indice][1][1:-1], '%Y-%m-%d %H:%M')
+        if abs(hora_casa - hora_acesso) > timedelta(minutes = 10):
             break
-        indice_final = indice_final + 1 
-        hora_casa = dt.strptime(dados_casa[indice_final][1][1:-1], '%Y-%m-%d %H:%M')
+        indice_final = prox_indice
     return dados_casa[indice_inicial:indice_final]
 
-
-"""
-insere elemento num vetor usando a metodologia de busca binaria e diz se o elemento ja existe
-"""
-def insercao_binaria(vetor, elemento):
-    indice_atual = int(len(vetor)/2)
-    if elemento < vetor[0]:
-        vetor.insert(0,elemento)
-        return False
-    elif elemento > vetor[-1]:
-        vetor.insert(len(vetor),elemento)
-        return False
-    elif len(vetor) == 2 and elemento > vetor[0] and elemento < vetor[-1]:
-        vetor.insert(1,elemento)
-        return False
-    else:
-        while True:
-            if vetor[indice_atual] > elemento:
-                if vetor[indice_atual-1] < elemento and elemento < vetor[indice_atual+1]:
-                    elemento_repitido = False
-                    vetor.insert(indice_atual,elemento)
-                    break
-                    
-
-                elif vetor[indice_atual-1] == elemento or elemento == vetor[indice_atual+1]:
-                    elemento_repitido = True
-                    break
-                indice_atual = int(indice_atual/2)
-            else:
-                if vetor[indice_atual-1] < elemento and elemento < vetor[indice_atual+1]:
-                    elemento_repitido = False
-                    vetor.insert(indice_atual, elemento)
-                    break
-                    
-                elif vetor[indice_atual-1] == elemento or elemento == vetor[indice_atual+1]:
-                    elemento_repitido = True
-                    break
-                indice_atual = int((indice_atual+ len(vetor))/2)
-                    
-        return elemento_repitido
     
+#print(match_acesso_casa(dados_casa,dados_acesso[30]))
 
-print(match_acesso_casa(dados_casa, dados_acesso[30]))
+
+
+
+for i in range(1,len(dados_acesso)):
+    if match_acesso_casa(dados_casa, dados_acesso[i]) == None:
+        print("nao existe para: ", dados_acesso[i])
+    else: 
+        vetor = match_acesso_casa(dados_casa,dados_acesso[i])
+        entrada, saida = entrada_saida(vetor, dados_acesso[i][1])
+        print("entrada: ",entrada,"   ","saida: ",saida, "  ", dados_acesso[i][1])
+        """
+        print("inicial: ", vetor[0][1])
+        print("final: ", vetor[-1][1])
+        print("acesso: ", dados_acesso[i][1])
+        """
+    print("\n\n\n\n")
+
