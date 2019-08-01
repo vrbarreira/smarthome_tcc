@@ -23,6 +23,20 @@ def rotula_base(vetor_sensor):
 entrada
 vetor_sensor: vetor de dados contendo as informacoes brutas dos sensores da casa
 
+classifica o segmento 
+"""
+
+def corredor(vetor_sensor):
+    luz_corredor = 12
+    pres_corredor = 22
+    
+    if vetor_sensor[]
+    
+
+"""
+entrada
+vetor_sensor: vetor de dados contendo as informacoes brutas dos sensores da casa
+
 funcao diz se o acesso trata-se de uma entrada de morador ou saida de morador
 """
 
