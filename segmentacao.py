@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from scipy import integrate
 import time
 from datetime import datetime as dt
+from datetime import timedelta
 import datetime
 
 ############################### funcoes de ajuda deletar dps ##############################
@@ -42,15 +43,13 @@ def imprimeTransicoes(matrix_dados, vetor_col):
 testa os segmentos das transicoes 
 """
 def testa_trasicao(matrix_dados, transicoes):
+	for elemento in transicoes:
+		elemento.insert(1,1)
+		elemento.append(-1)
 	escada = transicoes[0]
 	aquario = transicoes[1]
 	banho = transicoes[2]
-	escada.insert(1,1)
-	escada.append(-1)
-	aquario.insert(1,1)
-	aquario.append(-1)
-	banho.insert(1,1)
-	banho.append(-1)
+	
 	funciona = True
 	i=1
 	#while i < len(escada)-1:
@@ -62,7 +61,7 @@ def testa_trasicao(matrix_dados, transicoes):
 		indice_final = escada[i+1]
 		while k < indice_final:
 			if estado != matrix_dados[k][5] and estado != matrix_dados[k+1][5] and estado != matrix_dados[k+2][5] and estado != matrix_dados[k+3][5]:
-				print("multiplos estados no segmento")
+				print("multiplos estados no segmento na escada")
 				print("indice inicial: ", indice_inicial)
 				print("indie final: ", indice_final)
 				funciona = False
@@ -75,7 +74,7 @@ def testa_trasicao(matrix_dados, transicoes):
 			break
 	if funciona:
 		print("escada ok")
-
+	funciona = True
 	for i in range(1,len(aquario)-1):
 		indice_inicial = aquario[i]
 		k = indice_inicial +1 
@@ -84,7 +83,7 @@ def testa_trasicao(matrix_dados, transicoes):
 		indice_final = aquario[i+1]
 		while k < indice_final:
 			if estado != matrix_dados[k][10] and estado != matrix_dados[k+1][10] and estado != matrix_dados[k+2][10] and estado != matrix_dados[k+3][10]:
-				print("multiplos estados no segmento")
+				print("multiplos estados no segmento no aquario")
 				print("indice inicial: ", indice_inicial)
 				print("indie final: ", indice_final)
 				funciona = False
@@ -97,7 +96,7 @@ def testa_trasicao(matrix_dados, transicoes):
 			break
 	if funciona:
 		print("aquario ok")
-		
+	funciona = True
 	for i in range(1,len(banho)-1):
 		indice_inicial = banho[i]
 		k = indice_inicial +1 
@@ -106,7 +105,7 @@ def testa_trasicao(matrix_dados, transicoes):
 		indice_final = banho[i+1]
 		while k < indice_final:
 			if estado != matrix_dados[k][13] and estado != matrix_dados[k+1][13] and estado != matrix_dados[k+2][13] and estado != matrix_dados[k+3][13]:
-				print("multiplos estados no segmento")
+				print("multiplos estados no segmento no banho")
 				print("indice inicial: ", indice_inicial)
 				print("indie final: ", indice_final)
 				funciona = False
@@ -120,6 +119,44 @@ def testa_trasicao(matrix_dados, transicoes):
 	if funciona:
 		print("banho ok")
 	
+	funciona = True
+	for elemento in transicoes[3:]:
+		indice_col = elemento[0]
+		for i in range(len(elemento)-1):
+			indice_inicial = elemento[i]
+			k = indice_inicial
+			indice_final = elemento[i+1]
+			if matrix_dados[indice_inicial][indice_col] < 150:
+				presente = True
+			else:
+				presente = False
+			while k < indice_final:
+				if presente:
+					if matrix_dados[k][indice_col] >= 150:
+						print("pessoa esta ausente no segmento")
+						print("sensor: ", matrix_dados[0][indice_col])
+						print("indice inicial: ", indice_inicial)
+						print("indice final: ", indice_final)
+						funciona = False
+						break
+
+				else:
+					if matrix_dados[k][indice_col] < 150:
+						print("pessoa esta presente no segmento")
+						print("sensor: ", matrix_dados[0][indice_col])
+						print("indice inicial: ", indice_inicial)
+						print("indice final: ", indice_final)
+						funciona = False
+						break
+				k+=1
+			if not(funciona):
+				break
+		if funciona:
+			print(print("segmentos ok: ", matrix_dados[0][indice_col]))
+		funciona = True
+			
+
+					
 
 ############################### dados da casa #################################
 id_luz_sala = 2
@@ -224,20 +261,40 @@ def init_dados_casa():
 		lineSplit[2:] =  list(map(int,lineSplit[2:])) #Conversão das leituras de sensores para int
 		dados_casa.append(lineSplit)
 	arquivo.close()
-
 	#Identificação de transições (escada, aquario, banho, presença)
 	size_janela = 3
-
 	add_transicao = True
 	for j in indices_sensores: 
 		transicao_col = [j]
+		if j > 14:
+			add_transicao = False
+			if dados_casa[1][j] < 50:
+				presente = True
+			else:
+				presente = False
 		for i in range(1, len(dados_casa) - size_janela): 
 			if j > 14: #Presenças
-				for k in range(1,size_janela+1):
-					if dados_casa[i][j] < dados_casa[i+k][j]:
-						add_transicao = False
-						break
-
+				hora_casa_atual = dt.strptime(dados_casa[i][1][1:-1], '%Y-%m-%d %H:%M')
+				hora_casa_seguinte = dt.strptime(dados_casa[i][1][1:-1], '%Y-%m-%d %H:%M')
+				dif_pres = timedelta(seconds = dados_casa[i+1][j] - dados_casa[i][j]) #tempo que foi incrementado no sensor de presenca 
+				#for k in range(1,size_janela+1):
+					#if dados_casa[i][j] <= dados_casa[i+k][j]:  
+						#add_transicao = False
+						#break
+				"""
+				if j == 16:
+					a = dados_casa[i][j]
+					b = dados_casa[i+1][j]
+					c = dados_casa[i][0]
+				"""
+				if (dados_casa[i][j] > dados_casa[i+1][j] or (hora_casa_seguinte - hora_casa_atual)/2 > dif_pres) and dados_casa[i+1][j] < 150 and not(presente):
+					presente = True
+					add_transicao = True
+				elif (presente and dados_casa[i+1][j] >= 150) or hora_casa_seguinte - hora_casa_atual > timedelta(minutes = 30):
+					presente = False
+					add_transicao = True
+				
+				
 			else: #luz_escada, luz_aquario, luz_banho (Cômodos s/ sensor de presença)
 				for k in range(1,size_janela+1):
 					"""
@@ -249,16 +306,18 @@ def init_dados_casa():
 					f = dados_casa[i+1]
 					g = i-(size_janela) + 1
 					"""
+					
 					if dados_casa[i][j] == dados_casa[i+k][j] or (dados_casa[i][j]!= dados_casa[i + 1 -(size_janela)][j] and dados_casa[i][j] != dados_casa[i+1][j]):
 						add_transicao = False
 						break
 				
 			if add_transicao:
-				#if j<= 14:
 				transicao_col.append(i+1)
-				#else:
-				#	transicao_col.append(i+2)
-			add_transicao = True
+
+			if j <= 14:
+				add_transicao = True
+			else:
+				add_transicao = False
 
 		transicoes.append(transicao_col)
 
@@ -403,10 +462,10 @@ def feature_tempo(vetor, col):
 #Teste de verificação com dados da casa
 print(dados_casa[0][2],dados_casa[0][15],dados_casa[0][27])
 #print(vetor)
-print(feature_vector_aparelho(vetor,[2,27]))
+#print(feature_vector_aparelho(vetor,[2,27]))
 print(dados_casa[0][1],dados_casa[0][15])
-print(feature_tempo(vetor[0],[1,15]))
-#testa_trasicao(dados_casa,transicoes)
+#print(feature_tempo(vetor[0],[1,15]))
+testa_trasicao(dados_casa,transicoes)
 
 
 

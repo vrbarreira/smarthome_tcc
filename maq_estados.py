@@ -7,6 +7,10 @@ import segmentacao
 dados_casa = segmentacao.dados_casa
 dados_acesso = segmentacao.dados_acesso
 transicoes = segmentacao.transicoes
+for elemento in transicoes:
+    elemento.insert(1,1)
+    elemento.append(-1)
+
 """
 entrada
 vetor_sensor: vetor de dados contendo as informacoes brutas dos sensores da casa
@@ -29,9 +33,15 @@ classifica o segmento
 def corredor(vetor_sensor):
     luz_corredor = 12
     pres_corredor = 22
-    
-    if vetor_sensor[]
-    
+    vetor_retorno = []
+    for i in range(len(vetor)):
+        if vetor_sensor[i][pres_corredor] >= 150 and luz_corredor[luz_corredor] == 1:
+            vetor_retorno.append("luz acesa")
+        elif vetor_sensor[i][pres_corredor] >= 150 and luz_corredor[luz_corredor] == 0:
+            vetor_retorno.append("vazio")
+        elif vetor_sensor[i][pres_corredor] < 150:
+            vetor_retorno.append("transicao corredor")
+    return vetor_retorno
 
 """
 entrada
@@ -131,6 +141,14 @@ def match_acesso_casa(dados_casa, dados_acesso):
 
 
 
+for i in range(1,len(transicoes[10])-1):
+    indice_inicial = transicoes[10][i]
+    indice_final = transicoes[10][i+1]
+    vetor = dados_casa[indice_inicial:indice_final]
+    print(corredor(vetor))
+    print("indice inicial: ", indice_inicial)
+    print("indice final: ", indice_final)
+    print("\n\n")
 
 for i in range(1,len(dados_acesso)):
     if match_acesso_casa(dados_casa, dados_acesso[i]) == None:
