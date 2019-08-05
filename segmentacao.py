@@ -42,10 +42,7 @@ def imprimeTransicoes(matrix_dados, vetor_col):
 """
 testa os segmentos das transicoes 
 """
-def testa_trasicao(matrix_dados, transicoes):
-	for elemento in transicoes:
-		elemento.insert(1,1)
-		elemento.append(-1)
+def testa_trasicao(matrix_dados, transicoes, size_janela):
 	escada = transicoes[0]
 	aquario = transicoes[1]
 	banho = transicoes[2]
@@ -60,7 +57,7 @@ def testa_trasicao(matrix_dados, transicoes):
 		#if estado == 1: 
 		indice_final = escada[i+1]
 		while k < indice_final:
-			if estado != matrix_dados[k][5] and estado != matrix_dados[k+1][5] and estado != matrix_dados[k+2][5] and estado != matrix_dados[k+3][5]:
+			if estado != matrix_dados[k][5] and estado != matrix_dados[k+1][5] and estado != matrix_dados[k+2][5]:
 				print("multiplos estados no segmento na escada")
 				print("indice inicial: ", indice_inicial)
 				print("indie final: ", indice_final)
@@ -82,7 +79,7 @@ def testa_trasicao(matrix_dados, transicoes):
 		#if estado == 1: 
 		indice_final = aquario[i+1]
 		while k < indice_final:
-			if estado != matrix_dados[k][10] and estado != matrix_dados[k+1][10] and estado != matrix_dados[k+2][10] and estado != matrix_dados[k+3][10]:
+			if estado != matrix_dados[k][10] and estado != matrix_dados[k+1][10] and estado != matrix_dados[k+2][10]:
 				print("multiplos estados no segmento no aquario")
 				print("indice inicial: ", indice_inicial)
 				print("indie final: ", indice_final)
@@ -266,12 +263,14 @@ def init_dados_casa():
 	add_transicao = True
 	for j in indices_sensores: 
 		transicao_col = [j]
+		acesa = dados_casa[1][j] #indica se a luz esta acesa ou nao
 		if j > 14:
 			add_transicao = False
 			if dados_casa[1][j] < 50:
 				presente = True
 			else:
 				presente = False
+		
 		for i in range(1, len(dados_casa) - size_janela): 
 			if j > 14: #Presenças
 				hora_casa_atual = dt.strptime(dados_casa[i][1][1:-1], '%Y-%m-%d %H:%M')
@@ -307,19 +306,38 @@ def init_dados_casa():
 					g = i-(size_janela) + 1
 					"""
 					
-					if dados_casa[i][j] == dados_casa[i+k][j] or (dados_casa[i][j]!= dados_casa[i + 1 -(size_janela)][j] and dados_casa[i][j] != dados_casa[i+1][j]):
+					if dados_casa[i][j] == dados_casa[i+k][j]:
 						add_transicao = False
 						break
-				
+					elif dados_casa[i][j]!= dados_casa[i-1][j] and dados_casa[i][j] != dados_casa[i+1][j]: #teste para ver se é um elemento isolado
+						for l in range(1,size_janela +1):
+							if acesa:
+								if dados_casa[i+l][j] == 1:
+									add_transicao =False
+									break
+							else:
+								if dados_casa[i+l][j] == 0:
+									add_transicao = False
+									break
+								
+						if not(add_transicao):
+							break
 			if add_transicao:
+				if j<= 14:
+					if dados_casa[i+1][j] == 1:
+						acesa = True
+					else:
+						acesa = False
 				transicao_col.append(i+1)
 
 			if j <= 14:
 				add_transicao = True
 			else:
 				add_transicao = False
-
+		transicao_col.insert(1,1)
+		transicao_col.append(-1)
 		transicoes.append(transicao_col)
+	
 
 	for i in range(1,len(dados_casa)-1):
 		datetime_dia = dt.strptime(dados_casa[i][1][1:11], '%Y-%m-%d')
@@ -465,7 +483,7 @@ print(dados_casa[0][2],dados_casa[0][15],dados_casa[0][27])
 #print(feature_vector_aparelho(vetor,[2,27]))
 print(dados_casa[0][1],dados_casa[0][15])
 #print(feature_tempo(vetor[0],[1,15]))
-testa_trasicao(dados_casa,transicoes)
+testa_trasicao(dados_casa,transicoes,3)
 
 
 
