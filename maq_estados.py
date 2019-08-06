@@ -35,37 +35,53 @@ def corredor(vetor_sensor):
     estado_transicao = 0
     estados = []
     segmentos = []
+    segmento_atual = []
     for i in range(len(vetor)):
         if vetor_sensor[i][pres_corredor] >= 150 and vetor_sensor[i][luz_corredor] == 1:
             estado_aceso += 1
             estado_vazio = 0
             estado_transicao = 0
-            if estado_aceso == 1:
-                segmentos.append(vetor_sensor[i])
-                estados.append("luz acesa")
-            elif estado_aceso >1:
-                segmentos.insert(-1,vetor_sensor[i])
 
+            if estado_aceso == 1:
+                if len(segmento_atual) != 0:
+                    segmentos.append(segmento_atual)
+                segmento_atual = []
+                estados.append("luz acesa")
+            segmento_atual.append(vetor_sensor[i])
+            
+            if (i == len(vetor)-1):
+                segmentos.append(segmento_atual)
 
         elif vetor_sensor[i][pres_corredor] >= 150 and vetor_sensor[i][luz_corredor] == 0:
             estado_vazio += 1
             estado_aceso = 0
             estado_transicao = 0
+
             if estado_vazio == 1:
-                segmentos.append(vetor_sensor[i-2:i])
+                if len(segmento_atual) != 0:
+                    segmentos.append(segmento_atual)
+                segmento_atual = []
                 estados.append("vazio")
-            elif estado_vazio > 1:
-                segmentos.insert(-1,vetor_sensor[i])
+            segmento_atual.append(vetor_sensor[i])
+
+            if i == len(vetor)-1:
+                segmentos.append(segmento_atual)
 
         elif vetor_sensor[i][pres_corredor] < 150:
             estado_transicao += 1 
             estado_aceso = 0
             estado_vazio = 0
+
             if estado_transicao == 1:
-                segmentos.append(vetor_sensor[i])
+                if len(segmento_atual) != 0:
+                    segmentos.append(segmento_atual)
+                segmento_atual = []
                 estados.append("transicao corredor")
-            elif estado_transicao > 1:
-                segmentos.insert(-1,vetor_sensor[i])
+            segmento_atual.append(vetor_sensor[i])
+            
+            if i == len(vetor)-1:
+                segmentos.append(segmento_atual)
+            
 
     return estados, segmentos
 
@@ -170,6 +186,8 @@ def match_acesso_casa(dados_casa, dados_acesso):
 for i in range(1,len(transicoes[10])-1):
     indice_inicial = transicoes[10][i]
     indice_final = transicoes[10][i+1]
+    if indice_inicial == 103:
+        print("a")
     vetor = dados_casa[indice_inicial:indice_final]
     resultado, segmento = corredor(vetor)
     if len(resultado) != 1:
