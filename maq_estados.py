@@ -29,7 +29,6 @@ vetor_sensor: vetor de dados contendo as informacoes brutas dos sensores da casa
 
 classifica o segmento 
 """
-
 def corredor(vetor_sensor):
     luz_corredor = 12
     pres_corredor = 22
@@ -49,7 +48,6 @@ vetor_sensor: vetor de dados contendo as informacoes brutas dos sensores da casa
 
 funcao diz se o acesso trata-se de uma entrada de morador ou saida de morador
 """
-
 def entrada_saida(vetor_sensor, hora_entrada):
     hora_acesso = dt.strptime(hora_entrada, '%Y/%m/%d, %H:%M:%S')
     indice = 0
@@ -80,7 +78,6 @@ def entrada_saida(vetor_sensor, hora_entrada):
 
     return entrada, saida
         
-            
 
 """
 colocar esta funcao na segmentacao
@@ -135,11 +132,8 @@ def match_acesso_casa(dados_casa, dados_acesso):
             break
         indice_final = prox_indice
     return dados_casa[indice_inicial:indice_final]
-
-    
+   
 #print(match_acesso_casa(dados_casa,dados_acesso[30]))
-
-
 
 for i in range(1,len(transicoes[10])-1):
     indice_inicial = transicoes[10][i]
