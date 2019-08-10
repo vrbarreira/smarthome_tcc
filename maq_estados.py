@@ -35,9 +35,10 @@ def corredor(vetor_sensor):
     estados = []
     segmentos = []
     segmento_atual = []
+
     for i in range(len(vetor)):
-        if vetor_sensor[i][pres_corredor] >= 150 and vetor_sensor[i][luz_corredor] == 1:
-            estado_aceso += 1
+        if vetor_sensor[i][pres_corredor] >= 150 and vetor_sensor[i][luz_corredor] == 1: #Contador de presença >= tempo determinado e luz acesa
+            estado_aceso += 1 #Determinar estado aceso
             estado_vazio = 0
             estado_transicao = 0
 
@@ -51,8 +52,8 @@ def corredor(vetor_sensor):
             if (i == len(vetor)-1):
                 segmentos.append(segmento_atual)
 
-        elif vetor_sensor[i][pres_corredor] >= 150 and vetor_sensor[i][luz_corredor] == 0:
-            estado_vazio += 1
+        elif vetor_sensor[i][pres_corredor] >= 150 and vetor_sensor[i][luz_corredor] == 0: #Contador de presença >= tempo determinado e luz acesa
+            estado_vazio += 1 #Determinar estado vazio
             estado_aceso = 0
             estado_transicao = 0
 
@@ -177,7 +178,7 @@ def match_acesso_casa(dados_casa, dados_acesso):
    
 #print(match_acesso_casa(dados_casa,dados_acesso[30]))
 
-for i in range(1,len(transicoes[10])-1):
+for i in range(1,len(transicoes[10])-1): #Essa análise não está passando da linha 133 da extração
     indice_inicial = transicoes[10][i]
     indice_final = transicoes[10][i+1]
     if indice_inicial == 103:
@@ -185,13 +186,13 @@ for i in range(1,len(transicoes[10])-1):
     vetor = dados_casa[indice_inicial:indice_final]
     resultado, segmento = corredor(vetor)
     if len(resultado) != 1:
-        print("erro")
+        print("Mudança de feature!") #Caso de erro ocorre quando são detectadas 2 ou mais atividades em um segmento (ex: mudança de luz dentro de um segmento presença)
         print(resultado)
         print(segmento)
         print("indice inicial: ", indice_inicial)
         print("indice final: ", indice_final)
         print("\n\n")
-        break
+        #break
 
     else:
         print(resultado)
