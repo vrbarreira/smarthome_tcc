@@ -7,10 +7,7 @@ import segmentacao
 dados_casa = segmentacao.dados_casa
 dados_acesso = segmentacao.dados_acesso
 transicoes = segmentacao.transicoes
-for elemento in transicoes:
-    elemento.insert(1,1)
-    elemento.append(-1)
-
+print("\n\n\n\n\n")
 """
 entrada
 vetor_sensor: vetor de dados contendo as informacoes brutas dos sensores da casa
@@ -32,15 +29,60 @@ classifica o segmento
 def corredor(vetor_sensor):
     luz_corredor = 12
     pres_corredor = 22
-    vetor_retorno = []
+    estado_aceso = 0
+    estado_vazio = 0
+    estado_transicao = 0
+    estados = []
+    segmentos = []
+    segmento_atual = []
     for i in range(len(vetor)):
-        if vetor_sensor[i][pres_corredor] >= 150 and luz_corredor[luz_corredor] == 1:
-            vetor_retorno.append("luz acesa")
-        elif vetor_sensor[i][pres_corredor] >= 150 and luz_corredor[luz_corredor] == 0:
-            vetor_retorno.append("vazio")
+        if vetor_sensor[i][pres_corredor] >= 150 and vetor_sensor[i][luz_corredor] == 1:
+            estado_aceso += 1
+            estado_vazio = 0
+            estado_transicao = 0
+
+            if estado_aceso == 1:
+                if len(segmento_atual) != 0:
+                    segmentos.append(segmento_atual)
+                segmento_atual = []
+                estados.append("luz acesa")
+            segmento_atual.append(vetor_sensor[i])
+            
+            if (i == len(vetor)-1):
+                segmentos.append(segmento_atual)
+
+        elif vetor_sensor[i][pres_corredor] >= 150 and vetor_sensor[i][luz_corredor] == 0:
+            estado_vazio += 1
+            estado_aceso = 0
+            estado_transicao = 0
+
+            if estado_vazio == 1:
+                if len(segmento_atual) != 0:
+                    segmentos.append(segmento_atual)
+                segmento_atual = []
+                estados.append("vazio")
+            segmento_atual.append(vetor_sensor[i])
+
+            if i == len(vetor)-1:
+                segmentos.append(segmento_atual)
+
         elif vetor_sensor[i][pres_corredor] < 150:
-            vetor_retorno.append("transicao corredor")
-    return vetor_retorno
+            estado_transicao += 1 
+            estado_aceso = 0
+            estado_vazio = 0
+
+            if estado_transicao == 1:
+                if len(segmento_atual) != 0:
+                    segmentos.append(segmento_atual)
+                segmento_atual = []
+                estados.append("transicao corredor")
+            segmento_atual.append(vetor_sensor[i])
+            
+            if i == len(vetor)-1:
+                segmentos.append(segmento_atual)
+            
+
+    return estados, segmentos
 
 """
 entrada
@@ -138,11 +180,24 @@ def match_acesso_casa(dados_casa, dados_acesso):
 for i in range(1,len(transicoes[10])-1):
     indice_inicial = transicoes[10][i]
     indice_final = transicoes[10][i+1]
+    if indice_inicial == 103:
+        print("a")
     vetor = dados_casa[indice_inicial:indice_final]
-    print(corredor(vetor))
-    print("indice inicial: ", indice_inicial)
-    print("indice final: ", indice_final)
-    print("\n\n")
+    resultado, segmento = corredor(vetor)
+    if len(resultado) != 1:
+        print("erro")
+        print(resultado)
+        print(segmento)
+        print("indice inicial: ", indice_inicial)
+        print("indice final: ", indice_final)
+        print("\n\n")
+        break
+
+    else:
+        print(resultado)
+        print("indice inicial: ", indice_inicial)
+        print("indice final: ", indice_final)
+        print("\n\n")
 
 for i in range(1,len(dados_acesso)):
     if match_acesso_casa(dados_casa, dados_acesso[i]) == None:
