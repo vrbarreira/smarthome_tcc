@@ -7,7 +7,153 @@ import time
 from datetime import datetime as dt
 from datetime import timedelta
 import datetime
-				
+
+############################### funcoes de ajuda deletar dps ##############################
+
+"""
+printa as linhas da matrix de dados onde ocorre trancao de estado 1-0 ou 0-1 junto com os indices 
+linhas: linhas da matrix 
+indice: indice da linha onde ocorreu a transicao 
+"""
+def imprimeTransicoes(matrix_dados, vetor_col):
+	estado = matrix_dados[0]
+	indice = [[0]]*len(matrix_dados[0])
+	linhas = [[0]]*len(matrix_dados[0])
+	entra = True
+	for i in range(len(matrix_dados)):
+		for j in vetor_col:
+			if entra and matrix_dados[i][j] != estado[j]:
+				print(i,"dasdas")
+				estado[j] = matrix_dados[i][j]
+				indice[j]= [i]
+				linhas[j]= [matrix_dados[i-1]]
+				linhas[j].append(matrix_dados[i])
+				linhas[j].append(matrix_dados[i+1]) 
+
+				entra = False
+			
+			elif matrix_dados[i][j] != estado[j]:
+				estado[j] = matrix_dados[i][j]
+				indice[j].append(i)
+				linhas[j].append(matrix_dados[i-1])
+				linhas[j].append(matrix_dados[i])
+				linhas[j].append(matrix_dados[i+1]) 
+	return linhas, indice
+"""
+testa os segmentos das transicoes 
+"""
+def testa_trasicao(matrix_dados, transicoes, size_janela):
+	escada = transicoes[0]
+	aquario = transicoes[1]
+	banho = transicoes[2]
+	
+	funciona = True
+	i=1
+	#while i < len(escada)-1:
+	for i in range(1,len(escada)-1):
+		indice_inicial = escada[i]
+		k = indice_inicial +1 
+		estado = matrix_dados[indice_inicial][5]
+		#if estado == 1: 
+		indice_final = escada[i+1]
+		while k < indice_final:
+			if estado != matrix_dados[k][5] and estado != matrix_dados[k+1][5] and estado != matrix_dados[k+2][5]:
+				print("multiplos estados no segmento na escada")
+				print("indice inicial: ", indice_inicial)
+				print("indie final: ", indice_final)
+				funciona = False
+				break
+			k += 1
+			#i += 2
+		#else:
+		#	i += 1
+		if not(funciona):
+			break
+	if funciona:
+		print("escada ok")
+	funciona = True
+	for i in range(1,len(aquario)-1):
+		indice_inicial = aquario[i]
+		k = indice_inicial +1 
+		estado = matrix_dados[indice_inicial][10]
+		#if estado == 1: 
+		indice_final = aquario[i+1]
+		while k < indice_final:
+			if estado != matrix_dados[k][10] and estado != matrix_dados[k+1][10] and estado != matrix_dados[k+2][10]:
+				print("multiplos estados no segmento no aquario")
+				print("indice inicial: ", indice_inicial)
+				print("indie final: ", indice_final)
+				funciona = False
+				break
+			k += 1
+			#i += 2
+		#else:
+		#	i += 1
+		if not(funciona):
+			break
+	if funciona:
+		print("aquario ok")
+	funciona = True
+	for i in range(1,len(banho)-1):
+		indice_inicial = banho[i]
+		k = indice_inicial +1 
+		estado = matrix_dados[indice_inicial][13]
+		#if estado == 1: 
+		indice_final = banho[i+1]
+		while k < indice_final:
+			if estado != matrix_dados[k][13] and estado != matrix_dados[k+1][13] and estado != matrix_dados[k+2][13] and estado != matrix_dados[k+3][13]:
+				print("multiplos estados no segmento no banho")
+				print("indice inicial: ", indice_inicial)
+				print("indie final: ", indice_final)
+				funciona = False
+				break
+			k += 1
+			#i += 2
+		#else:
+		#	i += 1
+		if not(funciona):
+			break
+	if funciona:
+		print("banho ok")
+	
+	funciona = True
+	for elemento in transicoes[3:]:
+		indice_col = elemento[0]
+		for i in range(len(elemento)-1):
+			indice_inicial = elemento[i]
+			k = indice_inicial
+			indice_final = elemento[i+1]
+			if matrix_dados[indice_inicial][indice_col] < 150:
+				presente = True
+			else:
+				presente = False
+			while k < indice_final:
+				if presente:
+					if matrix_dados[k][indice_col] >= 150:
+						print("pessoa esta ausente no segmento")
+						print("sensor: ", matrix_dados[0][indice_col])
+						print("indice inicial: ", indice_inicial)
+						print("indice final: ", indice_final)
+						funciona = False
+						break
+
+				else:
+					if matrix_dados[k][indice_col] < 150:
+						print("pessoa esta presente no segmento")
+						print("sensor: ", matrix_dados[0][indice_col])
+						print("indice inicial: ", indice_inicial)
+						print("indice final: ", indice_final)
+						funciona = False
+						break
+				k+=1
+			if not(funciona):
+				break
+		if funciona:
+			print(print("segmentos ok: ", matrix_dados[0][indice_col]))
+		funciona = True
+			
+
+					
 
 ############################### dados da casa #################################
 id_luz_sala = 2
@@ -67,12 +213,12 @@ aquario = [10] #luz
 casa = [sala, cozinha, lavanderia, escada, garagem, cobertura, corredor, quarto1, quarto2, quarto3, banheiro, aquario]
 
 ############################### dados da casa #################################
-dados_casa = [] #Arquivo de entrada contendo os dados de sensores da casa
-transicoes = [] #Índices de mudança de estado de todos os sensores
+dados_casa = [] #Arquivo de entrada contendo os dados da casa
+transicoes = [] #Índices de mudança de estado de todos os sensores da presença
 dias_casa = [] #Índice no qual um dia acaba
 
 ############################### dados de acesso na casa #################################
-dados_acesso = [] #Arquivo de entrada contendo os dados de acessos da casa
+dados_acesso = []
 dias_acesso = [] #Índice no qual um dia acaba
 
 
@@ -91,7 +237,6 @@ dias_da_semana = [
     'Domingo'
 ]
 
-# Extração de dados dos sensores da casa
 def init_dados_casa():
 	global dados_casa
 	global transicoes
@@ -215,7 +360,6 @@ def init_dados_casa():
 		print("\n\n")
 	"""
 
-# Extração de dados do portão de acesso
 def init_dados_acesso():
 	global dados_acesso
 	global dias_acesso # cada dois indices seguidos corresponde a um dia
@@ -268,7 +412,6 @@ vetor = dados_casa[4:indice]
 entradas
 vetor: vetor de vetores
 vetor_col: vetor de indices
-
 esta funcao diz quantas transicoes do tipo on/off existem para todos os aparelhos presentes na entrada da funcao e
 mostra em forma de porcentagem o tempo que os aparelhos ficaram ligados. Retorna 2 vetores
 onde a resposta desejada esta no indice vetor_col
@@ -302,7 +445,6 @@ def feature_vector_aparelho(vetor, vetor_col):
 entradas
 vetor: vetor de dados
 col: indice do vetor que contem a informacao de interesse
-
 esta funcao diz em qual dia da semana a atividade esta sendo realizada, horario de inicio, periodo 
 e se o dia eh fim de semana ou nao.
 """
@@ -331,7 +473,6 @@ def feature_tempo(vetor, col):
 
 	return hora_inicio, dia_semana, dia_data, periodo, fim_semana
 
-############################### funcoes de ajuda deletar dps ##############################
 
 #Teste de verificação com dados da casa
 print(dados_casa[0][2],dados_casa[0][15],dados_casa[0][27])
@@ -339,7 +480,8 @@ print(dados_casa[0][2],dados_casa[0][15],dados_casa[0][27])
 #print(feature_vector_aparelho(vetor,[2,27]))
 print(dados_casa[0][1],dados_casa[0][15])
 #print(feature_tempo(vetor[0],[1,15]))
-testa_transicao(dados_casa,transicoes,3)
+testa_trasicao(dados_casa,transicoes,3)
+
 
 
 #for i in range(len(dias_acesso)-1):
@@ -350,158 +492,68 @@ testa_transicao(dados_casa,transicoes,3)
 
 
 """
-printa as linhas da matrix de dados onde ocorre trancao de estado 1-0 ou 0-1 junto com os indices 
-linhas: linhas da matrix 
-indice: indice da linha onde ocorreu a transicao 
+for i in range(1,lend(dados)): #range(1,len(dados)):
+  luz_sala.append(int(dados[i][2]))
+  if i+1 < len(dados):
+    if int(dados[i][2]) != int(dados[i+1][2]):
+      troca.append(i)
+print(luz_sala,"dasdas")
+print(troca)
+plt.plot(range(len(luz_sala)),binom.pmf(luz_sala, len(luz_sala),0.99))
+plt.show()
 """
-def imprimeTransicoes(matrix_dados, vetor_col):
-	estado = matrix_dados[0]
-	indice = [[0]]*len(matrix_dados[0])
-	linhas = [[0]]*len(matrix_dados[0])
-	entra = True
-	for i in range(len(matrix_dados)):
-		for j in vetor_col:
-			if entra and matrix_dados[i][j] != estado[j]:
-				print(i,"dasdas")
-				estado[j] = matrix_dados[i][j]
-				indice[j]= [i]
-				linhas[j]= [matrix_dados[i-1]]
-				linhas[j].append(matrix_dados[i])
-				linhas[j].append(matrix_dados[i+1]) 
 
-				entra = False
-			
-			elif matrix_dados[i][j] != estado[j]:
-				estado[j] = matrix_dados[i][j]
-				indice[j].append(i)
-				linhas[j].append(matrix_dados[i-1])
-				linhas[j].append(matrix_dados[i])
-				linhas[j].append(matrix_dados[i+1]) 
-	return linhas, indice
 
 """
-testa os segmentos das transicoes 
+for i in range(1,60): #range(1,len(dados)):
+  pres_sala.append(int(dados[i][15]))
+  if i+1 < len(dados):
+    if int(dados[i][15]) > int(dados[i+1][15]):
+      print(dados[i][15], dados[i+1][15], i)
+      troca.append(i)
+  
+print(pres_sala)
+print(troca)
+window = [pres_sala[i:i+5] for i in range(0, len(pres_sala), 5)]
+print(window)
+i = 0
+j = 0 
+print(window[0][0:1])
+while i<len(window):
+	plt.figure(1)
+	plt.subplot(221)
+	plt.plot(range(len(window[i][0:2])),norm.pdf(window[i][0:2]))
+	plt.subplot(222)
+	plt.plot(range(len(window[i][0:3])),norm.pdf(window[i][0:3]))
+	plt.subplot(223)
+	plt.plot(range(len(window[i][0:4])),norm.pdf(window[i][0:4]))
+	plt.subplot(224)
+	plt.plot(range(len(window[i][0:5])),norm.pdf(window[i][0:5]))
+	print(window[i],"window")
+	plt.show()
+	sair = raw_input("continuar?")
+	if sair != "s":
+		break
+	i+= 1
 """
-def testa_transicao(matrix_dados, transicoes):
-	for elemento in transicoes:
-		elemento.insert(1,1)
-		elemento.append(-1)
-	escada = transicoes[0]
-	aquario = transicoes[1]
-	banho = transicoes[2]
-	
-	funciona = True
-	i=1
-	#while i < len(escada)-1:
-	for i in range(1,len(escada)-1):
-		indice_inicial = escada[i]
-		k = indice_inicial +1 
-		estado = matrix_dados[indice_inicial][5]
-		#if estado == 1: 
-		indice_final = escada[i+1]
-		while k < indice_final:
-			if estado != matrix_dados[k][5] and estado != matrix_dados[k+1][5] and estado != matrix_dados[k+2][5] and estado != matrix_dados[k+3][5]:
-				print("multiplos estados no segmento na escada")
-				print("indice inicial: ", indice_inicial)
-				print("indice final: ", indice_final)
-				funciona = False
-				break
-			k += 1
-			#i += 2
-		#else:
-		#	i += 1
-		if not(funciona):
-			break
-	if funciona:
-		print("escada ok")
-	funciona = True
-	for i in range(1,len(aquario)-1):
-		indice_inicial = aquario[i]
-		k = indice_inicial +1 
-		estado = matrix_dados[indice_inicial][10]
-		#if estado == 1: 
-		indice_final = aquario[i+1]
-		while k < indice_final:
-			if estado != matrix_dados[k][10] and estado != matrix_dados[k+1][10] and estado != matrix_dados[k+2][10] and estado != matrix_dados[k+3][10]:
-				print("multiplos estados no segmento no aquario")
-				print("indice inicial: ", indice_inicial)
-				print("indie final: ", indice_final)
-				funciona = False
-				break
-			k += 1
-			#i += 2
-		#else:
-		#	i += 1
-		if not(funciona):
-			break
-	if funciona:
-		print("aquario ok")
-	funciona = True
-	for i in range(1,len(banho)-1):
-		indice_inicial = banho[i]
-		k = indice_inicial +1 
-		estado = matrix_dados[indice_inicial][13]
-		#if estado == 1: 
-		indice_final = banho[i+1]
-		while k < indice_final:
-			if estado != matrix_dados[k][13] and estado != matrix_dados[k+1][13] and estado != matrix_dados[k+2][13] and estado != matrix_dados[k+3][13]:
-				print("multiplos estados no segmento no banho")
-				print("indice inicial: ", indice_inicial)
-				print("indie final: ", indice_final)
-				funciona = False
-				break
-			k += 1
-			#i += 2
-		#else:
-		#	i += 1
-		if not(funciona):
-			break
-	if funciona:
-		print("banho ok")
-	
-	funciona = True
-	for elemento in transicoes[3:]:
-		indice_col = elemento[0]
-		for i in range(len(elemento)-1):
-			indice_inicial = elemento[i]
-			k = indice_inicial
-			indice_final = elemento[i+1]
-			if matrix_dados[indice_inicial][indice_col] < 150:
-				presente = True
-			else:
-				presente = False
-			while k < indice_final:
-				if presente:
-					if matrix_dados[k][indice_col] >= 150:
-						print("pessoa esta ausente no segmento")
-						print("sensor: ", matrix_dados[0][indice_col])
-						print("indice inicial: ", indice_inicial)
-						print("indice final: ", indice_final)
-						funciona = False
-						break
 
-				else:
-					if matrix_dados[k][indice_col] < 150:
-						print("pessoa esta presente no segmento")
-						print("sensor: ", matrix_dados[0][indice_col])
-						print("indice inicial: ", indice_inicial)
-						print("indice final: ", indice_final)
-						funciona = False
-						break
-				k+=1
-			if not(funciona):
-				break
-		if funciona:
-			print(print("segmentos ok: ", matrix_dados[0][indice_col]))
-		funciona = True
-
-
-#Teste de verificação com dados da casa
-#print(dados_casa[0][2],dados_casa[0][15],dados_casa[0][27])
-#print(vetor)
-#print(feature_vector_aparelho(vetor,[2,27]))
-
-print(dados_casa[0][1],dados_casa[0][15])
-#print(feature_tempo(vetor[0],[1,15]))
-testa_transicao(dados_casa,transicoes)
-
+""""
+plt.figure(1)
+plt.subplot(221)
+plt.plot(range(len(pres_sala[troca[i]:troca[i+1]])),norm.pdf(pres_sala[troca[i]:troca[i+1]]))
+plt.subplot(222)
+plt.plot(range(len(pres_sala[troca[i]:troca[i+2]])),norm.pdf(pres_sala[troca[i]:troca[i+2]]))
+plt.subplot(223)
+plt.plot(range(len(pres_sala[troca[i]:troca[i+3]])),norm.pdf(pres_sala[troca[i]:troca[i+3]]))
+plt.subplot(224)
+plt.plot(range(len(pres_sala[troca[i]:troca[i+4]])),norm.pdf(pres_sala[troca[i]:troca[i+4]]))
+plt.figure(1)
+	plt.subplot(221)
+	plt.plot(range(len(window[i][0:1])),norm.pdf(window[[i][0:1]]))
+	plt.subplot(222)
+	plt.plot(range(len(window[i][0:2])),norm.pdf(window[[i][0:2]]))
+	plt.subplot(223)
+	plt.plot(range(len(window[i][0:3])),norm.pdf(window[[i][0:3]]))
+	plt.subplot(224)
+	plt.plot(range(len(window[i][0:4])),norm.pdf(window[[i][0:4]]))
+"""
