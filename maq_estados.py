@@ -178,11 +178,13 @@ def match_acesso_casa(dados_casa, dados_acesso):
    
 #print(match_acesso_casa(dados_casa,dados_acesso[30]))
 
-for i in range(1,len(transicoes[10])-1): #Essa análise não está passando da linha 133 da extração
+for i in range(1,len(transicoes[10])-1):
     indice_inicial = transicoes[10][i]
     indice_final = transicoes[10][i+1]
-    if indice_inicial == 103:
-        print("a")
+    
+    #if indice_inicial == 103:
+    #    print("a")
+    
     vetor = dados_casa[indice_inicial:indice_final]
     resultado, segmento = corredor(vetor)
     if len(resultado) != 1:
