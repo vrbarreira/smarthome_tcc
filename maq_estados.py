@@ -62,52 +62,75 @@ def classif_corredor(vetor_sensor):
     estados = []
     segmentos = []
     segmento_atual = []
-
-    for i in range(len(vetor)):
-        if vetor_sensor[i][pres_corredor] >= limite_presenca and vetor_sensor[i][luz_corredor] == 1: #Contador de presença >= tempo determinado e luz acesa
-            estado_aceso += 1 #Determinar estado aceso
-            estado_vazio = 0
-            estado_transicao = 0
-
-            if estado_aceso == 1:
-                if len(segmento_atual) != 0:
-                    segmentos.append(segmento_atual)
-                segmento_atual = []
+    if len(vetor_sensor) <=3: 
+        segmentos = [vetor_sensor]
+        for i in range(len(vetor)):
+            if vetor_sensor[i][pres_corredor] >= limite_presenca and vetor_sensor[i][luz_corredor] == 1:
+                estado_aceso += 1
+            elif vetor_sensor[i][pres_corredor] >= limite_presenca and vetor_sensor[i][luz_corredor] == 0:
+                estado_vazio += 1
+            elif vetor_sensor[i][pres_corredor] < limite_presenca:
+                estado_transicao += 1 
+        if (estado_aceso == estado_transicao) or (estado_aceso == estado_vazio) or (estado_transicao == estado_vazio):
+            if  vetor_sensor[0][pres_corredor] >= limite_presenca and vetor_sensor[0][luz_corredor] == 1:
                 estados.append("luz acesa")
-            segmento_atual.append(vetor_sensor[i])
-            
-            if (i == len(vetor)-1):
-                segmentos.append(segmento_atual)
-
-        elif vetor_sensor[i][pres_corredor] >= limite_presenca and vetor_sensor[i][luz_corredor] == 0: #Contador de presença >= tempo determinado e luz acesa
-            estado_vazio += 1 #Determinar estado vazio
-            estado_aceso = 0
-            estado_transicao = 0
-
-            if estado_vazio == 1:
-                if len(segmento_atual) != 0:
-                    segmentos.append(segmento_atual)
-                segmento_atual = []
+            elif vetor_sensor[i][pres_corredor] >= limite_presenca and vetor_sensor[i][luz_corredor] == 0:
                 estados.append("vazio")
-            segmento_atual.append(vetor_sensor[i])
-
-            if i == len(vetor)-1:
-                segmentos.append(segmento_atual)
-
-        elif vetor_sensor[i][pres_corredor] < limite_presenca:
-            estado_transicao += 1 
-            estado_aceso = 0
-            estado_vazio = 0
-
-            if estado_transicao == 1:
-                if len(segmento_atual) != 0:
-                    segmentos.append(segmento_atual)
-                segmento_atual = []
+            elif vetor_sensor[i][pres_corredor] < limite_presenca:
                 estados.append("transicao corredor")
-            segmento_atual.append(vetor_sensor[i])
-            
-            if i == len(vetor)-1:
-                segmentos.append(segmento_atual)
+        else:
+            if estado_aceso > estado_transicao and estado_aceso > estado_vazio:
+                estados.append("luz acesa")
+            elif estado_vazio > estado_aceso and estado_vazio > estado_transicao:
+                estados.append("vazio")
+            elif estado_transicao > estado_aceso and estado_transicao > estado_vazio:
+                estados.append("transicao corredor")
+    else:
+        for i in range(len(vetor)):
+            if vetor_sensor[i][pres_corredor] >= limite_presenca and vetor_sensor[i][luz_corredor] == 1: #Contador de presença >= tempo determinado e luz acesa
+                estado_aceso += 1 #Determinar estado aceso
+                estado_vazio = 0
+                estado_transicao = 0
+
+                if estado_aceso == 3:
+                    if len(segmento_atual) != 0:
+                        segmentos.append(segmento_atual)
+                    segmento_atual = []
+                    estados.append("luz acesa")
+                segmento_atual.append(vetor_sensor[i])
+                
+                if (i == len(vetor)-1):
+                    segmentos.append(segmento_atual)
+
+            elif vetor_sensor[i][pres_corredor] >= limite_presenca and vetor_sensor[i][luz_corredor] == 0: #Contador de presença >= tempo determinado e luz acesa
+                estado_vazio += 1 #Determinar estado vazio
+                estado_aceso = 0
+                estado_transicao = 0
+
+                if estado_vazio == 3:
+                    if len(segmento_atual) != 0:
+                        segmentos.append(segmento_atual)
+                    segmento_atual = []
+                    estados.append("vazio")
+                segmento_atual.append(vetor_sensor[i])
+
+                if i == len(vetor)-1:
+                    segmentos.append(segmento_atual)
+
+            elif vetor_sensor[i][pres_corredor] < limite_presenca:
+                estado_transicao += 1 
+                estado_aceso = 0
+                estado_vazio = 0
+
+                if estado_transicao == 1:
+                    if len(segmento_atual) != 0:
+                        segmentos.append(segmento_atual)
+                    segmento_atual = []
+                    estados.append("transicao corredor")
+                segmento_atual.append(vetor_sensor[i])
+                
+                if i == len(vetor)-1:
+                    segmentos.append(segmento_atual)
             
 
     return estados, segmentos
@@ -209,19 +232,20 @@ id_transic = 10
 for i in range(1,len(transicoes[id_transic])-1):
     indice_inicial = transicoes[id_transic][i]
     indice_final = transicoes[id_transic][i+1]
-    
+
     vetor = dados_casa[indice_inicial:indice_final]
     resultado, segmento = classif_corredor(vetor)
     if len(resultado) != 1:
         print("Mudança de feature!") #Caso de erro ocorre quando são detectadas 2 ou mais atividades em um segmento (ex: mudança de luz dentro de um segmento presença)
         print(resultado)
-        #print(segmento)
+        print(segmento)
         print("indice inicial: ", indice_inicial)
         print("indice final: ", indice_final)
         print("\n")
         #break
     else:
         print(resultado)
+        print(segmento)
         print("indice inicial: ", indice_inicial)
         print("indice final: ", indice_final)
         print("\n")
