@@ -4,10 +4,15 @@ from datetime import timedelta
 import datetime
 import segmentacao
 
+indices_sensores = segmentacao.indices_sensores
 dados_casa = segmentacao.dados_casa
 dados_acesso = segmentacao.dados_acesso
 transicoes = segmentacao.transicoes
 print("\n\n\n\n\n")
+
+lista_estados = []
+lista_segmentos = []
+
 """
 entrada
 vetor_sensor: vetor de dados contendo as informacoes brutas dos sensores da casa
@@ -26,18 +31,21 @@ vetor_sensor: vetor de dados contendo as informacoes brutas dos sensores da casa
 
 classifica o segmento 
 """
-def corredor(vetor_sensor):
+def classif_corredor(vetor_sensor):
     luz_corredor = 12
     pres_corredor = 22
+    limite_presenca = 150    
+    
     estado_aceso = 0
     estado_vazio = 0
     estado_transicao = 0
+    
     estados = []
     segmentos = []
     segmento_atual = []
 
     for i in range(len(vetor)):
-        if vetor_sensor[i][pres_corredor] >= 150 and vetor_sensor[i][luz_corredor] == 1: #Contador de presença >= tempo determinado e luz acesa
+        if vetor_sensor[i][pres_corredor] >= limite_presenca and vetor_sensor[i][luz_corredor] == 1: #Contador de presença >= tempo determinado e luz acesa
             estado_aceso += 1 #Determinar estado aceso
             estado_vazio = 0
             estado_transicao = 0
@@ -52,7 +60,7 @@ def corredor(vetor_sensor):
             if (i == len(vetor)-1):
                 segmentos.append(segmento_atual)
 
-        elif vetor_sensor[i][pres_corredor] >= 150 and vetor_sensor[i][luz_corredor] == 0: #Contador de presença >= tempo determinado e luz acesa
+        elif vetor_sensor[i][pres_corredor] >= limite_presenca and vetor_sensor[i][luz_corredor] == 0: #Contador de presença >= tempo determinado e luz acesa
             estado_vazio += 1 #Determinar estado vazio
             estado_aceso = 0
             estado_transicao = 0
@@ -67,7 +75,7 @@ def corredor(vetor_sensor):
             if i == len(vetor)-1:
                 segmentos.append(segmento_atual)
 
-        elif vetor_sensor[i][pres_corredor] < 150:
+        elif vetor_sensor[i][pres_corredor] < limite_presenca:
             estado_transicao += 1 
             estado_aceso = 0
             estado_vazio = 0
@@ -178,29 +186,29 @@ def match_acesso_casa(dados_casa, dados_acesso):
    
 #print(match_acesso_casa(dados_casa,dados_acesso[30]))
 
-for i in range(1,len(transicoes[10])-1):
-    indice_inicial = transicoes[10][i]
-    indice_final = transicoes[10][i+1]
-    
-    #if indice_inicial == 103:
-    #    print("a")
+id_transic = 10
+for i in range(1,len(transicoes[id_transic])-1):
+    indice_inicial = transicoes[id_transic][i]
+    indice_final = transicoes[id_transic][i+1]
     
     vetor = dados_casa[indice_inicial:indice_final]
-    resultado, segmento = corredor(vetor)
+    resultado, segmento = classif_corredor(vetor)
     if len(resultado) != 1:
         print("Mudança de feature!") #Caso de erro ocorre quando são detectadas 2 ou mais atividades em um segmento (ex: mudança de luz dentro de um segmento presença)
         print(resultado)
-        print(segmento)
+        #print(segmento)
         print("indice inicial: ", indice_inicial)
         print("indice final: ", indice_final)
-        print("\n\n")
+        print("\n")
         #break
-
     else:
         print(resultado)
         print("indice inicial: ", indice_inicial)
         print("indice final: ", indice_final)
-        print("\n\n")
+        print("\n")
+    
+    lista_estados.append(resultado)
+    lista_segmentos.append(segmento)
 
 for i in range(1,len(dados_acesso)):
     if match_acesso_casa(dados_casa, dados_acesso[i]) == None:
@@ -215,4 +223,3 @@ for i in range(1,len(dados_acesso)):
         print("acesso: ", dados_acesso[i][1])
         """
     print("\n\n\n\n")
-
