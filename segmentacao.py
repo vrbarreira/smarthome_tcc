@@ -39,6 +39,7 @@ def imprimeTransicoes(matrix_dados, vetor_col):
 				linhas[j].append(matrix_dados[i])
 				linhas[j].append(matrix_dados[i+1]) 
 	return linhas, indice
+
 """
 testa os segmentos das transicoes 
 """
@@ -151,8 +152,6 @@ def testa_trasicao(matrix_dados, transicoes, size_janela):
 		if funciona:
 			print(print("segmentos ok: ", matrix_dados[0][indice_col]))
 		funciona = True
-			
-
 					
 
 ############################### dados da casa #################################

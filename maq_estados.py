@@ -10,8 +10,26 @@ dados_acesso = segmentacao.dados_acesso
 transicoes = segmentacao.transicoes
 print("\n\n\n\n\n")
 
-lista_estados = []
-lista_segmentos = []
+lista_estados_corr = []
+lista_segmentos_corr = []
+
+lista_estados_sala = []
+lista_segmentos_sala = []
+
+lista_estados_cozi = []
+lista_segmentos_cozi = []
+
+lista_estados_lavnd = []
+lista_segmentos_lavnd = []
+
+lista_estados_qrt1 = []
+lista_segmentos_qrt1 = []
+
+lista_estados_qrt2 = []
+lista_segmentos_qrt2 = []
+
+lista_estados_qrt3 = []
+lista_segmentos_qrt3 = []
 
 """
 entrada
@@ -22,6 +40,7 @@ esta funcao mapeia o estado de todos os comodos da casa
 """
 def maq_estados(vetor_sensor, comodo):
     pass
+
 def rotula_base(vetor_sensor):
     pass
 
@@ -207,8 +226,8 @@ for i in range(1,len(transicoes[id_transic])-1):
         print("indice final: ", indice_final)
         print("\n")
     
-    lista_estados.append(resultado)
-    lista_segmentos.append(segmento)
+    lista_estados_corr.append(resultado)
+    lista_segmentos_corr.append(segmento)
 
 for i in range(1,len(dados_acesso)):
     if match_acesso_casa(dados_casa, dados_acesso[i]) == None:
