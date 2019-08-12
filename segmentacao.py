@@ -222,7 +222,7 @@ dias_acesso = [] #Índice no qual um dia acaba
 
 
 #Índices hardcode. Esta parte será customizável em versão futura
-#luz_escada, luz_aquario, luz_banho, pres_sala, pres_cozinha pres_lavanderia, pres_garagem, pres_quarto1, pres_quarto2, pres_quarto3
+#luz_escada, luz_aquario, luz_banho, pres_sala, pres_cozinha, pres_lavanderia, pres_garagem, pres_quarto1, pres_quarto2, pres_cobertura, pres_corredor, pres_quarto3
 indices_sensores = [5,10,13,15, 16, 17, 18, 19, 20, 21, 22, 23]
 #Foram escolhidos sensores de presença ou de luz, quando não há sensor de presença no cômodo
 
