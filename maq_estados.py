@@ -4,6 +4,7 @@ from datetime import timedelta
 import datetime
 import segmentacao
 
+print("Segmentação em andamento")
 indices_sensores = segmentacao.indices_sensores
 dados_casa = segmentacao.dados_casa
 dados_acesso = segmentacao.dados_acesso
@@ -66,9 +67,12 @@ def rotula_base(nome_arq, id_transic, id_luz, id_pres, lista_estados, lista_segm
         #print("\n")
 
         arq_saida.write("%s\n" % (resultado))
-        arq_saida.write("%s\n" % (segmento))
-        arq_saida.write("indice inicial: %s\n" % (indice_inicial))
-        arq_saida.write("indice final: %s\n" % (indice_final))
+        #arq_saida.write("%s\n" % (segmento))
+        arq_saida.write("id %s - %s - Pres: %s\n" % (vetor[0][0], vetor[0][1], vetor[0][id_pres]))
+        arq_saida.write("id %s - %s - Pres: %s\n" % (vetor[len(vetor)-1][0], vetor[len(vetor)-1][1], vetor[len(vetor)-1][id_pres]))
+
+        #arq_saida.write("indice inicial: %s\n" % (indice_inicial))
+        #arq_saida.write("indice final: %s\n" % (indice_final))
         arq_saida.write("\n")
         
         lista_estados.append(resultado)
@@ -263,6 +267,7 @@ def match_acesso_casa(dados_casa, dados_acesso):
 
 #luz_escada, luz_aquario, luz_banho, pres_sala, pres_cozinha, pres_lavanderia, pres_garagem, pres_quarto1, pres_quarto2, pres_cobertura, pres_corredor, pres_quarto3
 
+print("Classificação em andamento")
 rotula_base("classif_sala.txt", 3, segmentacao.id_luz_sala, segmentacao.id_pres_sala, lista_estados_sala, lista_segmentos_sala) #Sala
 rotula_base("classif_cozinha.txt", 4, segmentacao.id_luz_cozinha, segmentacao.id_pres_cozinha, lista_estados_cozi, lista_segmentos_cozi) #Cozinha
 rotula_base("classif_lavanderia.txt", 5, segmentacao.id_luz_lavanderia, segmentacao.id_pres_lavanderia, lista_estados_lavnd, lista_segmentos_lavnd) #Lavanderia
