@@ -273,22 +273,23 @@ def init_dados_casa():
 		for i in range(1, len(dados_casa) - size_janela): 
 			if j > 14: #Presenças
 				hora_casa_atual = dt.strptime(dados_casa[i][1][1:-1], '%Y-%m-%d %H:%M')
-				hora_casa_seguinte = dt.strptime(dados_casa[i][1][1:-1], '%Y-%m-%d %H:%M')
+				hora_casa_seguinte = dt.strptime(dados_casa[i+1][1][1:-1], '%Y-%m-%d %H:%M')
 				dif_pres = timedelta(seconds = dados_casa[i+1][j] - dados_casa[i][j]) #tempo que foi incrementado no sensor de presenca 
 				#for k in range(1,size_janela+1):
 					#if dados_casa[i][j] <= dados_casa[i+k][j]:  
 						#add_transicao = False
 						#break
 				"""
-				if j == 16:
-					a = dados_casa[i][j]
-					b = dados_casa[i+1][j]
-					c = dados_casa[i][0]
+				if j == 22 and i == 178:
+					a = dados_casa[i]
+					b = dados_casa[i+1]
+					c = dados_casa[i]
 				"""
+					
 				if (dados_casa[i][j] > dados_casa[i+1][j] or (hora_casa_seguinte - hora_casa_atual)/2 > dif_pres) and dados_casa[i+1][j] < 150 and not(presente):
 					presente = True
 					add_transicao = True
-				elif (presente and dados_casa[i+1][j] >= 150) or hora_casa_seguinte - hora_casa_atual > timedelta(minutes = 30):
+				elif (presente and dados_casa[i+1][j] >= 150) or hora_casa_seguinte - hora_casa_atual > timedelta(minutes = 30) or dados_casa[i][j] > dados_casa[i+1][j]:
 					presente = False
 					add_transicao = True
 				
@@ -474,12 +475,12 @@ def feature_tempo(vetor, col):
 
 
 #Teste de verificação com dados da casa
-print(dados_casa[0][2],dados_casa[0][15],dados_casa[0][27])
+#print(dados_casa[0][2],dados_casa[0][15],dados_casa[0][27])
 #print(vetor)
 #print(feature_vector_aparelho(vetor,[2,27]))
-print(dados_casa[0][1],dados_casa[0][15])
+#print(dados_casa[0][1],dados_casa[0][15])
 #print(feature_tempo(vetor[0],[1,15]))
-testa_trasicao(dados_casa,transicoes,3)
+#testa_trasicao(dados_casa,transicoes,3)
 
 
 

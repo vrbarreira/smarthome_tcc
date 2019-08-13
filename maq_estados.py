@@ -53,7 +53,9 @@ def rotula_base(nome_arq, id_transic, id_luz, id_pres, lista_estados, lista_segm
     for i in range(1,len(transicoes[id_transic])-1):
         indice_inicial = transicoes[id_transic][i]
         indice_final = transicoes[id_transic][i+1]
-    
+
+        #if indice_inicial == 1095: 
+        #    print("a")
         vetor = dados_casa[indice_inicial:indice_final]
         resultado, segmento = classif_comodo(vetor, id_luz, id_pres)
         if len(resultado) != 1:
@@ -65,6 +67,13 @@ def rotula_base(nome_arq, id_transic, id_luz, id_pres, lista_estados, lista_segm
         #print("indice inicial: ", indice_inicial)
         #print("indice final: ", indice_final)
         #print("\n")
+        if len(resultado) != len(segmento):
+            print("\n\nErro")
+            print("multiplos estados no mesmo segmento")
+            print("indice final: ",vetor[0][0],"       inidice inicial:",vetor[len(vetor)-1][0])
+            print(resultado)
+            for elemento in segmento:
+                print(elemento)
 
         arq_saida.write("%s\n" % (resultado))
         #arq_saida.write("%s\n" % (segmento))
@@ -85,8 +94,10 @@ def rotula_base(nome_arq, id_transic, id_luz, id_pres, lista_estados, lista_segm
 """
 entrada
 vetor_sensor: vetor de dados contendo as informacoes brutas dos sensores da casa
+id_luz: indice do "vetor_sensor" onde esta o sensor de luz do comodo
+id_pres: indice do "vetor_sensor" onde esta o sensor de presenca comodo
 
-classifica o segmento 
+classifica o segmento baseado nos valores dos sensores
 """
 def classif_comodo(vetor_sensor, id_luz, id_pres):
     limite_presenca = 150    
@@ -98,7 +109,53 @@ def classif_comodo(vetor_sensor, id_luz, id_pres):
     estados = []
     segmentos = []
     segmento_atual = []
-    if len(vetor_sensor) <=3: 
+    for i in range(len(vetor_sensor)):
+        if vetor_sensor[i][id_pres] >= limite_presenca and vetor_sensor[i][id_luz] == 1: #Contador de presença >= tempo determinado e luz acesa
+            estado_aceso += 1 #Determinar estado aceso
+            estado_vazio = 0
+            estado_transicao = 0
+
+            if estado_aceso == 3:
+                if len(segmento_atual) >= 3:
+                    segmentos.append(segmento_atual[:-2])
+                    segmento_atual = segmento_atual[-2:]
+                estados.append("luz acesa")
+            segmento_atual.append(vetor_sensor[i])
+            
+            if (i == len(vetor_sensor)-1):
+                segmentos.append(segmento_atual)
+
+        elif vetor_sensor[i][id_pres] >= limite_presenca and vetor_sensor[i][id_luz] == 0: #Contador de presença >= tempo determinado e luz acesa
+            estado_vazio += 1 #Determinar estado vazio
+            estado_aceso = 0
+            estado_transicao = 0
+
+            if estado_vazio == 3:
+                if len(segmento_atual) >= 3:
+                    segmentos.append(segmento_atual[:-2])
+                    segmento_atual = segmento_atual[-2:]
+                estados.append("vazio")
+            segmento_atual.append(vetor_sensor[i])
+
+            if i == len(vetor_sensor)-1:
+                segmentos.append(segmento_atual)
+
+        elif vetor_sensor[i][id_pres] < limite_presenca:
+            estado_transicao += 1 
+            estado_aceso = 0
+            estado_vazio = 0
+
+            if estado_transicao == 1:
+                if len(segmento_atual) >= 1:
+                    segmentos.append(segmento_atual)
+                    segmento_atual = []
+                estados.append("transicao")
+            segmento_atual.append(vetor_sensor[i])
+            
+            if i == len(vetor_sensor)-1:
+                segmentos.append(segmento_atual)
+
+    if len(estados) == 0: 
         segmentos = [vetor_sensor]
         for i in range(len(vetor_sensor)):
             if vetor_sensor[i][id_pres] >= limite_presenca and vetor_sensor[i][id_luz] == 1:
@@ -121,52 +178,6 @@ def classif_comodo(vetor_sensor, id_luz, id_pres):
                 estados.append("vazio")
             elif estado_transicao > estado_aceso and estado_transicao > estado_vazio:
                 estados.append("transicao")
-    else:
-        for i in range(len(vetor_sensor)):
-            if vetor_sensor[i][id_pres] >= limite_presenca and vetor_sensor[i][id_luz] == 1: #Contador de presença >= tempo determinado e luz acesa
-                estado_aceso += 1 #Determinar estado aceso
-                estado_vazio = 0
-                estado_transicao = 0
-
-                if estado_aceso == 3:
-                    if len(segmento_atual) != 0:
-                        segmentos.append(segmento_atual)
-                    segmento_atual = []
-                    estados.append("luz acesa")
-                segmento_atual.append(vetor_sensor[i])
-                
-                if (i == len(vetor_sensor)-1):
-                    segmentos.append(segmento_atual)
-
-            elif vetor_sensor[i][id_pres] >= limite_presenca and vetor_sensor[i][id_luz] == 0: #Contador de presença >= tempo determinado e luz acesa
-                estado_vazio += 1 #Determinar estado vazio
-                estado_aceso = 0
-                estado_transicao = 0
-
-                if estado_vazio == 3:
-                    if len(segmento_atual) != 0:
-                        segmentos.append(segmento_atual)
-                    segmento_atual = []
-                    estados.append("vazio")
-                segmento_atual.append(vetor_sensor[i])
-
-                if i == len(vetor_sensor)-1:
-                    segmentos.append(segmento_atual)
-
-            elif vetor_sensor[i][id_pres] < limite_presenca:
-                estado_transicao += 1 
-                estado_aceso = 0
-                estado_vazio = 0
-
-                if estado_transicao == 1:
-                    if len(segmento_atual) != 0:
-                        segmentos.append(segmento_atual)
-                    segmento_atual = []
-                    estados.append("transicao")
-                segmento_atual.append(vetor_sensor[i])
-                
-                if i == len(vetor_sensor)-1:
-                    segmentos.append(segmento_atual)
             
 
     return estados, segmentos
@@ -188,7 +199,7 @@ def entrada_saida(vetor_sensor, hora_entrada):
         indice += 1
     pres_anterior = vetor_sensor[0][18]
 
-    for i in range(1,indice):
+    for i in range(0,indice):
         pres_atual = vetor_sensor[i][18]
         if pres_atual < pres_anterior or pres_atual < 50:
             saida = True
@@ -238,13 +249,14 @@ def match_acesso_casa(dados_casa, dados_acesso):
         if prox_indice == indice_atual:
             print("não existe faixa horario correspondente nos dados da casa")
             indice_atual = None
-            break
+            return None
+            #break
         
         indice_atual = prox_indice
         hora_casa = dt.strptime(dados_casa[indice_atual][1][1:-1], '%Y-%m-%d %H:%M')
 
-    if indice_atual == None:
-        return None
+    #if indice_atual == None:
+    #    return None
 
     indice_inicial = indice_atual #indice no qual esta a ultima linha do vetor de retorno
     indice_final = indice_atual #indice no qual esta o primeira linha do vetor de retorno
@@ -261,7 +273,13 @@ def match_acesso_casa(dados_casa, dados_acesso):
         if abs(hora_casa - hora_acesso) > timedelta(minutes = 10):
             break
         indice_final = prox_indice
-    return dados_casa[indice_inicial:indice_final]
+    
+    hora_inicial = dt.strptime(dados_casa[indice_inicial][1][1:-1], '%Y-%m-%d %H:%M')
+    hora_final = dt.strptime(dados_casa[indice_final][1][1:-1], '%Y-%m-%d %H:%M')
+    if  hora_inicial > hora_acesso or hora_final < hora_acesso:
+        print("não existe faixa horario correspondente nos dados da casa")
+        return  None
+    return dados_casa[indice_inicial:indice_final + 1]
    
 #print(match_acesso_casa(dados_casa,dados_acesso[30]))
 
@@ -279,16 +297,20 @@ rotula_base("classif_quarto3.txt", 11, segmentacao.id_luz_quarto3, segmentacao.i
 rotula_base("classif_cobertura.txt", 9, segmentacao.id_luz_cobertura, segmentacao.id_pres_cobertura, lista_estados_cobt, lista_segmentos_cobt) #Cobertura
 rotula_base("classif_corredor.txt", 10, segmentacao.id_luz_corredor, segmentacao.id_pres_corredor, lista_estados_corr, lista_segmentos_corr) #Corredor
 
+"""
 for i in range(1,len(dados_acesso)):
     if match_acesso_casa(dados_casa, dados_acesso[i]) == None:
         print("nao existe para: ", dados_acesso[i])
     else: 
         vetor = match_acesso_casa(dados_casa,dados_acesso[i])
         entrada, saida = entrada_saida(vetor, dados_acesso[i][1])
+        if not(saida) and not(entrada):
+            print("erro")
+            print("entrada: ",entrada,"   ","saida: ",saida, "  ", dados_acesso[i][1])
+            break
         print("entrada: ",entrada,"   ","saida: ",saida, "  ", dados_acesso[i][1])
-        """
-        print("inicial: ", vetor[0][1])
-        print("final: ", vetor[-1][1])
-        print("acesso: ", dados_acesso[i][1])
-        """
     print("\n")
+"""
+
+#rotula_base("classif_corredor.txt", 10, segmentacao.id_luz_corredor, segmentacao.id_pres_corredor, lista_estados_corr, lista_segmentos_corr) #Corredor
+#rotula_base("classif_cozinha.txt", 4, segmentacao.id_luz_cozinha, segmentacao.id_pres_cozinha, lista_estados_cozi, lista_segmentos_cozi) #Cozinha
