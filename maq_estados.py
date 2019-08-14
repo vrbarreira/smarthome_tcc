@@ -141,7 +141,7 @@ def classif_comodo(vetor_sensor, id_luz, id_pres):
                     segmento_atual = segmento_atual[-2:]
                 estados.append("vazio")
 
-            elif estado_aceso == 3 and not(estado_adicionado):
+            elif estado_vazio == 3 and not(estado_adicionado):
                 estado_adicionado = True
                 estados.append("vazio")
             segmento_atual.append(vetor_sensor[i])
@@ -160,7 +160,7 @@ def classif_comodo(vetor_sensor, id_luz, id_pres):
                     segmento_atual = []
                 estados.append("transicao")
         
-            elif estado_aceso == 1 and not(estado_adicionado):
+            elif estado_transicao == 1 and not(estado_adicionado):
                 estado_adicionado = True
                 estados.append("transicao")
 
