@@ -207,8 +207,7 @@ id 303 - "2019-04-15 10:07" - Pres: 158
 id 304 - "2019-04-15 10:09" - Pres: 477
 id 304 - "2019-04-15 10:09" - Pres: 477
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 305 - "2019-04-15 10:11" - Pres: 8
 id 327 - "2019-04-15 10:56" - Pres: 128
 
@@ -765,8 +764,7 @@ id 1075 - "2019-04-21 18:18" - Pres: 0
 id 1076 - "2019-04-21 18:25" - Pres: 310
 id 1076 - "2019-04-21 18:25" - Pres: 310
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 1077 - "2019-04-21 18:28" - Pres: 0
 id 1082 - "2019-04-21 18:44" - Pres: 31
 
@@ -1006,8 +1004,7 @@ id 1272 - "2019-04-22 06:46" - Pres: 1671
 id 1273 - "2019-04-22 06:55" - Pres: 2174
 id 1275 - "2019-04-22 07:01" - Pres: 2510
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 1276 - "2019-04-22 07:20" - Pres: 0
 id 1278 - "2019-04-22 07:26" - Pres: 121
 
@@ -1163,8 +1160,7 @@ id 1480 - "2019-04-22 19:04" - Pres: 2702
 id 1481 - "2019-04-22 19:13" - Pres: 205
 id 1483 - "2019-04-22 19:20" - Pres: 547
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 1484 - "2019-04-22 19:23" - Pres: 94
 id 1486 - "2019-04-22 19:29" - Pres: 97
 
@@ -2116,8 +2112,7 @@ id 2448 - "2019-04-25 06:23" - Pres: 2820
 id 2449 - "2019-04-25 06:32" - Pres: 3312
 id 2459 - "2019-04-25 07:04" - Pres: 5000
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 2460 - "2019-04-25 07:07" - Pres: 0
 id 2463 - "2019-04-25 07:17" - Pres: 69
 
@@ -2157,8 +2152,7 @@ id 2512 - "2019-04-25 10:05" - Pres: 134
 id 2513 - "2019-04-25 10:09" - Pres: 302
 id 2513 - "2019-04-25 10:09" - Pres: 302
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 2514 - "2019-04-25 10:12" - Pres: 0
 id 2518 - "2019-04-25 10:24" - Pres: 38
 
@@ -2210,8 +2204,7 @@ id 2542 - "2019-04-25 11:52" - Pres: 718
 id 2543 - "2019-04-25 11:58" - Pres: 1050
 id 2546 - "2019-04-25 12:08" - Pres: 1546
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 2547 - "2019-04-25 12:11" - Pres: 22
 id 2551 - "2019-04-25 12:23" - Pres: 125
 
@@ -2231,8 +2224,7 @@ id 2558 - "2019-04-25 12:48" - Pres: 30
 id 2559 - "2019-04-25 12:52" - Pres: 193
 id 2567 - "2019-04-25 13:16" - Pres: 1382
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 2568 - "2019-04-25 13:19" - Pres: 11
 id 2572 - "2019-04-25 13:31" - Pres: 1
 
@@ -2473,8 +2465,7 @@ id 2875 - "2019-04-26 08:26" - Pres: 278
 id 2876 - "2019-04-26 08:30" - Pres: 10
 id 2876 - "2019-04-26 08:30" - Pres: 10
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 2877 - "2019-04-26 08:36" - Pres: 5
 id 2884 - "2019-04-26 08:58" - Pres: 47
 
@@ -2498,8 +2489,7 @@ id 2889 - "2019-04-26 09:22" - Pres: 0
 id 2890 - "2019-04-26 09:28" - Pres: 53
 id 2892 - "2019-04-26 09:34" - Pres: 64
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 2893 - "2019-04-26 09:40" - Pres: 1
 id 2898 - "2019-04-26 09:56" - Pres: 173
 
@@ -2933,8 +2923,7 @@ id 3401 - "2019-04-27 14:31" - Pres: 72
 id 3402 - "2019-04-27 14:34" - Pres: 232
 id 3402 - "2019-04-27 14:34" - Pres: 232
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 3403 - "2019-04-27 14:37" - Pres: 17
 id 3406 - "2019-04-27 14:46" - Pres: 48
 
@@ -2954,8 +2943,7 @@ id 3416 - "2019-04-27 15:21" - Pres: 41
 id 3417 - "2019-04-27 15:24" - Pres: 210
 id 3417 - "2019-04-27 15:24" - Pres: 210
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 3418 - "2019-04-27 15:27" - Pres: 10
 id 3421 - "2019-04-27 15:36" - Pres: 136
 
@@ -2975,8 +2963,7 @@ id 3442 - "2019-04-27 16:45" - Pres: 92
 id 3443 - "2019-04-27 16:48" - Pres: 252
 id 3443 - "2019-04-27 16:48" - Pres: 252
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 3444 - "2019-04-27 16:51" - Pres: 0
 id 3447 - "2019-04-27 17:00" - Pres: 69
 
@@ -2996,8 +2983,7 @@ id 3454 - "2019-04-27 17:37" - Pres: 25
 id 3455 - "2019-04-27 17:40" - Pres: 184
 id 3463 - "2019-04-27 18:05" - Pres: 1477
 
-Mudança de feature!
-['transicao', 'transicao', 'transicao']
+['transicao']
 id 3464 - "2019-04-27 18:11" - Pres: 0
 id 3476 - "2019-04-27 18:48" - Pres: 124
 
@@ -3021,8 +3007,7 @@ id 3481 - "2019-04-27 19:07" - Pres: 391
 id 3482 - "2019-04-27 19:11" - Pres: 24
 id 3484 - "2019-04-27 19:17" - Pres: 89
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 3485 - "2019-04-27 19:23" - Pres: 12
 id 3492 - "2019-04-27 19:44" - Pres: 0
 
@@ -3063,8 +3048,7 @@ id 3515 - "2019-04-27 21:05" - Pres: 57
 id 3516 - "2019-04-27 21:08" - Pres: 221
 id 3517 - "2019-04-27 21:11" - Pres: 384
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 3518 - "2019-04-27 21:14" - Pres: 111
 id 3525 - "2019-04-27 21:36" - Pres: 162
 
@@ -3564,8 +3548,7 @@ id 4058 - "2019-04-29 06:27" - Pres: 3191
 id 4059 - "2019-04-29 06:36" - Pres: 3685
 id 4066 - "2019-04-29 06:58" - Pres: 4865
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 4067 - "2019-04-29 07:01" - Pres: 51
 id 4070 - "2019-04-29 07:10" - Pres: 0
 
@@ -3609,8 +3592,7 @@ id 4094 - "2019-04-29 08:47" - Pres: 79
 id 4095 - "2019-04-29 08:50" - Pres: 242
 id 4103 - "2019-04-29 09:15" - Pres: 1543
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 4104 - "2019-04-29 09:18" - Pres: 37
 id 4107 - "2019-04-29 09:28" - Pres: 130
 
@@ -3864,8 +3846,7 @@ id 4333 - "2019-04-29 23:04" - Pres: 1094
 id 4334 - "2019-04-29 23:07" - Pres: 12
 id 4335 - "2019-04-29 23:10" - Pres: 1
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 4336 - "2019-04-29 23:16" - Pres: 12
 id 4344 - "2019-04-29 23:42" - Pres: 0
 
@@ -4001,8 +3982,7 @@ id 4490 - "2019-04-30 08:48" - Pres: 128
 id 4491 - "2019-04-30 08:51" - Pres: 262
 id 4491 - "2019-04-30 08:51" - Pres: 262
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 4492 - "2019-04-30 08:54" - Pres: 0
 id 4495 - "2019-04-30 09:03" - Pres: 20
 
@@ -4010,8 +3990,7 @@ id 4495 - "2019-04-30 09:03" - Pres: 20
 id 4496 - "2019-04-30 09:06" - Pres: 182
 id 4498 - "2019-04-30 09:12" - Pres: 485
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 4499 - "2019-04-30 09:15" - Pres: 0
 id 4501 - "2019-04-30 09:22" - Pres: 149
 
@@ -4374,8 +4353,7 @@ id 4906 - "2019-05-01 10:22" - Pres: 141
 id 4907 - "2019-05-01 10:26" - Pres: 309
 id 4908 - "2019-05-01 10:29" - Pres: 479
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 4909 - "2019-05-01 10:32" - Pres: 20
 id 4912 - "2019-05-01 10:41" - Pres: 80
 
@@ -4483,8 +4461,7 @@ id 4985 - "2019-05-01 15:05" - Pres: 55
 id 4986 - "2019-05-01 15:24" - Pres: 0
 id 4986 - "2019-05-01 15:24" - Pres: 0
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 4987 - "2019-05-01 15:30" - Pres: 2
 id 4993 - "2019-05-01 15:48" - Pres: 25
 
@@ -4750,8 +4727,7 @@ id 5304 - "2019-05-06 11:26" - Pres: 361
 id 5305 - "2019-05-06 11:33" - Pres: 688
 id 5309 - "2019-05-06 11:45" - Pres: 1344
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 5310 - "2019-05-06 11:48" - Pres: 3
 id 5314 - "2019-05-06 12:01" - Pres: 48
 
@@ -5120,8 +5096,7 @@ id 5703 - "2019-05-07 10:34" - Pres: 288
 id 5704 - "2019-05-07 10:37" - Pres: 27
 id 5704 - "2019-05-07 10:37" - Pres: 27
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 5705 - "2019-05-07 10:44" - Pres: 151
 id 5718 - "2019-05-07 11:24" - Pres: 137
 
@@ -5149,8 +5124,7 @@ id 5732 - "2019-05-07 12:11" - Pres: 49
 id 5733 - "2019-05-07 12:14" - Pres: 214
 id 5741 - "2019-05-07 12:39" - Pres: 1512
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 5742 - "2019-05-07 12:42" - Pres: 33
 id 5745 - "2019-05-07 12:51" - Pres: 18
 
@@ -5228,8 +5202,7 @@ id 5907 - "2019-05-07 21:37" - Pres: 152
 id 5908 - "2019-05-07 21:40" - Pres: 317
 id 5914 - "2019-05-07 21:59" - Pres: 1314
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 5915 - "2019-05-07 22:02" - Pres: 0
 id 5919 - "2019-05-07 22:15" - Pres: 95
 
@@ -5726,8 +5699,7 @@ id 6517 - "2019-05-09 08:26" - Pres: 42
 id 6518 - "2019-05-09 08:32" - Pres: 220
 id 6521 - "2019-05-09 08:42" - Pres: 722
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 6522 - "2019-05-09 08:45" - Pres: 0
 id 6529 - "2019-05-09 09:07" - Pres: 33
 
@@ -5996,8 +5968,7 @@ id 6782 - "2019-05-09 23:49" - Pres: 172
 id 6783 - "2019-05-09 23:52" - Pres: 337
 id 6784 - "2019-05-09 23:56" - Pres: 504
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 6785 - "2019-05-10 00:02" - Pres: 5
 id 6789 - "2019-05-10 00:14" - Pres: 0
 
@@ -6085,8 +6056,7 @@ id 6926 - "2019-05-10 08:10" - Pres: 222
 id 6927 - "2019-05-10 08:13" - Pres: 4
 id 6930 - "2019-05-10 08:23" - Pres: 158
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 6931 - "2019-05-10 08:29" - Pres: 8
 id 6936 - "2019-05-10 08:44" - Pres: 145
 
@@ -6146,8 +6116,7 @@ id 6972 - "2019-05-10 10:50" - Pres: 599
 id 6973 - "2019-05-10 10:53" - Pres: 5
 id 6973 - "2019-05-10 10:53" - Pres: 5
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 6974 - "2019-05-10 10:59" - Pres: 0
 id 6979 - "2019-05-10 11:15" - Pres: 59
 
@@ -6215,8 +6184,7 @@ id 7023 - "2019-05-10 13:51" - Pres: 1839
 id 7024 - "2019-05-10 13:54" - Pres: 0
 id 7026 - "2019-05-10 14:00" - Pres: 0
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 7027 - "2019-05-10 14:06" - Pres: 3
 id 7031 - "2019-05-10 14:19" - Pres: 117
 
@@ -6620,8 +6588,7 @@ id 7383 - "2019-05-11 12:19" - Pres: 1754
 id 7384 - "2019-05-11 12:26" - Pres: 2076
 id 7384 - "2019-05-11 12:26" - Pres: 2076
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 7385 - "2019-05-11 12:29" - Pres: 12
 id 7395 - "2019-05-11 13:00" - Pres: 164
 
@@ -6697,8 +6664,7 @@ id 7460 - "2019-05-11 16:48" - Pres: 33
 id 7461 - "2019-05-11 16:51" - Pres: 192
 id 7468 - "2019-05-11 17:12" - Pres: 1157
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 7469 - "2019-05-11 17:15" - Pres: 37
 id 7489 - "2019-05-11 18:18" - Pres: 0
 
@@ -9081,8 +9047,7 @@ id 10138 - "2019-05-19 11:03" - Pres: 175
 id 10139 - "2019-05-19 11:09" - Pres: 516
 id 10141 - "2019-05-19 11:15" - Pres: 855
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 10142 - "2019-05-19 11:18" - Pres: 12
 id 10144 - "2019-05-19 11:25" - Pres: 131
 
@@ -9958,8 +9923,7 @@ id 10918 - "2019-05-21 09:51" - Pres: 114
 id 10919 - "2019-05-21 09:54" - Pres: 278
 id 10922 - "2019-05-21 10:03" - Pres: 760
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 10923 - "2019-05-21 10:06" - Pres: 20
 id 10928 - "2019-05-21 10:22" - Pres: 34
 
@@ -10019,8 +9983,7 @@ id 10964 - "2019-05-21 12:43" - Pres: 562
 id 10965 - "2019-05-21 12:49" - Pres: 1037
 id 10967 - "2019-05-21 12:55" - Pres: 1365
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 10968 - "2019-05-21 12:58" - Pres: 68
 id 10980 - "2019-05-21 13:36" - Pres: 72
 
@@ -10181,8 +10144,7 @@ id 11115 - "2019-05-21 21:22" - Pres: 455
 id 11116 - "2019-05-21 21:26" - Pres: 0
 id 11119 - "2019-05-21 21:35" - Pres: 105
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 11120 - "2019-05-21 21:41" - Pres: 0
 id 11122 - "2019-05-21 21:47" - Pres: 105
 
@@ -10358,8 +10320,7 @@ id 11339 - "2019-05-22 10:29" - Pres: 171
 id 11340 - "2019-05-22 10:38" - Pres: 56
 id 11340 - "2019-05-22 10:38" - Pres: 56
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 11341 - "2019-05-22 10:51" - Pres: 0
 id 11351 - "2019-05-22 11:22" - Pres: 109
 
@@ -10751,8 +10712,7 @@ id 11706 - "2019-05-23 09:28" - Pres: 108
 id 11707 - "2019-05-23 09:31" - Pres: 274
 id 11710 - "2019-05-23 09:40" - Pres: 773
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 11711 - "2019-05-23 09:43" - Pres: 15
 id 11718 - "2019-05-23 10:05" - Pres: 164
 
@@ -10772,8 +10732,7 @@ id 11725 - "2019-05-23 10:30" - Pres: 668
 id 11726 - "2019-05-23 10:33" - Pres: 92
 id 11726 - "2019-05-23 10:33" - Pres: 92
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 11727 - "2019-05-23 10:40" - Pres: 10
 id 11733 - "2019-05-23 10:59" - Pres: 23
 
@@ -10793,8 +10752,7 @@ id 11744 - "2019-05-23 11:39" - Pres: 856
 id 11745 - "2019-05-23 11:46" - Pres: 1190
 id 11756 - "2019-05-23 12:20" - Pres: 3010
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 11757 - "2019-05-23 12:23" - Pres: 10
 id 11760 - "2019-05-23 12:32" - Pres: 27
 
@@ -10850,8 +10808,7 @@ id 11822 - "2019-05-23 16:02" - Pres: 342
 id 11823 - "2019-05-23 16:08" - Pres: 685
 id 11828 - "2019-05-23 16:24" - Pres: 1538
 
-Mudança de feature!
-['transicao', 'transicao']
+['transicao']
 id 11829 - "2019-05-23 16:27" - Pres: 0
 id 11832 - "2019-05-23 16:36" - Pres: 108
 
@@ -11632,8 +11589,7 @@ id 12502 - "2019-05-25 19:09" - Pres: 6574
 id 12503 - "2019-05-25 19:15" - Pres: 22
 id 12505 - "2019-05-25 19:21" - Pres: 45
 
-Mudança de feature!
-['luz acesa', 'luz acesa']
+['luz acesa']
 id 12506 - "2019-05-25 19:25" - Pres: 215
 id 12513 - "2019-05-25 19:47" - Pres: 1408
 

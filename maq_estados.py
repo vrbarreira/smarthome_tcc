@@ -107,6 +107,7 @@ def classif_comodo(vetor_sensor, id_luz, id_pres):
     estado_transicao = 0
     
     estados = []
+    estado_atual = "nenhum"
     estado_adicionado = False
     segmentos = []
     segmento_atual = []
@@ -116,14 +117,16 @@ def classif_comodo(vetor_sensor, id_luz, id_pres):
             estado_vazio = 0
             estado_transicao = 0
 
-            if estado_aceso == 3 and estado_adicionado:
+            if estado_aceso == 3 and estado_adicionado and estado_atual != "aceso":
                 if len(segmento_atual) >= 3:
                     segmentos.append(segmento_atual[:-2])
                     segmento_atual = segmento_atual[-2:]
+                estado_atual = "aceso"
                 estados.append("luz acesa")
 
             elif estado_aceso == 3 and not(estado_adicionado):
                 estado_adicionado = True
+                estado_atual = "aceso"
                 estados.append("luz acesa")
             segmento_atual.append(vetor_sensor[i])
 
@@ -135,15 +138,17 @@ def classif_comodo(vetor_sensor, id_luz, id_pres):
             estado_aceso = 0
             estado_transicao = 0
 
-            if estado_vazio == 3 and estado_adicionado:
+            if estado_vazio == 3 and estado_adicionado and estado_atual != "vazio":
                 if len(segmento_atual) >= 3:
                     segmentos.append(segmento_atual[:-2])
                     segmento_atual = segmento_atual[-2:]
+                estado_atual = "vazio"
                 estados.append("vazio")
 
             elif estado_vazio == 3 and not(estado_adicionado):
                 estado_adicionado = True
                 estados.append("vazio")
+                estado_atual = "vazio"
             segmento_atual.append(vetor_sensor[i])
 
             if i == len(vetor_sensor)-1:
@@ -154,14 +159,16 @@ def classif_comodo(vetor_sensor, id_luz, id_pres):
             estado_aceso = 0
             estado_vazio = 0
 
-            if estado_transicao == 1 and estado_adicionado:
+            if estado_transicao == 1 and estado_adicionado and estado_atual != "transicao":
                 if len(segmento_atual) >= 1:
                     segmentos.append(segmento_atual)
                     segmento_atual = []
+                estado_atual = "transicao"
                 estados.append("transicao")
         
             elif estado_transicao == 1 and not(estado_adicionado):
                 estado_adicionado = True
+                estado_atual = "transicao"
                 estados.append("transicao")
 
             segmento_atual.append(vetor_sensor[i])
@@ -312,7 +319,6 @@ rotula_base("classif_quarto3.txt", 11, segmentacao.id_luz_quarto3, segmentacao.i
 
 rotula_base("classif_cobertura.txt", 9, segmentacao.id_luz_cobertura, segmentacao.id_pres_cobertura, lista_estados_cobt, lista_segmentos_cobt) #Cobertura
 rotula_base("classif_corredor.txt", 10, segmentacao.id_luz_corredor, segmentacao.id_pres_corredor, lista_estados_corr, lista_segmentos_corr) #Corredor
-
 """
 for i in range(1,len(dados_acesso)):
     if match_acesso_casa(dados_casa, dados_acesso[i]) == None:
