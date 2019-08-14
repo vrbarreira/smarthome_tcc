@@ -43,7 +43,7 @@ def imprimeTransicoes(matrix_dados, vetor_col):
 """
 testa os segmentos das transicoes 
 """
-def testa_trasicao(matrix_dados, transicoes, size_janela):
+def testa_trasicao(matrix_dados, transicoes, size_janela, limite_presenca):
 	escada = transicoes[0]
 	aquario = transicoes[1]
 	banho = transicoes[2]
@@ -82,8 +82,8 @@ def testa_trasicao(matrix_dados, transicoes, size_janela):
 		while k < indice_final:
 			if estado != matrix_dados[k][10] and estado != matrix_dados[k+1][10] and estado != matrix_dados[k+2][10]:
 				print("multiplos estados no segmento no aquario")
-				print("indice inicial: ", indice_inicial)
-				print("indie final: ", indice_final)
+				print("indice inicial: ", matrix_dados[indice_inicial][0])
+				print("indie final: ", matrix_dados[indice_final][0])
 				funciona = False
 				break
 			k += 1
@@ -124,33 +124,33 @@ def testa_trasicao(matrix_dados, transicoes, size_janela):
 			indice_inicial = elemento[i]
 			k = indice_inicial
 			indice_final = elemento[i+1]
-			if matrix_dados[indice_inicial][indice_col] < 150:
+			if matrix_dados[indice_inicial][indice_col] < limite_presenca:
 				presente = True
 			else:
 				presente = False
 			while k < indice_final:
 				if presente:
-					if matrix_dados[k][indice_col] >= 150:
+					if matrix_dados[k][indice_col] >= limite_presenca and matrix_dados[indice_inicial][indice_col] < 200:
 						print("pessoa esta ausente no segmento")
 						print("sensor: ", matrix_dados[0][indice_col])
-						print("indice inicial: ", indice_inicial)
-						print("indice final: ", indice_final)
+						print("indice inicial: ", matrix_dados[indice_inicial][0])
+						print("indice final: ", matrix_dados[indice_final][0])
 						funciona = False
 						break
 
 				else:
-					if matrix_dados[k][indice_col] < 150:
+					if matrix_dados[k][indice_col] < limite_presenca and matrix_dados[indice_inicial][indice_col] >= 200:
 						print("pessoa esta presente no segmento")
 						print("sensor: ", matrix_dados[0][indice_col])
-						print("indice inicial: ", indice_inicial)
-						print("indice final: ", indice_final)
+						print("indice inicial: ", matrix_dados[indice_inicial][0])
+						print("indice final: ", matrix_dados[indice_final][0])
 						funciona = False
 						break
 				k+=1
-			if not(funciona):
-				break
 		if funciona:
-			print(print("segmentos ok: ", matrix_dados[0][indice_col]))
+			print("segmentos ok: ", matrix_dados[0][indice_col])
+		else:
+			print("segmentos falhos: ", matrix_dados[0][indice_col])
 		funciona = True
 					
 
@@ -194,6 +194,11 @@ id_vent_quarto3 = 26
 id_luz_banheiro = 13
 
 id_luz_aquario = 10
+
+############################### variaveis utilizadas para a segmentacao #########################
+size_janela = 3 #numero de eventos consecutivos para considerar alteracao de estado 
+limite_presenca = 180 #limite superior para considerar que uma pessoa esta presente
+intervalo_leitura = timedelta(minutes = 5) #intervalo de tempo entre as leituras dos sensores
 
 #Índices do log de entrada por cômodo (hardcoded, será customizável em versão futura)
 sala = [id_luz_sala,id_pres_sala,id_tv_sala]
@@ -258,14 +263,13 @@ def init_dados_casa():
 		dados_casa.append(lineSplit)
 	arquivo.close()
 	#Identificação de transições (escada, aquario, banho, presença)
-	size_janela = 3
 	add_transicao = True
 	for j in indices_sensores: 
 		transicao_col = [j]
 		acesa = dados_casa[1][j] #indica se a luz esta acesa ou nao
 		if j > 14:
 			add_transicao = False
-			if dados_casa[1][j] < 50:
+			if dados_casa[1][j] < limite_presenca:
 				presente = True
 			else:
 				presente = False
@@ -274,22 +278,32 @@ def init_dados_casa():
 			if j > 14: #Presenças
 				hora_casa_atual = dt.strptime(dados_casa[i][1][1:-1], '%Y-%m-%d %H:%M')
 				hora_casa_seguinte = dt.strptime(dados_casa[i+1][1][1:-1], '%Y-%m-%d %H:%M')
-				dif_pres = timedelta(seconds = dados_casa[i+1][j] - dados_casa[i][j]) #tempo que foi incrementado no sensor de presenca 
+				#dif_pres = timedelta(seconds = dados_casa[i+1][j] - dados_casa[i][j]) #tempo que foi incrementado no sensor de presenca 
 				#for k in range(1,size_janela+1):
 					#if dados_casa[i][j] <= dados_casa[i+k][j]:  
 						#add_transicao = False
 						#break
-				"""
-				if j == 22 and i == 178:
-					a = dados_casa[i]
-					b = dados_casa[i+1]
-					c = dados_casa[i]
-				"""
-					
-				if (dados_casa[i][j] > dados_casa[i+1][j] or (hora_casa_seguinte - hora_casa_atual)/2 > dif_pres) and dados_casa[i+1][j] < 150 and not(presente):
+				
+				if j == id_pres_lavanderia and int(dados_casa[i][0]) >= 7332:
+					a = dados_casa[i][j]
+					b = dados_casa[i+1][j]
+					c = dados_casa[i][0]
+					d = dados_casa[i][j] > dados_casa[i+1][j]
+					e = dados_casa[i+1][j] < limite_presenca
+				
+				if hora_casa_seguinte - hora_casa_atual > intervalo_leitura: #verifica se houve uma quebra na continuidade da coleta
+					a = dados_casa[i][j]
+					b = dados_casa[i+1][j]
+					c = dados_casa[i][0]
+					if dados_casa[i+1][j] < limite_presenca:
+						presente = True
+					else:
+						presente = False
+					add_transicao = True
+				elif (dados_casa[i][j] > dados_casa[i+1][j] or dados_casa[i+1][j] < limite_presenca) and not(presente): #verifica se na linha seguinte o sensor de presenca resetou
 					presente = True
 					add_transicao = True
-				elif (presente and dados_casa[i+1][j] >= 150) or hora_casa_seguinte - hora_casa_atual > timedelta(minutes = 30) or dados_casa[i][j] > dados_casa[i+1][j]:
+				elif presente and (dados_casa[i+1][j] >= limite_presenca):# verifica se na linha seguinte a pessoa esta ausente
 					presente = False
 					add_transicao = True
 				
@@ -480,8 +494,7 @@ def feature_tempo(vetor, col):
 #print(feature_vector_aparelho(vetor,[2,27]))
 #print(dados_casa[0][1],dados_casa[0][15])
 #print(feature_tempo(vetor[0],[1,15]))
-#testa_trasicao(dados_casa,transicoes,3)
-
+testa_trasicao(dados_casa,transicoes,3,limite_presenca)
 
 
 #for i in range(len(dias_acesso)-1):

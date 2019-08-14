@@ -107,6 +107,7 @@ def classif_comodo(vetor_sensor, id_luz, id_pres):
     estado_transicao = 0
     
     estados = []
+    estado_adicionado = False
     segmentos = []
     segmento_atual = []
     for i in range(len(vetor_sensor)):
@@ -115,13 +116,17 @@ def classif_comodo(vetor_sensor, id_luz, id_pres):
             estado_vazio = 0
             estado_transicao = 0
 
-            if estado_aceso == 3:
+            if estado_aceso == 3 and estado_adicionado:
                 if len(segmento_atual) >= 3:
                     segmentos.append(segmento_atual[:-2])
                     segmento_atual = segmento_atual[-2:]
                 estados.append("luz acesa")
+
+            elif estado_aceso == 3 and not(estado_adicionado):
+                estado_adicionado = True
+                estados.append("luz acesa")
             segmento_atual.append(vetor_sensor[i])
-            
+
             if (i == len(vetor_sensor)-1):
                 segmentos.append(segmento_atual)
 
@@ -130,10 +135,14 @@ def classif_comodo(vetor_sensor, id_luz, id_pres):
             estado_aceso = 0
             estado_transicao = 0
 
-            if estado_vazio == 3:
+            if estado_vazio == 3 and estado_adicionado:
                 if len(segmento_atual) >= 3:
                     segmentos.append(segmento_atual[:-2])
                     segmento_atual = segmento_atual[-2:]
+                estados.append("vazio")
+
+            elif estado_aceso == 3 and not(estado_adicionado):
+                estado_adicionado = True
                 estados.append("vazio")
             segmento_atual.append(vetor_sensor[i])
 
@@ -145,17 +154,25 @@ def classif_comodo(vetor_sensor, id_luz, id_pres):
             estado_aceso = 0
             estado_vazio = 0
 
-            if estado_transicao == 1:
+            if estado_transicao == 1 and estado_adicionado:
                 if len(segmento_atual) >= 1:
                     segmentos.append(segmento_atual)
                     segmento_atual = []
                 estados.append("transicao")
+        
+            elif estado_aceso == 1 and not(estado_adicionado):
+                estado_adicionado = True
+                estados.append("transicao")
+
             segmento_atual.append(vetor_sensor[i])
-            
+
             if i == len(vetor_sensor)-1:
                 segmentos.append(segmento_atual)
 
     if len(estados) == 0: 
+        estado_aceso = 0
+        estado_vazio = 0
+        estado_transicao = 0
         segmentos = [vetor_sensor]
         for i in range(len(vetor_sensor)):
             if vetor_sensor[i][id_pres] >= limite_presenca and vetor_sensor[i][id_luz] == 1:
@@ -167,9 +184,9 @@ def classif_comodo(vetor_sensor, id_luz, id_pres):
         if (estado_aceso == estado_transicao) or (estado_aceso == estado_vazio) or (estado_transicao == estado_vazio):
             if  vetor_sensor[0][id_pres] >= limite_presenca and vetor_sensor[0][id_luz] == 1:
                 estados.append("luz acesa")
-            elif vetor_sensor[i][id_pres] >= limite_presenca and vetor_sensor[i][id_luz] == 0:
+            elif vetor_sensor[0][id_pres] >= limite_presenca and vetor_sensor[0][id_luz] == 0:
                 estados.append("vazio")
-            elif vetor_sensor[i][id_pres] < limite_presenca:
+            elif vetor_sensor[0][id_pres] < limite_presenca:
                 estados.append("transicao")
         else:
             if estado_aceso > estado_transicao and estado_aceso > estado_vazio:
@@ -179,7 +196,6 @@ def classif_comodo(vetor_sensor, id_luz, id_pres):
             elif estado_transicao > estado_aceso and estado_transicao > estado_vazio:
                 estados.append("transicao")
             
-
     return estados, segmentos
 
 
