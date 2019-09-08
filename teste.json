@@ -1,0 +1,48 @@
+{
+"comodos_sensores": [
+	{id_comodo:"1", desc_comodo:"Garagem", tipo:"2", timer_presenca:180, id_luz:"6", id_presenca:"18", id_aparelho:null},
+	{id_comodo:"2", desc_comodo:"Escada", tipo:"1", timer_presenca:180, id_luz:"5", id_presenca:null, id_aparelho:null},
+	{id_comodo:"3", desc_comodo:"Sala", tipo:"3", timer_presenca:180, id_luz:"2", id_presenca:"15", id_aparelho:"27"},
+	{id_comodo:"4", desc_comodo:"Cozinha", tipo:"3", timer_presenca:180, id_luz:"3", id_presenca:"16", id_aparelho:"28"},
+	{id_comodo:"5", desc_comodo:"Lavanderia", tipo:"3", timer_presenca:180, id_luz:"4", id_presenca:"17", id_aparelho:"29"},
+	{id_comodo:"6", desc_comodo:"Corredor", tipo:"2", timer_presenca:180, id_luz:"12", id_presenca:"22", id_aparelho:null},
+	{id_comodo:"7", desc_comodo:"Quarto 1", tipo:"3", timer_presenca:180, id_luz:"8", id_presenca:"19", id_aparelho:"24"},
+	{id_comodo:"8", desc_comodo:"Quarto 2", tipo:"3", timer_presenca:180, id_luz:"9", id_presenca:"20", id_aparelho:"25"},
+	{id_comodo:"9", desc_comodo:"Quarto 3", tipo:"3", timer_presenca:180, id_luz:"14", id_presenca:"23", id_aparelho:"26"},
+	{id_comodo:"10", desc_comodo:"Banho", tipo:"1", timer_presenca:180, id_luz:"13", id_presenca:null, id_aparelho:null},
+	{id_comodo:"11", desc_comodo:"Cobertura", tipo:"2", timer_presenca:180, id_luz:"11", id_presenca:"21", id_aparelho:null}
+],
+atividades: [
+	{"id_atividade":"1","desc_atividade":"Acordar","periodo_dia":"1","hora_1":"05:00","hora_2":"06:30","categ_dia":"1"},
+	{"id_atividade":"2","desc_atividade":"Acordar","periodo_dia":"2","hora_1":"07:30","hora_2":"08:30","categ_dia":"2"},
+	{"id_atividade":"3","desc_atividade":"Entrada","periodo_dia":"1","hora_1":"","hora_2":"","categ_dia":"0"},
+	{"id_atividade":"4","desc_atividade":"Entrada","periodo_dia":"2","hora_1":"","hora_2":"","categ_dia":"0"},
+	{"id_atividade":"5","desc_atividade":"Entrada","periodo_dia":"3","hora_1":"","hora_2":"","categ_dia":"0"},
+	{"id_atividade":"6","desc_atividade":"Entrada","periodo_dia":"4","hora_1":"","hora_2":"","categ_dia":"0"},
+	{"id_atividade":"7","desc_atividade":"Saída","periodo_dia":"1","hora_1":"","hora_2":"","categ_dia":"0"},
+	{"id_atividade":"8","desc_atividade":"Saída","periodo_dia":"2","hora_1":"","hora_2":"","categ_dia":"0"},
+	{"id_atividade":"9","desc_atividade":"Saída","periodo_dia":"3","hora_1":"","hora_2":"","categ_dia":"0"},
+	{"id_atividade":"10","desc_atividade":"Saída","periodo_dia":"4","hora_1":"","hora_2":"","categ_dia":"0"},
+	{"id_atividade":"11","desc_atividade":"Cozinha","periodo_dia":"1","hora_1":"","hora_2":"","categ_dia":"0"},
+	{"id_atividade":"12","desc_atividade":"Cozinha","periodo_dia":"2","hora_1":"","hora_2":"","categ_dia":"0"},
+	{"id_atividade":"13","desc_atividade":"Cozinha","periodo_dia":"3","hora_1":"","hora_2":"","categ_dia":"0"},
+	{"id_atividade":"14","desc_atividade":"Cozinha","periodo_dia":"4","hora_1":"","hora_2":"","categ_dia":"0"},
+	{"id_atividade":"15","desc_atividade":"Lazer sala","periodo_dia":"1","hora_1":"","hora_2":"","categ_dia":"0"},
+	{"id_atividade":"16","desc_atividade":"Lazer sala","periodo_dia":"2","hora_1":"","hora_2":"","categ_dia":"0"},
+	{"id_atividade":"17","desc_atividade":"Lazer sala","periodo_dia":"3","hora_1":"","hora_2":"","categ_dia":"0"},
+	{"id_atividade":"18","desc_atividade":"Lazer sala","periodo_dia":"4","hora_1":"","hora_2":"","categ_dia":"0"},
+	{"id_atividade":"19","desc_atividade":"Assistir TV","periodo_dia":"1","hora_1":"","hora_2":"","categ_dia":"0"},
+	{"id_atividade":"20","desc_atividade":"Assistir TV","periodo_dia":"2","hora_1":"","hora_2":"","categ_dia":"0"},
+	{"id_atividade":"21","desc_atividade":"Assistir TV","periodo_dia":"3","hora_1":"","hora_2":"","categ_dia":"0"},
+	{"id_atividade":"22","desc_atividade":"Assistir TV","periodo_dia":"4","hora_1":"","hora_2":"","categ_dia":"0"},
+	{"id_atividade":"23","desc_atividade":"Dormir","periodo_dia":"3","hora_1":"","hora_2":"","categ_dia":"0"},
+	{"id_atividade":"24","desc_atividade":"Dormir","periodo_dia":"4","hora_1":"01:00","hora_2":"02:00","categ_dia":"0"}
+],
+correlacao_sensores:[
+	{"id_sensor_1":"15","id_sensor_2":"16","id_atividade":"1","margem_tempo":"0","modo":"0"},
+	{"id_sensor_1":"15","id_sensor_2":"17","id_atividade":"1","margem_tempo":"0","modo":"0"},
+	{"id_sensor_1":"16","id_sensor_2":"17","id_atividade":"1","margem_tempo":"0","modo":"0"},
+	{"id_sensor_1":"15","id_sensor_2":"22","id_atividade":"1","margem_tempo":"120","modo":"1"},
+	{"id_sensor_1":"16","id_sensor_2":"22","id_atividade":"1","margem_tempo":"120","modo":"1"}
+]
+}

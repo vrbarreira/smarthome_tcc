@@ -319,7 +319,7 @@ rotula_base("classif_quarto3.txt", 11, segmentacao.id_luz_quarto3, segmentacao.i
 
 rotula_base("classif_cobertura.txt", 9, segmentacao.id_luz_cobertura, segmentacao.id_pres_cobertura, lista_estados_cobt, lista_segmentos_cobt) #Cobertura
 rotula_base("classif_corredor.txt", 10, segmentacao.id_luz_corredor, segmentacao.id_pres_corredor, lista_estados_corr, lista_segmentos_corr) #Corredor
-"""
+
 for i in range(1,len(dados_acesso)):
     if match_acesso_casa(dados_casa, dados_acesso[i]) == None:
         print("nao existe para: ", dados_acesso[i])
@@ -332,7 +332,7 @@ for i in range(1,len(dados_acesso)):
             break
         print("entrada: ",entrada,"   ","saida: ",saida, "  ", dados_acesso[i][1])
     print("\n")
-"""
+
 
 #rotula_base("classif_corredor.txt", 10, segmentacao.id_luz_corredor, segmentacao.id_pres_corredor, lista_estados_corr, lista_segmentos_corr) #Corredor
 #rotula_base("classif_cozinha.txt", 4, segmentacao.id_luz_cozinha, segmentacao.id_pres_cozinha, lista_estados_cozi, lista_segmentos_cozi) #Cozinha

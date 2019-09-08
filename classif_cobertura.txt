@@ -582,7 +582,7 @@ id 931 - "2019-04-21 09:19" - Pres: 856
 id 932 - "2019-04-21 09:31" - Pres: 176
 id 933 - "2019-04-21 09:34" - Pres: 176
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['transicao', 'vazio']
 id 934 - "2019-04-21 09:40" - Pres: 137
 id 937 - "2019-04-21 09:49" - Pres: 158
@@ -847,7 +847,7 @@ id 1323 - "2019-04-22 09:54" - Pres: 169
 id 1324 - "2019-04-22 09:57" - Pres: 337
 id 1325 - "2019-04-22 10:00" - Pres: 506
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['transicao', 'vazio']
 id 1326 - "2019-04-22 10:03" - Pres: 9
 id 1329 - "2019-04-22 10:13" - Pres: 178

@@ -34,7 +34,7 @@ id 56 - "2019-04-14 15:22" - Pres: 17
 id 57 - "2019-04-14 15:33" - Pres: 0
 id 72 - "2019-04-14 16:03" - Pres: 34
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 73 - "2019-04-14 16:11" - Pres: 430
 id 87 - "2019-04-14 16:40" - Pres: 2051
@@ -123,7 +123,7 @@ id 183 - "2019-04-15 05:04" - Pres: 752
 id 184 - "2019-04-15 05:08" - Pres: 144
 id 191 - "2019-04-15 05:25" - Pres: 111
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 192 - "2019-04-15 05:31" - Pres: 469
 id 203 - "2019-04-15 05:53" - Pres: 1688
@@ -376,7 +376,7 @@ id 514 - "2019-04-15 18:33" - Pres: 646
 id 515 - "2019-04-15 18:47" - Pres: 28
 id 518 - "2019-04-15 18:54" - Pres: 71
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 519 - "2019-04-15 19:00" - Pres: 249
 id 544 - "2019-04-15 19:54" - Pres: 3303
@@ -569,7 +569,7 @@ id 801 - "2019-04-21 00:57" - Pres: 137
 id 802 - "2019-04-21 01:04" - Pres: 0
 id 807 - "2019-04-21 01:19" - Pres: 102
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 808 - "2019-04-21 01:23" - Pres: 276
 id 824 - "2019-04-21 02:13" - Pres: 3130
@@ -862,7 +862,7 @@ id 1173 - "2019-04-22 00:44" - Pres: 289
 id 1174 - "2019-04-22 00:54" - Pres: 503
 id 1174 - "2019-04-22 00:54" - Pres: 503
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 1175 - "2019-04-22 01:00" - Pres: 306
 id 1187 - "2019-04-22 01:38" - Pres: 2484
@@ -1255,7 +1255,7 @@ id 1643 - "2019-04-23 06:22" - Pres: 356
 id 1644 - "2019-04-23 06:32" - Pres: 0
 id 1647 - "2019-04-23 06:41" - Pres: 170
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 1648 - "2019-04-23 06:45" - Pres: 351
 id 1657 - "2019-04-23 07:13" - Pres: 1974
@@ -3392,7 +3392,7 @@ id 4262 - "2019-04-29 18:47" - Pres: 33
 id 4263 - "2019-04-29 18:51" - Pres: 215
 id 4264 - "2019-04-29 18:54" - Pres: 215
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 4265 - "2019-04-29 19:00" - Pres: 269
 id 4276 - "2019-04-29 19:34" - Pres: 2231
@@ -4005,7 +4005,7 @@ id 5191 - "2019-05-06 05:15" - Pres: 10291
 id 5192 - "2019-05-06 05:18" - Pres: 0
 id 5198 - "2019-05-06 05:37" - Pres: 2
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 5199 - "2019-05-06 05:40" - Pres: 182
 id 5210 - "2019-05-06 06:14" - Pres: 2165
@@ -4758,7 +4758,7 @@ id 6261 - "2019-05-08 17:44" - Pres: 908
 id 6262 - "2019-05-08 17:47" - Pres: 111
 id 6262 - "2019-05-08 17:47" - Pres: 111
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 6263 - "2019-05-08 17:51" - Pres: 293
 id 6275 - "2019-05-08 18:28" - Pres: 2448
@@ -4867,7 +4867,7 @@ id 6359 - "2019-05-08 23:29" - Pres: 194
 id 6360 - "2019-05-08 23:35" - Pres: 107
 id 6360 - "2019-05-08 23:35" - Pres: 107
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 6361 - "2019-05-08 23:39" - Pres: 290
 id 6373 - "2019-05-09 00:16" - Pres: 2478
@@ -5736,7 +5736,7 @@ id 7489 - "2019-05-11 18:18" - Pres: 0
 id 7490 - "2019-05-11 18:27" - Pres: 0
 id 7499 - "2019-05-11 18:55" - Pres: 160
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 7500 - "2019-05-11 18:58" - Pres: 334
 id 7510 - "2019-05-11 19:29" - Pres: 2119
@@ -5973,7 +5973,7 @@ id 7807 - "2019-05-13 05:28" - Pres: 22
 id 7808 - "2019-05-13 05:31" - Pres: 202
 id 7809 - "2019-05-13 05:34" - Pres: 385
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 7810 - "2019-05-13 05:41" - Pres: 746
 id 7821 - "2019-05-13 06:15" - Pres: 2742
@@ -6222,7 +6222,7 @@ id 8118 - "2019-05-13 23:54" - Pres: 672
 id 8119 - "2019-05-13 23:57" - Pres: 0
 id 8120 - "2019-05-14 00:00" - Pres: 158
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 8121 - "2019-05-14 00:03" - Pres: 339
 id 8145 - "2019-05-14 01:17" - Pres: 4615
@@ -6679,7 +6679,7 @@ id 8704 - "2019-05-15 17:21" - Pres: 88
 id 8705 - "2019-05-15 17:24" - Pres: 271
 id 8716 - "2019-05-15 17:59" - Pres: 2261
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['vazio', 'luz acesa']
 id 8717 - "2019-05-15 18:05" - Pres: 2624
 id 8725 - "2019-05-15 18:30" - Pres: 4086
@@ -6688,7 +6688,7 @@ id 8725 - "2019-05-15 18:30" - Pres: 4086
 id 8726 - "2019-05-15 18:33" - Pres: 61
 id 8727 - "2019-05-15 18:36" - Pres: 130
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 8728 - "2019-05-15 18:39" - Pres: 299
 id 8744 - "2019-05-15 19:29" - Pres: 3205
@@ -7209,7 +7209,7 @@ id 9342 - "2019-05-17 07:22" - Pres: 64
 id 9343 - "2019-05-17 07:28" - Pres: 8
 id 9345 - "2019-05-17 07:34" - Pres: 155
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 9346 - "2019-05-17 07:37" - Pres: 338
 id 9353 - "2019-05-17 07:59" - Pres: 1614
@@ -7378,7 +7378,7 @@ id 9530 - "2019-05-17 18:40" - Pres: 29
 id 9531 - "2019-05-17 18:47" - Pres: 0
 id 9543 - "2019-05-17 19:24" - Pres: 162
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 9544 - "2019-05-17 19:27" - Pres: 339
 id 9554 - "2019-05-17 19:59" - Pres: 2140
@@ -7871,7 +7871,7 @@ id 10186 - "2019-05-19 13:57" - Pres: 2
 id 10187 - "2019-05-19 14:03" - Pres: 0
 id 10191 - "2019-05-19 14:16" - Pres: 140
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 10192 - "2019-05-19 14:22" - Pres: 484
 id 10199 - "2019-05-19 14:44" - Pres: 1692
@@ -8056,7 +8056,7 @@ id 10311 - "2019-05-19 21:43" - Pres: 287
 id 10312 - "2019-05-19 21:46" - Pres: 134
 id 10312 - "2019-05-19 21:46" - Pres: 134
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 10313 - "2019-05-19 21:49" - Pres: 313
 id 10321 - "2019-05-19 22:15" - Pres: 1704
@@ -8945,7 +8945,7 @@ id 11366 - "2019-05-22 12:15" - Pres: 0
 id 11367 - "2019-05-22 12:21" - Pres: 0
 id 11379 - "2019-05-22 12:59" - Pres: 78
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 11380 - "2019-05-22 13:02" - Pres: 259
 id 11388 - "2019-05-22 13:27" - Pres: 1715
@@ -9310,7 +9310,7 @@ id 11702 - "2019-05-23 09:15" - Pres: 284
 id 11703 - "2019-05-23 09:18" - Pres: 0
 id 11704 - "2019-05-23 09:21" - Pres: 177
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 11705 - "2019-05-23 09:24" - Pres: 360
 id 11718 - "2019-05-23 10:05" - Pres: 2721
@@ -9603,7 +9603,7 @@ id 12035 - "2019-05-24 05:13" - Pres: 285
 id 12036 - "2019-05-24 05:20" - Pres: 11
 id 12037 - "2019-05-24 05:23" - Pres: 112
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 12038 - "2019-05-24 05:26" - Pres: 293
 id 12067 - "2019-05-24 06:57" - Pres: 5532
@@ -9836,7 +9836,7 @@ id 12357 - "2019-05-25 00:42" - Pres: 658
 id 12358 - "2019-05-25 00:48" - Pres: 188
 id 12358 - "2019-05-25 00:48" - Pres: 188
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 12359 - "2019-05-25 00:54" - Pres: 523
 id 12368 - "2019-05-25 01:22" - Pres: 2098
@@ -9909,7 +9909,7 @@ id 12450 - "2019-05-25 15:49" - Pres: 3379
 id 12451 - "2019-05-25 15:52" - Pres: 34
 id 12451 - "2019-05-25 15:52" - Pres: 34
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 12452 - "2019-05-25 15:55" - Pres: 206
 id 12459 - "2019-05-25 16:17" - Pres: 1438
@@ -10070,7 +10070,7 @@ id 12552 - "2019-05-25 23:02" - Pres: 99
 id 12553 - "2019-05-25 23:05" - Pres: 282
 id 12556 - "2019-05-25 23:14" - Pres: 816
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 12557 - "2019-05-25 23:24" - Pres: 197
 id 12566 - "2019-05-25 23:53" - Pres: 1787
@@ -10175,7 +10175,7 @@ id 12659 - "2019-05-26 05:31" - Pres: 611
 id 12660 - "2019-05-26 05:37" - Pres: 43
 id 12660 - "2019-05-26 05:37" - Pres: 43
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 12661 - "2019-05-26 05:41" - Pres: 221
 id 12686 - "2019-05-26 06:58" - Pres: 4520
@@ -10356,7 +10356,7 @@ id 12916 - "2019-05-26 20:09" - Pres: 0
 id 12917 - "2019-05-26 20:15" - Pres: 0
 id 12944 - "2019-05-26 21:40" - Pres: 153
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 12945 - "2019-05-26 21:43" - Pres: 337
 id 12958 - "2019-05-26 22:24" - Pres: 2703
@@ -10445,7 +10445,7 @@ id 12993 - "2019-05-27 01:15" - Pres: 88
 id 12994 - "2019-05-27 01:18" - Pres: 272
 id 12994 - "2019-05-27 01:18" - Pres: 272
 
-MudanÃ§a de feature!
+Mudança de feature!
 ['luz acesa', 'vazio']
 id 12995 - "2019-05-27 01:24" - Pres: 633
 id 13002 - "2019-05-27 01:46" - Pres: 1924

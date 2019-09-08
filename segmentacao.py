@@ -471,13 +471,13 @@ def feature_tempo(vetor, col):
 	dia_semana = dias_da_semana[dia_data.weekday()]
 	hora_inicio = datetime.time(dia_data.hour,dia_data.minute,)
 	
-	if hora_inicio.hour >= 0 and hora_inicio.hour <= 4:
+	if hora_inicio.hour >= 0 and hora_inicio.hour <= 5:
 		periodo = "madrugada"
-	elif hora_inicio.hour >= 5 and hora_inicio.hour <= 11:
+	elif hora_inicio.hour >= 6 and hora_inicio.hour <= 11:
 		periodo = "manha"
-	elif hora_inicio.hour >= 12 and hora_inicio.hour <= 18:
+	elif hora_inicio.hour >= 12 and hora_inicio.hour <= 17:
 		periodo = "tarde"
-	elif hora_inicio.hour >= 19 and hora_inicio.hour <= 23:
+	elif hora_inicio.hour >= 18 and hora_inicio.hour <= 23:
 		periodo = "noite"
 
 	if dia_semana == "Domingo" or dia_semana == "Sábado":

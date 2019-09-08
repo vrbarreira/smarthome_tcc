@@ -1,0 +1,25 @@
+id_atividade;desc_atividade;periodo_dia;hora_1;hora_2;categ_dia
+1;Acordar (dia util);1;05:00;06:30;1
+2;Acordar (fds);2;07:30;08:30;2
+3;Entrada;1;;;0
+4;Entrada;2;;;0
+5;Entrada;3;;;0
+6;Entrada;4;;;0
+7;Saída;1;;;0
+8;Saída;2;;;0
+9;Saída;3;;;0
+10;Saída;4;;;0
+11;Cozinha;1;;;0
+12;Cozinha;2;;;0
+13;Cozinha;3;;;0
+14;Cozinha;4;;;0
+15;Lazer sala;1;;;0
+16;Lazer sala;2;;;0
+17;Lazer sala;3;;;0
+18;Lazer sala;4;;;0
+19;Assistir TV;1;;;0
+20;Assistir TV;2;;;0
+21;Assistir TV;3;;;0
+22;Assistir TV;4;;;0
+23;Dormir;3;;;0
+24;Dormir;4;01:00;02:00;0
