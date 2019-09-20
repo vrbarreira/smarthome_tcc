@@ -74,8 +74,6 @@ for i in range(len(dados)):
     dia_atual = dados[i][0]
     dia_seguinte = dados[i+1][0]
     dados_dia_aux.append(dados[i])
-    if dados[i][-2] == "A12":
-        print("a")
     if dados[i][-1] == "ON":
         dados_dia.append(2*sensores.index(dados[i][-2]) + 1)
     elif dados[i][-1] == "OFF":
@@ -94,7 +92,7 @@ for i in range(len(dados)):
 
 ######################## algoritmo AprioriAll#################
 
-min_sup = 0.5 #minimum support
+#min_sup = 0.5 #minimum support
 
 def AprioriAll(matrix_dados, min_sup, large1):
     minimo_suporte = ceil(len(matrix_dados)*min_sup)
@@ -217,18 +215,94 @@ def aprioriGen(list_seq):
                 break
     return lista_retorno
 
+########################################## dados hayashi ##########################################
+dados_casa = [] #dados da casa
+matrix_casa = [] #dados da casa tratados para usar data mining
+arquivo = open("home.csv", "r")
+
+line = arquivo.readline()
+lineSplit = line.split(",") 
+lineSplit[-1] = lineSplit[-1][:-1]
+dados_casa.append(lineSplit)
+
+
+for line in arquivo:
+    lineSplit = line.split(",")
+    lineSplit[2:] =  list(map(int,lineSplit[2:])) 
+    dados_casa.append(lineSplit)
+arquivo.close()
+large1 = []
+for coluna in range(2,len(dados_casa[0])):
+    if coluna > 14 and coluna < 24 and coluna != 19:
+        valor_atual = dados_casa[1][coluna]
+        prox_valor = dados_casa[2][coluna]
+        if prox_valor < valor_atual or valor_atual < 50:
+            matrix_casa.append([dados_casa[0][coluna], dados_casa[1][1]])
+        large1.append(dados_casa[0][coluna])
+    elif coluna != 19:
+        if dados_casa[1][coluna] == 0:
+            matrix_casa.append([dados_casa[0][coluna] + " OFF", dados_casa[1][1]])
+        elif dados_casa[1][coluna] == 1:
+            matrix_casa.append([dados_casa[0][coluna] + " ON", dados_casa[1][1]])
+        else:
+            print("Erro")
+            break
+        large1.append(dados_casa[0][coluna] + " ON")
+        large1.append(dados_casa[0][coluna] + " OFF")
+for linha in range(3,len(dados_casa)-1):
+    for coluna in range(2, len(dados_casa[0])):
+        if coluna > 14 and coluna < 24 and coluna != 19:
+            valor_atual = dados_casa[linha][coluna]
+            prox_valor = dados_casa[linha + 1][coluna]
+            if prox_valor < valor_atual or valor_atual < 50:
+                matrix_casa.append([dados_casa[0][coluna], dados_casa[linha][1]])
+        elif coluna != 19:
+            valor_atual = dados_casa[linha][coluna]
+            valor_anterior = dados_casa[linha - 1][coluna]
+            if valor_atual == 0 and valor_atual != valor_anterior:
+                matrix_casa.append([dados_casa[0][coluna] + " OFF", dados_casa[linha][1]])
+            elif valor_atual == 1 and valor_atual != valor_anterior:
+                matrix_casa.append([dados_casa[0][coluna] + " ON", dados_casa[linha][1]])
+            elif valor_atual != 0 and valor_atual != 1:
+                print("Erro")
+                break
+dados_dia = [] # matrix separada em dias
+dados_dia_aux = [] # matrix auxiliar para separar em dias
+for i in range(len(matrix_casa) -1): #verifica se os elementos estão em ordem e separa a matrix em dias
+    atual = datetime.strptime(matrix_casa[i][1][1:-1], "%Y-%m-%d %H:%M") # hora atual para verificar a ordem
+    depois = datetime.strptime(matrix_casa[i+1][1][1:-1], "%Y-%m-%d %H:%M") # hora atual + 1 para verificar a ordem
+    dia_atual = datetime.strptime(matrix_casa[i][1][1:11], '%Y-%m-%d')
+    dia_seguinte = datetime.strptime(matrix_casa[i+1][1][1:11], '%Y-%m-%d')
+    
+    dados_dia_aux.append(matrix_casa[i][0])
+    if dia_atual < dia_seguinte:
+        dados_dia.append(dados_dia_aux)
+        dados_dia_aux = []
+    if i == len(matrix_casa) -2:
+        dados_dia_aux.append(matrix_casa[i][0])
+        dados_dia.append(dados_dia_aux)
+    if atual > depois:
+        print("erro na matrix_casa indice: ",i)
+
+
+eventos = AprioriAll(dados_dia, 1,large1) #patterns encontrados
+print(eventos)
+print("a")
+
+
+
+########################################## dados artigo ##########################################
+
 #test = [[1,5,2,3,4],[1,3,4,3,5],[1,2,3,4],[1,3,5],[4,5]]
 #a = AprioriAll(test,0.6,[1,2,3,4,5])
-
+'''
 large1 = []
 for i in range(max(max(matrix_dados))+1):
     large1.append(i)
 eventos = AprioriAll(matrix_dados,0.45,large1)
         
  
-#test = [[1,2,3],[1,2,4],[1,3,4],[1,3,5],[2,3,4]]
-#seq = aprioriGen(test)
-#print(aprioriGen(seq))
+
 
 eventos_sensor = []
 for seq in eventos:
@@ -240,7 +314,7 @@ for seq in eventos:
             else:
                 aux.append(sensores[int((indice_sensor-1)/2)])
         eventos_sensor.append(aux)
-print(eventos_sensor)
+print("a")
 
 
 frequencia = [0]*len(sensores)
@@ -259,5 +333,6 @@ for valor in dic.values():
 media = media/len(dic)
 #for elemento in frequencia:
 #    print(elemento)
-#print("\n\n", media)
+print("\n\n", media)
 
+'''
