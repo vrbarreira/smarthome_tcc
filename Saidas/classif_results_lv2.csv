@@ -1,0 +1,447 @@
+Id Home,Timestamp,Sensor Comodo,Comodo,Id Atividade,Atividade
+179,2019-04-15 01:39,17,Lavanderia,23,Dormir
+179,2019-04-15 01:39,22,Corredor,23,Dormir
+179,2019-04-15 01:39,15,Sala,23,Dormir
+179,2019-04-15 01:39,17,Lavanderia,23,Dormir
+180,2019-04-15 01:41,17,Lavanderia,23,Dormir
+180,2019-04-15 01:41,22,Corredor,23,Dormir
+180,2019-04-15 01:41,15,Sala,23,Dormir
+180,2019-04-15 01:41,17,Lavanderia,23,Dormir
+188,2019-04-15 05:18,17,Lavanderia,1,Acordar (dia util)
+188,2019-04-15 05:18,22,Corredor,1,Acordar (dia util)
+189,2019-04-15 05:20,17,Lavanderia,1,Acordar (dia util)
+189,2019-04-15 05:20,22,Corredor,1,Acordar (dia util)
+681,2019-04-16 01:55,17,Lavanderia,23,Dormir
+681,2019-04-16 01:55,22,Corredor,23,Dormir
+681,2019-04-16 01:55,15,Sala,23,Dormir
+681,2019-04-16 01:55,17,Lavanderia,23,Dormir
+760,2019-04-16 05:18,17,Lavanderia,1,Acordar (dia util)
+760,2019-04-16 05:18,22,Corredor,1,Acordar (dia util)
+761,2019-04-16 05:20,17,Lavanderia,1,Acordar (dia util)
+761,2019-04-16 05:20,22,Corredor,1,Acordar (dia util)
+802,2019-04-21 01:04,15,Sala,23,Dormir
+802,2019-04-21 01:04,17,Lavanderia,23,Dormir
+1185,2019-04-22 01:32,17,Lavanderia,23,Dormir
+1185,2019-04-22 01:32,22,Corredor,23,Dormir
+1185,2019-04-22 01:32,15,Sala,23,Dormir
+1185,2019-04-22 01:32,17,Lavanderia,23,Dormir
+1192,2019-04-22 01:57,17,Lavanderia,23,Dormir
+1192,2019-04-22 01:57,22,Corredor,23,Dormir
+1192,2019-04-22 01:57,15,Sala,23,Dormir
+1192,2019-04-22 01:57,17,Lavanderia,23,Dormir
+1253,2019-04-22 05:33,17,Lavanderia,1,Acordar (dia util)
+1253,2019-04-22 05:33,22,Corredor,1,Acordar (dia util)
+1254,2019-04-22 05:36,17,Lavanderia,1,Acordar (dia util)
+1254,2019-04-22 05:36,22,Corredor,1,Acordar (dia util)
+1255,2019-04-22 05:40,17,Lavanderia,1,Acordar (dia util)
+1255,2019-04-22 05:40,22,Corredor,1,Acordar (dia util)
+1256,2019-04-22 05:46,17,Lavanderia,1,Acordar (dia util)
+1256,2019-04-22 05:46,22,Corredor,1,Acordar (dia util)
+1558,2019-04-23 01:06,17,Lavanderia,23,Dormir
+1558,2019-04-23 01:06,22,Corredor,23,Dormir
+1558,2019-04-23 01:06,15,Sala,23,Dormir
+1558,2019-04-23 01:06,17,Lavanderia,23,Dormir
+1562,2019-04-23 01:22,17,Lavanderia,23,Dormir
+1562,2019-04-23 01:22,22,Corredor,23,Dormir
+1562,2019-04-23 01:22,15,Sala,23,Dormir
+1562,2019-04-23 01:22,17,Lavanderia,23,Dormir
+1567,2019-04-23 01:44,17,Lavanderia,23,Dormir
+1567,2019-04-23 01:44,22,Corredor,23,Dormir
+1567,2019-04-23 01:44,15,Sala,23,Dormir
+1567,2019-04-23 01:44,17,Lavanderia,23,Dormir
+1630,2019-04-23 05:20,17,Lavanderia,1,Acordar (dia util)
+1630,2019-04-23 05:20,22,Corredor,1,Acordar (dia util)
+1633,2019-04-23 05:32,17,Lavanderia,1,Acordar (dia util)
+1633,2019-04-23 05:32,22,Corredor,1,Acordar (dia util)
+1635,2019-04-23 05:38,17,Lavanderia,1,Acordar (dia util)
+1635,2019-04-23 05:38,22,Corredor,1,Acordar (dia util)
+1636,2019-04-23 05:45,17,Lavanderia,1,Acordar (dia util)
+1636,2019-04-23 05:45,22,Corredor,1,Acordar (dia util)
+1951,2019-04-24 01:02,17,Lavanderia,23,Dormir
+1951,2019-04-24 01:02,22,Corredor,23,Dormir
+1968,2019-04-24 01:55,17,Lavanderia,23,Dormir
+1968,2019-04-24 01:55,22,Corredor,23,Dormir
+1968,2019-04-24 01:55,15,Sala,23,Dormir
+1968,2019-04-24 01:55,17,Lavanderia,23,Dormir
+2029,2019-04-24 05:15,17,Lavanderia,1,Acordar (dia util)
+2029,2019-04-24 05:15,22,Corredor,1,Acordar (dia util)
+2032,2019-04-24 05:24,17,Lavanderia,1,Acordar (dia util)
+2032,2019-04-24 05:24,22,Corredor,1,Acordar (dia util)
+2038,2019-04-24 05:46,17,Lavanderia,1,Acordar (dia util)
+2038,2019-04-24 05:46,22,Corredor,1,Acordar (dia util)
+2363,2019-04-25 01:06,17,Lavanderia,23,Dormir
+2363,2019-04-25 01:06,22,Corredor,23,Dormir
+2363,2019-04-25 01:06,15,Sala,23,Dormir
+2363,2019-04-25 01:06,17,Lavanderia,23,Dormir
+2368,2019-04-25 01:28,15,Sala,23,Dormir
+2368,2019-04-25 01:28,17,Lavanderia,23,Dormir
+2371,2019-04-25 01:37,17,Lavanderia,23,Dormir
+2371,2019-04-25 01:37,22,Corredor,23,Dormir
+2371,2019-04-25 01:37,15,Sala,23,Dormir
+2371,2019-04-25 01:37,17,Lavanderia,23,Dormir
+2372,2019-04-25 01:40,17,Lavanderia,23,Dormir
+2372,2019-04-25 01:40,22,Corredor,23,Dormir
+2372,2019-04-25 01:40,15,Sala,23,Dormir
+2372,2019-04-25 01:40,17,Lavanderia,23,Dormir
+2373,2019-04-25 01:44,15,Sala,23,Dormir
+2373,2019-04-25 01:44,17,Lavanderia,23,Dormir
+2374,2019-04-25 01:53,17,Lavanderia,23,Dormir
+2374,2019-04-25 01:53,22,Corredor,23,Dormir
+2374,2019-04-25 01:53,15,Sala,23,Dormir
+2374,2019-04-25 01:53,17,Lavanderia,23,Dormir
+2439,2019-04-25 05:46,17,Lavanderia,1,Acordar (dia util)
+2439,2019-04-25 05:46,22,Corredor,1,Acordar (dia util)
+2753,2019-04-26 01:05,17,Lavanderia,23,Dormir
+2753,2019-04-26 01:05,22,Corredor,23,Dormir
+2753,2019-04-26 01:05,15,Sala,23,Dormir
+2753,2019-04-26 01:05,17,Lavanderia,23,Dormir
+2755,2019-04-26 01:15,17,Lavanderia,23,Dormir
+2755,2019-04-26 01:15,22,Corredor,23,Dormir
+2755,2019-04-26 01:15,15,Sala,23,Dormir
+2755,2019-04-26 01:15,17,Lavanderia,23,Dormir
+2824,2019-04-26 05:07,17,Lavanderia,1,Acordar (dia util)
+2824,2019-04-26 05:07,22,Corredor,1,Acordar (dia util)
+2833,2019-04-26 05:38,17,Lavanderia,1,Acordar (dia util)
+2833,2019-04-26 05:38,22,Corredor,1,Acordar (dia util)
+2835,2019-04-26 05:44,17,Lavanderia,1,Acordar (dia util)
+2835,2019-04-26 05:44,22,Corredor,1,Acordar (dia util)
+3165,2019-04-27 01:00,15,Sala,23,Dormir
+3165,2019-04-27 01:00,17,Lavanderia,23,Dormir
+3166,2019-04-27 01:03,17,Lavanderia,23,Dormir
+3166,2019-04-27 01:03,22,Corredor,23,Dormir
+3166,2019-04-27 01:03,15,Sala,23,Dormir
+3166,2019-04-27 01:03,17,Lavanderia,23,Dormir
+3169,2019-04-27 01:15,17,Lavanderia,23,Dormir
+3169,2019-04-27 01:15,22,Corredor,23,Dormir
+3169,2019-04-27 01:15,15,Sala,23,Dormir
+3169,2019-04-27 01:15,17,Lavanderia,23,Dormir
+3173,2019-04-27 01:31,17,Lavanderia,23,Dormir
+3173,2019-04-27 01:31,22,Corredor,23,Dormir
+3173,2019-04-27 01:31,15,Sala,23,Dormir
+3173,2019-04-27 01:31,17,Lavanderia,23,Dormir
+3174,2019-04-27 01:34,17,Lavanderia,23,Dormir
+3174,2019-04-27 01:34,22,Corredor,23,Dormir
+3174,2019-04-27 01:34,15,Sala,23,Dormir
+3174,2019-04-27 01:34,17,Lavanderia,23,Dormir
+3587,2019-04-28 01:07,17,Lavanderia,23,Dormir
+3587,2019-04-28 01:07,22,Corredor,23,Dormir
+3587,2019-04-28 01:07,15,Sala,23,Dormir
+3587,2019-04-28 01:07,17,Lavanderia,23,Dormir
+3589,2019-04-28 01:14,17,Lavanderia,23,Dormir
+3589,2019-04-28 01:14,22,Corredor,23,Dormir
+3589,2019-04-28 01:14,15,Sala,23,Dormir
+3589,2019-04-28 01:14,17,Lavanderia,23,Dormir
+3600,2019-04-28 01:58,17,Lavanderia,23,Dormir
+3600,2019-04-28 01:58,22,Corredor,23,Dormir
+3600,2019-04-28 01:58,15,Sala,23,Dormir
+3600,2019-04-28 01:58,17,Lavanderia,23,Dormir
+4037,2019-04-29 05:09,17,Lavanderia,1,Acordar (dia util)
+4037,2019-04-29 05:09,22,Corredor,1,Acordar (dia util)
+4041,2019-04-29 05:25,17,Lavanderia,1,Acordar (dia util)
+4041,2019-04-29 05:25,22,Corredor,1,Acordar (dia util)
+4044,2019-04-29 05:34,17,Lavanderia,1,Acordar (dia util)
+4044,2019-04-29 05:34,22,Corredor,1,Acordar (dia util)
+4051,2019-04-29 05:59,17,Lavanderia,1,Acordar (dia util)
+4051,2019-04-29 05:59,22,Corredor,1,Acordar (dia util)
+4368,2019-04-30 01:16,17,Lavanderia,23,Dormir
+4368,2019-04-30 01:16,22,Corredor,23,Dormir
+4368,2019-04-30 01:16,15,Sala,23,Dormir
+4368,2019-04-30 01:16,17,Lavanderia,23,Dormir
+4434,2019-04-30 05:06,17,Lavanderia,1,Acordar (dia util)
+4434,2019-04-30 05:06,22,Corredor,1,Acordar (dia util)
+4441,2019-04-30 05:31,17,Lavanderia,1,Acordar (dia util)
+4441,2019-04-30 05:31,22,Corredor,1,Acordar (dia util)
+4442,2019-04-30 05:34,17,Lavanderia,1,Acordar (dia util)
+4442,2019-04-30 05:34,22,Corredor,1,Acordar (dia util)
+4446,2019-04-30 05:50,17,Lavanderia,1,Acordar (dia util)
+4446,2019-04-30 05:50,22,Corredor,1,Acordar (dia util)
+4761,2019-05-01 01:30,17,Lavanderia,23,Dormir
+4761,2019-05-01 01:30,22,Corredor,23,Dormir
+4761,2019-05-01 01:30,15,Sala,23,Dormir
+4761,2019-05-01 01:30,17,Lavanderia,23,Dormir
+4762,2019-05-01 01:33,17,Lavanderia,23,Dormir
+4762,2019-05-01 01:33,22,Corredor,23,Dormir
+4762,2019-05-01 01:33,15,Sala,23,Dormir
+4762,2019-05-01 01:33,17,Lavanderia,23,Dormir
+4810,2019-05-01 05:03,17,Lavanderia,1,Acordar (dia util)
+4810,2019-05-01 05:03,22,Corredor,1,Acordar (dia util)
+5117,2019-05-06 01:05,15,Sala,23,Dormir
+5117,2019-05-06 01:05,17,Lavanderia,23,Dormir
+5122,2019-05-06 01:21,17,Lavanderia,23,Dormir
+5122,2019-05-06 01:21,22,Corredor,23,Dormir
+5122,2019-05-06 01:21,15,Sala,23,Dormir
+5122,2019-05-06 01:21,17,Lavanderia,23,Dormir
+5126,2019-05-06 01:36,17,Lavanderia,23,Dormir
+5126,2019-05-06 01:36,22,Corredor,23,Dormir
+5126,2019-05-06 01:36,15,Sala,23,Dormir
+5126,2019-05-06 01:36,17,Lavanderia,23,Dormir
+5130,2019-05-06 01:52,17,Lavanderia,23,Dormir
+5130,2019-05-06 01:52,22,Corredor,23,Dormir
+5130,2019-05-06 01:52,15,Sala,23,Dormir
+5130,2019-05-06 01:52,17,Lavanderia,23,Dormir
+5539,2019-05-07 01:03,17,Lavanderia,23,Dormir
+5539,2019-05-07 01:03,22,Corredor,23,Dormir
+5539,2019-05-07 01:03,15,Sala,23,Dormir
+5539,2019-05-07 01:03,17,Lavanderia,23,Dormir
+5549,2019-05-07 01:48,17,Lavanderia,23,Dormir
+5549,2019-05-07 01:48,22,Corredor,23,Dormir
+5549,2019-05-07 01:48,15,Sala,23,Dormir
+5549,2019-05-07 01:48,17,Lavanderia,23,Dormir
+5607,2019-05-07 05:08,17,Lavanderia,1,Acordar (dia util)
+5607,2019-05-07 05:08,22,Corredor,1,Acordar (dia util)
+5618,2019-05-07 05:45,17,Lavanderia,1,Acordar (dia util)
+5618,2019-05-07 05:45,22,Corredor,1,Acordar (dia util)
+5621,2019-05-07 05:57,17,Lavanderia,1,Acordar (dia util)
+5621,2019-05-07 05:57,22,Corredor,1,Acordar (dia util)
+5973,2019-05-08 01:26,15,Sala,23,Dormir
+5973,2019-05-08 01:26,17,Lavanderia,23,Dormir
+5980,2019-05-08 01:48,17,Lavanderia,23,Dormir
+5980,2019-05-08 01:48,22,Corredor,23,Dormir
+5980,2019-05-08 01:48,15,Sala,23,Dormir
+5980,2019-05-08 01:48,17,Lavanderia,23,Dormir
+5981,2019-05-08 01:51,17,Lavanderia,23,Dormir
+5981,2019-05-08 01:51,22,Corredor,23,Dormir
+5981,2019-05-08 01:51,15,Sala,23,Dormir
+5981,2019-05-08 01:51,17,Lavanderia,23,Dormir
+6045,2019-05-08 05:18,17,Lavanderia,1,Acordar (dia util)
+6045,2019-05-08 05:18,22,Corredor,1,Acordar (dia util)
+6047,2019-05-08 05:24,17,Lavanderia,1,Acordar (dia util)
+6047,2019-05-08 05:24,22,Corredor,1,Acordar (dia util)
+6051,2019-05-08 05:42,17,Lavanderia,1,Acordar (dia util)
+6051,2019-05-08 05:42,22,Corredor,1,Acordar (dia util)
+6395,2019-05-09 01:38,17,Lavanderia,23,Dormir
+6395,2019-05-09 01:38,22,Corredor,23,Dormir
+6395,2019-05-09 01:38,15,Sala,23,Dormir
+6395,2019-05-09 01:38,17,Lavanderia,23,Dormir
+6398,2019-05-09 01:50,17,Lavanderia,23,Dormir
+6398,2019-05-09 01:50,22,Corredor,23,Dormir
+6398,2019-05-09 01:50,15,Sala,23,Dormir
+6398,2019-05-09 01:50,17,Lavanderia,23,Dormir
+6466,2019-05-09 05:32,17,Lavanderia,1,Acordar (dia util)
+6466,2019-05-09 05:32,22,Corredor,1,Acordar (dia util)
+6805,2019-05-10 01:18,17,Lavanderia,23,Dormir
+6805,2019-05-10 01:18,22,Corredor,23,Dormir
+6805,2019-05-10 01:18,15,Sala,23,Dormir
+6805,2019-05-10 01:18,17,Lavanderia,23,Dormir
+6808,2019-05-10 01:31,17,Lavanderia,23,Dormir
+6808,2019-05-10 01:31,22,Corredor,23,Dormir
+6808,2019-05-10 01:31,15,Sala,23,Dormir
+6808,2019-05-10 01:31,17,Lavanderia,23,Dormir
+6874,2019-05-10 05:11,17,Lavanderia,1,Acordar (dia util)
+6874,2019-05-10 05:11,22,Corredor,1,Acordar (dia util)
+6875,2019-05-10 05:15,17,Lavanderia,1,Acordar (dia util)
+6875,2019-05-10 05:15,22,Corredor,1,Acordar (dia util)
+7204,2019-05-11 01:44,17,Lavanderia,23,Dormir
+7204,2019-05-11 01:44,22,Corredor,23,Dormir
+7204,2019-05-11 01:44,15,Sala,23,Dormir
+7204,2019-05-11 01:44,17,Lavanderia,23,Dormir
+7207,2019-05-11 01:57,17,Lavanderia,23,Dormir
+7207,2019-05-11 01:57,22,Corredor,23,Dormir
+7207,2019-05-11 01:57,15,Sala,23,Dormir
+7207,2019-05-11 01:57,17,Lavanderia,23,Dormir
+7208,2019-05-11 02:00,17,Lavanderia,23,Dormir
+7208,2019-05-11 02:00,22,Corredor,23,Dormir
+7208,2019-05-11 02:00,15,Sala,23,Dormir
+7208,2019-05-11 02:00,17,Lavanderia,23,Dormir
+7785,2019-05-13 01:08,17,Lavanderia,23,Dormir
+7785,2019-05-13 01:08,22,Corredor,23,Dormir
+7785,2019-05-13 01:08,15,Sala,23,Dormir
+7785,2019-05-13 01:08,17,Lavanderia,23,Dormir
+7791,2019-05-13 01:30,17,Lavanderia,23,Dormir
+7791,2019-05-13 01:30,22,Corredor,23,Dormir
+7791,2019-05-13 01:30,15,Sala,23,Dormir
+7791,2019-05-13 01:30,17,Lavanderia,23,Dormir
+7798,2019-05-13 01:55,17,Lavanderia,23,Dormir
+7798,2019-05-13 01:55,22,Corredor,23,Dormir
+7798,2019-05-13 01:55,15,Sala,23,Dormir
+7798,2019-05-13 01:55,17,Lavanderia,23,Dormir
+7807,2019-05-13 05:28,17,Lavanderia,1,Acordar (dia util)
+7807,2019-05-13 05:28,22,Corredor,1,Acordar (dia util)
+8141,2019-05-14 01:05,15,Sala,23,Dormir
+8141,2019-05-14 01:05,17,Lavanderia,23,Dormir
+8143,2019-05-14 01:11,17,Lavanderia,23,Dormir
+8143,2019-05-14 01:11,22,Corredor,23,Dormir
+8143,2019-05-14 01:11,15,Sala,23,Dormir
+8143,2019-05-14 01:11,17,Lavanderia,23,Dormir
+8144,2019-05-14 01:14,15,Sala,23,Dormir
+8144,2019-05-14 01:14,17,Lavanderia,23,Dormir
+8145,2019-05-14 01:17,17,Lavanderia,23,Dormir
+8145,2019-05-14 01:17,22,Corredor,23,Dormir
+8145,2019-05-14 01:17,15,Sala,23,Dormir
+8145,2019-05-14 01:17,17,Lavanderia,23,Dormir
+8146,2019-05-14 01:23,17,Lavanderia,23,Dormir
+8146,2019-05-14 01:23,22,Corredor,23,Dormir
+8146,2019-05-14 01:23,15,Sala,23,Dormir
+8146,2019-05-14 01:23,17,Lavanderia,23,Dormir
+8147,2019-05-14 01:26,17,Lavanderia,23,Dormir
+8147,2019-05-14 01:26,22,Corredor,23,Dormir
+8147,2019-05-14 01:26,15,Sala,23,Dormir
+8147,2019-05-14 01:26,17,Lavanderia,23,Dormir
+8152,2019-05-14 01:51,17,Lavanderia,23,Dormir
+8152,2019-05-14 01:51,22,Corredor,23,Dormir
+8152,2019-05-14 01:51,15,Sala,23,Dormir
+8152,2019-05-14 01:51,17,Lavanderia,23,Dormir
+8153,2019-05-14 01:54,15,Sala,23,Dormir
+8153,2019-05-14 01:54,17,Lavanderia,23,Dormir
+8211,2019-05-14 05:23,17,Lavanderia,1,Acordar (dia util)
+8211,2019-05-14 05:23,22,Corredor,1,Acordar (dia util)
+8218,2019-05-14 05:45,17,Lavanderia,1,Acordar (dia util)
+8218,2019-05-14 05:45,22,Corredor,1,Acordar (dia util)
+8830,2019-05-16 01:17,17,Lavanderia,23,Dormir
+8830,2019-05-16 01:17,22,Corredor,23,Dormir
+8830,2019-05-16 01:17,15,Sala,23,Dormir
+8830,2019-05-16 01:17,17,Lavanderia,23,Dormir
+8841,2019-05-16 01:55,17,Lavanderia,23,Dormir
+8841,2019-05-16 01:55,22,Corredor,23,Dormir
+8841,2019-05-16 01:55,15,Sala,23,Dormir
+8841,2019-05-16 01:55,17,Lavanderia,23,Dormir
+8842,2019-05-16 01:59,17,Lavanderia,23,Dormir
+8842,2019-05-16 01:59,22,Corredor,23,Dormir
+8842,2019-05-16 01:59,15,Sala,23,Dormir
+8842,2019-05-16 01:59,17,Lavanderia,23,Dormir
+9235,2019-05-17 01:11,17,Lavanderia,23,Dormir
+9235,2019-05-17 01:11,22,Corredor,23,Dormir
+9235,2019-05-17 01:11,15,Sala,23,Dormir
+9235,2019-05-17 01:11,17,Lavanderia,23,Dormir
+9245,2019-05-17 01:46,17,Lavanderia,23,Dormir
+9245,2019-05-17 01:46,22,Corredor,23,Dormir
+9245,2019-05-17 01:46,15,Sala,23,Dormir
+9245,2019-05-17 01:46,17,Lavanderia,23,Dormir
+9313,2019-05-17 05:38,17,Lavanderia,1,Acordar (dia util)
+9313,2019-05-17 05:38,22,Corredor,1,Acordar (dia util)
+9644,2019-05-18 01:04,17,Lavanderia,23,Dormir
+9644,2019-05-18 01:04,22,Corredor,23,Dormir
+9644,2019-05-18 01:04,15,Sala,23,Dormir
+9644,2019-05-18 01:04,17,Lavanderia,23,Dormir
+9645,2019-05-18 01:10,17,Lavanderia,23,Dormir
+9645,2019-05-18 01:10,22,Corredor,23,Dormir
+9645,2019-05-18 01:10,15,Sala,23,Dormir
+9645,2019-05-18 01:10,17,Lavanderia,23,Dormir
+9646,2019-05-18 01:13,17,Lavanderia,23,Dormir
+9646,2019-05-18 01:13,22,Corredor,23,Dormir
+9646,2019-05-18 01:13,15,Sala,23,Dormir
+9646,2019-05-18 01:13,17,Lavanderia,23,Dormir
+9647,2019-05-18 01:19,17,Lavanderia,23,Dormir
+9647,2019-05-18 01:19,22,Corredor,23,Dormir
+9647,2019-05-18 01:19,15,Sala,23,Dormir
+9647,2019-05-18 01:19,17,Lavanderia,23,Dormir
+9648,2019-05-18 01:35,17,Lavanderia,23,Dormir
+9648,2019-05-18 01:35,22,Corredor,23,Dormir
+9648,2019-05-18 01:35,15,Sala,23,Dormir
+9648,2019-05-18 01:35,17,Lavanderia,23,Dormir
+9649,2019-05-18 01:41,17,Lavanderia,23,Dormir
+9649,2019-05-18 01:41,22,Corredor,23,Dormir
+9649,2019-05-18 01:41,15,Sala,23,Dormir
+9649,2019-05-18 01:41,17,Lavanderia,23,Dormir
+9980,2019-05-19 01:56,17,Lavanderia,23,Dormir
+9980,2019-05-19 01:56,22,Corredor,23,Dormir
+9980,2019-05-19 01:56,15,Sala,23,Dormir
+9980,2019-05-19 01:56,17,Lavanderia,23,Dormir
+10363,2019-05-20 01:01,17,Lavanderia,23,Dormir
+10363,2019-05-20 01:01,22,Corredor,23,Dormir
+10363,2019-05-20 01:01,15,Sala,23,Dormir
+10363,2019-05-20 01:01,17,Lavanderia,23,Dormir
+10365,2019-05-20 01:07,17,Lavanderia,23,Dormir
+10365,2019-05-20 01:07,22,Corredor,23,Dormir
+10365,2019-05-20 01:07,15,Sala,23,Dormir
+10365,2019-05-20 01:07,17,Lavanderia,23,Dormir
+10377,2019-05-20 01:51,17,Lavanderia,23,Dormir
+10377,2019-05-20 01:51,22,Corredor,23,Dormir
+10377,2019-05-20 01:51,15,Sala,23,Dormir
+10377,2019-05-20 01:51,17,Lavanderia,23,Dormir
+10437,2019-05-20 05:10,17,Lavanderia,1,Acordar (dia util)
+10437,2019-05-20 05:10,22,Corredor,1,Acordar (dia util)
+10442,2019-05-20 05:29,17,Lavanderia,1,Acordar (dia util)
+10442,2019-05-20 05:29,22,Corredor,1,Acordar (dia util)
+10445,2019-05-20 05:45,17,Lavanderia,1,Acordar (dia util)
+10445,2019-05-20 05:45,22,Corredor,1,Acordar (dia util)
+10447,2019-05-20 05:51,17,Lavanderia,1,Acordar (dia util)
+10447,2019-05-20 05:51,22,Corredor,1,Acordar (dia util)
+10774,2019-05-21 01:19,17,Lavanderia,23,Dormir
+10774,2019-05-21 01:19,22,Corredor,23,Dormir
+10774,2019-05-21 01:19,15,Sala,23,Dormir
+10774,2019-05-21 01:19,17,Lavanderia,23,Dormir
+10782,2019-05-21 01:47,17,Lavanderia,23,Dormir
+10782,2019-05-21 01:47,22,Corredor,23,Dormir
+10782,2019-05-21 01:47,15,Sala,23,Dormir
+10782,2019-05-21 01:47,17,Lavanderia,23,Dormir
+10784,2019-05-21 01:54,15,Sala,23,Dormir
+10784,2019-05-21 01:54,17,Lavanderia,23,Dormir
+10785,2019-05-21 02:00,17,Lavanderia,23,Dormir
+10785,2019-05-21 02:00,22,Corredor,23,Dormir
+10785,2019-05-21 02:00,15,Sala,23,Dormir
+10785,2019-05-21 02:00,17,Lavanderia,23,Dormir
+10844,2019-05-21 05:25,17,Lavanderia,1,Acordar (dia util)
+10844,2019-05-21 05:25,22,Corredor,1,Acordar (dia util)
+10854,2019-05-21 05:59,17,Lavanderia,1,Acordar (dia util)
+10854,2019-05-21 05:59,22,Corredor,1,Acordar (dia util)
+11182,2019-05-22 01:34,17,Lavanderia,23,Dormir
+11182,2019-05-22 01:34,22,Corredor,23,Dormir
+11182,2019-05-22 01:34,15,Sala,23,Dormir
+11182,2019-05-22 01:34,17,Lavanderia,23,Dormir
+11186,2019-05-22 01:53,17,Lavanderia,23,Dormir
+11186,2019-05-22 01:53,22,Corredor,23,Dormir
+11186,2019-05-22 01:53,15,Sala,23,Dormir
+11186,2019-05-22 01:53,17,Lavanderia,23,Dormir
+11252,2019-05-22 05:39,17,Lavanderia,1,Acordar (dia util)
+11252,2019-05-22 05:39,22,Corredor,1,Acordar (dia util)
+11576,2019-05-23 01:02,17,Lavanderia,23,Dormir
+11576,2019-05-23 01:02,22,Corredor,23,Dormir
+11576,2019-05-23 01:02,15,Sala,23,Dormir
+11576,2019-05-23 01:02,17,Lavanderia,23,Dormir
+11577,2019-05-23 01:05,17,Lavanderia,23,Dormir
+11577,2019-05-23 01:05,22,Corredor,23,Dormir
+11577,2019-05-23 01:05,15,Sala,23,Dormir
+11577,2019-05-23 01:05,17,Lavanderia,23,Dormir
+11579,2019-05-23 01:18,17,Lavanderia,23,Dormir
+11579,2019-05-23 01:18,22,Corredor,23,Dormir
+11579,2019-05-23 01:18,15,Sala,23,Dormir
+11579,2019-05-23 01:18,17,Lavanderia,23,Dormir
+11586,2019-05-23 01:46,17,Lavanderia,23,Dormir
+11586,2019-05-23 01:46,22,Corredor,23,Dormir
+11586,2019-05-23 01:46,15,Sala,23,Dormir
+11586,2019-05-23 01:46,17,Lavanderia,23,Dormir
+11637,2019-05-23 05:11,17,Lavanderia,1,Acordar (dia util)
+11637,2019-05-23 05:11,22,Corredor,1,Acordar (dia util)
+11645,2019-05-23 05:39,17,Lavanderia,1,Acordar (dia util)
+11645,2019-05-23 05:39,22,Corredor,1,Acordar (dia util)
+11965,2019-05-24 01:15,17,Lavanderia,23,Dormir
+11965,2019-05-24 01:15,22,Corredor,23,Dormir
+11965,2019-05-24 01:15,15,Sala,23,Dormir
+11965,2019-05-24 01:15,17,Lavanderia,23,Dormir
+11969,2019-05-24 01:32,17,Lavanderia,23,Dormir
+11969,2019-05-24 01:32,22,Corredor,23,Dormir
+11969,2019-05-24 01:32,15,Sala,23,Dormir
+11969,2019-05-24 01:32,17,Lavanderia,23,Dormir
+12033,2019-05-24 05:04,17,Lavanderia,1,Acordar (dia util)
+12033,2019-05-24 05:04,22,Corredor,1,Acordar (dia util)
+12035,2019-05-24 05:13,17,Lavanderia,1,Acordar (dia util)
+12035,2019-05-24 05:13,22,Corredor,1,Acordar (dia util)
+12369,2019-05-25 01:25,17,Lavanderia,23,Dormir
+12369,2019-05-25 01:25,22,Corredor,23,Dormir
+12369,2019-05-25 01:25,15,Sala,23,Dormir
+12369,2019-05-25 01:25,17,Lavanderia,23,Dormir
+12378,2019-05-25 01:55,17,Lavanderia,23,Dormir
+12378,2019-05-25 01:55,22,Corredor,23,Dormir
+12378,2019-05-25 01:55,15,Sala,23,Dormir
+12378,2019-05-25 01:55,17,Lavanderia,23,Dormir
+12587,2019-05-26 01:05,17,Lavanderia,23,Dormir
+12587,2019-05-26 01:05,22,Corredor,23,Dormir
+12587,2019-05-26 01:05,15,Sala,23,Dormir
+12587,2019-05-26 01:05,17,Lavanderia,23,Dormir
+12592,2019-05-26 01:24,17,Lavanderia,23,Dormir
+12592,2019-05-26 01:24,22,Corredor,23,Dormir
+12592,2019-05-26 01:24,15,Sala,23,Dormir
+12592,2019-05-26 01:24,17,Lavanderia,23,Dormir
+12992,2019-05-27 01:12,17,Lavanderia,23,Dormir
+12992,2019-05-27 01:12,22,Corredor,23,Dormir
+12992,2019-05-27 01:12,15,Sala,23,Dormir
+12992,2019-05-27 01:12,17,Lavanderia,23,Dormir
+13000,2019-05-27 01:40,17,Lavanderia,23,Dormir
+13000,2019-05-27 01:40,22,Corredor,23,Dormir
+13000,2019-05-27 01:40,15,Sala,23,Dormir
+13000,2019-05-27 01:40,17,Lavanderia,23,Dormir
+13001,2019-05-27 01:43,17,Lavanderia,23,Dormir
+13001,2019-05-27 01:43,22,Corredor,23,Dormir
+13001,2019-05-27 01:43,15,Sala,23,Dormir
+13001,2019-05-27 01:43,17,Lavanderia,23,Dormir

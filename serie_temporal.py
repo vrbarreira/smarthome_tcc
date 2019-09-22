@@ -1,3 +1,4 @@
+import pickle
 from datetime import datetime 
 from datetime import time
 from operator import itemgetter 
@@ -88,7 +89,6 @@ for i in range(len(dados)):
         matrix_dados_aux.append(dados_dia_aux)
         dados_dia_aux = []
         dados_dia = []
-
 
 ######################## algoritmo AprioriAll#################
 
@@ -195,10 +195,6 @@ def AprioriAll(matrix_dados, min_sup, large1):
             
     return seq_max
     
-    
-        
-
-
 def aprioriGen(list_seq):
     lista_candidato = []
     for i in range(len(list_seq)):
@@ -225,7 +221,6 @@ lineSplit = line.split(",")
 lineSplit[-1] = lineSplit[-1][:-1]
 dados_casa.append(lineSplit)
 
-
 for line in arquivo:
     lineSplit = line.split(",")
     lineSplit[2:] =  list(map(int,lineSplit[2:])) 
@@ -239,6 +234,7 @@ for coluna in range(2,len(dados_casa[0])):
         if prox_valor < valor_atual or valor_atual < 50:
             matrix_casa.append([dados_casa[0][coluna], dados_casa[1][1]])
         large1.append(dados_casa[0][coluna])
+        large1.append(coluna)
     elif coluna != 19:
         if dados_casa[1][coluna] == 0:
             matrix_casa.append([dados_casa[0][coluna] + " OFF", dados_casa[1][1]])
@@ -287,9 +283,12 @@ for i in range(len(matrix_casa) -1): #verifica se os elementos estão em ordem e
 
 eventos = AprioriAll(dados_dia, 1,large1) #patterns encontrados
 print(eventos)
-print("a")
 
+with open('Saidas/AprioriAllBin.txt',  'wb') as fileBin:
+    pickle.dump(eventos, fileBin)
 
+fileBin.close()
+#print("a")
 
 ########################################## dados artigo ##########################################
 
