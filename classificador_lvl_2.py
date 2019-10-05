@@ -3,15 +3,19 @@ import csv
 import pickle
 
 def lerCSV(arquivo, matriz):
-    leitura = open(arquivo, "r").readlines()
-    for linha in leitura:
-        matriz.append(linha.strip().split(','))
+    with open(arquivo, "r") as arq:
+        leitura = arq.readlines()
+        for linha in leitura:
+            matriz.append(linha.strip().split(','))
+    arq.close()
 
 matriz_comodo_sensores = []
 matriz_atividades = []
 matriz_correlacao_sensores = []
 matriz_rotulos_lv1 = []
 matriz_rotulos_lv2 = []
+matriz_casa = []
+
 
 matriz_apriori = []
 with open('Saidas/AprioriAllBin.txt',  'rb') as fileBin:
@@ -21,6 +25,12 @@ lerCSV("id_comodo_sensores.csv", matriz_comodo_sensores)
 lerCSV("atividades.csv", matriz_atividades)
 lerCSV("correlacao_sensores.csv", matriz_correlacao_sensores)
 lerCSV("Saidas/classif_results_lv1.csv", matriz_rotulos_lv1)
+lerCSV("Saidas/matrix_casa.csv", matriz_casa)
+
+list_timestamps_apriori = []
+for i in range(1,len(matriz_casa)):
+    if(matriz_casa[i][1]) not in list_timestamps_apriori:
+        list_timestamps_apriori.append(matriz_casa[i][1])
 
 def filtro_correl_sensores_novo():
     mtx_aux = []
@@ -56,8 +66,76 @@ def filtro_correl_sensores_novo():
     return mtx_aux
 
 def filtro_correl_sensores_aprioriall():
-    pass
+    groups = [4]
+    saida = []
 
+    #j, k = 0, 0
+    
+    for group_correl in matriz_apriori:
+        if group_correl:
+            len_grupo = len(group_correl[0])
+            
+            if len_grupo in groups:
+
+                for j in range(0,1):
+                #for j in range(9, len(group_correl)):
+                    
+                    k = 0
+                    #while k < (len_grupo-1):
+                    count_timestamp = 0
+                    idx_timestamp = 0
+                    match = False
+
+                    x = 1
+                    while x < len(matriz_casa):
+                        idx_timestamp = list_timestamps_apriori.index(matriz_casa[x][1])
+                        increm_k = False
+
+                        if x == 181:
+                            print("")
+
+                        if matriz_casa[x][0] == group_correl[j][k]:
+                            count_timestamp = count_timestamp + 1
+
+                            if x + count_timestamp < len(matriz_casa)-1:
+                                while matriz_casa[x+count_timestamp][1] == list_timestamps_apriori[idx_timestamp] or matriz_casa[x+count_timestamp][1] == list_timestamps_apriori[idx_timestamp+1]:
+                                    if matriz_casa[x+count_timestamp][0] == group_correl[j][k+1]:
+                                        if k == len_grupo-2:
+                                            match = True
+                                            k = 0
+                                            #count_timestamp = 0
+                                            break
+                                        else:
+                                            k = k+1
+                                            #count_timestamp = count_timestamp + 1
+                                            x = x + count_timestamp
+                                            count_timestamp = 0
+                                            increm_k = True
+                                            break
+                                    else:
+                                        count_timestamp = count_timestamp + 1
+                                
+                                if match:
+                                    print("Grupo {} - LinhaApr: {} - Ultimo mtx_casa: {}".format(len_grupo, j, x+count_timestamp))
+                                    saida.append([len_grupo, j, x+count_timestamp])
+                                    match = False
+                                elif k > 0 and not increm_k:
+                                    k = 0
+                                
+                                
+                                x = x + count_timestamp
+                                count_timestamp = 0
+                            else:
+                                break
+                        else:
+                            x = x + 1
+                        
+                        #k = k+1
+
+    return saida
+
+# Modo de correlação pelo arquivo de configuração (usuário)
+'''
 matriz_rotulos_lv2 = filtro_correl_sensores_novo()
 
 def sortIdx(val):
@@ -69,5 +147,15 @@ with open('Saidas/classif_results_lv2.csv', 'w', newline='') as writeFile:
     writer = csv.writer(writeFile)
     writer.writerow(['Id Home', 'Timestamp', 'Sensor Comodo', 'Comodo', 'Id Atividade', 'Atividade'])
     writer.writerows(matriz_rotulos_lv2)
+
+writeFile.close()
+'''
+
+# Modo de correlação pelo AprioriAll gerado
+saida_match_apriori = filtro_correl_sensores_aprioriall()
+with open('Saidas/match_apriori.csv', 'w', newline='') as writeFile:
+    writer = csv.writer(writeFile)
+    writer.writerow(['Grupo', 'Linha Apr', 'Último mtx_casa'])
+    writer.writerows(saida_match_apriori)
 
 writeFile.close()

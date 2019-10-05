@@ -1,3 +1,4 @@
+import csv
 import pickle
 from datetime import datetime 
 from datetime import time
@@ -280,15 +281,26 @@ for i in range(len(matrix_casa) -1): #verifica se os elementos estão em ordem e
     if atual > depois:
         print("erro na matrix_casa indice: ",i)
 
-
+'''
 eventos = AprioriAll(dados_dia, 1,large1) #patterns encontrados
 print(eventos)
 
 with open('Saidas/AprioriAllBin.txt',  'wb') as fileBin:
     pickle.dump(eventos, fileBin)
-
 fileBin.close()
-#print("a")
+'''
+
+list_timestamps_apriori = []
+for i in range(1,len(matrix_casa)):
+    if(matrix_casa[i][1]) not in list_timestamps_apriori:
+        list_timestamps_apriori.append(matrix_casa[i][1])
+
+with open('Saidas/matrix_casa.csv', 'w', newline='') as writeFile:
+    writer = csv.writer(writeFile)
+    writer.writerow(['Sensor', 'Timestamp'])
+    for i in range(len(matrix_casa)):
+        if matrix_casa[i][1] != list_timestamps_apriori[0]: writer.writerow(matrix_casa[i])
+writeFile.close()
 
 ########################################## dados artigo ##########################################
 
@@ -298,10 +310,7 @@ fileBin.close()
 large1 = []
 for i in range(max(max(matrix_dados))+1):
     large1.append(i)
-eventos = AprioriAll(matrix_dados,0.45,large1)
-        
- 
-
+eventos = AprioriAll(matrix_dados,0.45,large1)    
 
 eventos_sensor = []
 for seq in eventos:
