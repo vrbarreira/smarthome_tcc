@@ -420,7 +420,7 @@ init_dados_acesso()
 indice = transicoes[3][2]
 vetor = dados_casa[4:indice] 
 
-#print(vetor)
+print(vetor)
 
 """
 entradas
@@ -491,10 +491,10 @@ def feature_tempo(vetor, col):
 #Teste de verificação com dados da casa
 #print(dados_casa[0][2],dados_casa[0][15],dados_casa[0][27])
 #print(vetor)
-#print(feature_vector_aparelho(vetor,[2,27]))
+print(feature_vector_aparelho(vetor,[2,27]))
 #print(dados_casa[0][1],dados_casa[0][15])
-#print(feature_tempo(vetor[0],[1,15]))
-testa_trasicao(dados_casa,transicoes,3,limite_presenca)
+print(feature_tempo(vetor[0],[1,15]))
+#testa_trasicao(dados_casa,transicoes,3,limite_presenca)
 
 
 #for i in range(len(dias_acesso)-1):
