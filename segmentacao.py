@@ -417,7 +417,8 @@ init_dados_casa()
 init_dados_acesso()
 
 ################### Extracao das features para classificacao #######################
-indice = transicoes[3][2]
+#indice = transicoes[3][2]
+indice = 7
 vetor = dados_casa[4:indice] 
 
 print(vetor)
@@ -432,10 +433,10 @@ onde a resposta desejada esta no indice vetor_col
 """
 def feature_vector_aparelho(vetor, vetor_col):
 	estado = []
-	vetor[0][2] = 0
-	vetor[0][27] = 1
-	vetor[7][2] = 0
-	vetor[8][27] = 1
+	#vetor[0][2] = 0
+	#vetor[0][27] = 1
+	#vetor[7][2] = 0
+	#vetor[8][27] = 1
 
 	for i in range(len(vetor[0])):
 		estado.append(vetor[0][i])
@@ -465,7 +466,7 @@ e se o dia eh fim de semana ou nao.
 def feature_tempo(vetor, col):
 	global dias_da_semana
 	
-	ind_timestamp = col[0]
+	ind_timestamp = col
 
 	dia_data = dt.strptime(vetor[ind_timestamp][1:-1], '%Y-%m-%d %H:%M') 
 	dia_semana = dias_da_semana[dia_data.weekday()]
@@ -493,7 +494,7 @@ def feature_tempo(vetor, col):
 #print(vetor)
 print(feature_vector_aparelho(vetor,[2,27]))
 #print(dados_casa[0][1],dados_casa[0][15])
-print(feature_tempo(vetor[0],[1,15]))
+print(feature_tempo(vetor[0],1))
 #testa_trasicao(dados_casa,transicoes,3,limite_presenca)
 
 
