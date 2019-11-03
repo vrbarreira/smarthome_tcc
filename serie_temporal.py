@@ -66,7 +66,7 @@ for elemento in dados:
     if add:
         sensores.append(elemento[-2])
 
-################## separacao dos dados em dias #################
+################## separacao dos dados do artigo em dias #################
 matrix_dados = []
 ultimo_dia = dados[-1][0]
 dados_dia = []
@@ -222,7 +222,7 @@ def start_end_time(matrix_dados, eventos):
     for i in eventos:
         start_end_vect.append([])
     for i in range(len(matrix_dados)):
-        if matrix_dados[i][-2] in eventos and matrix_dados[i][-1] == "ON":
+        if matrix_dados[i][-2] in eventos and matrix_dados[i][-1] == "ON" and i < len(matrix_dados)-1:
             start_time = i #indice no qual o evento comecou
             end_time = i + 1 #indice no qual o evento acaba
             evento = matrix_dados[i][-2] #evento em si
@@ -233,7 +233,9 @@ def start_end_time(matrix_dados, eventos):
                     add = False
                     break
                 end_time += 1
-                if end_time == len(matrix_dados):
+                if end_time == 16992:
+                    print("a")
+                if end_time >= len(matrix_dados):
                     print("Sensor não desligou")
                     add = False
                     break
@@ -250,7 +252,8 @@ def busca_relacao(vetor, data, hora_inicioX, hora_fimX, threshold_igual):
     threshold_rel = timedelta(minutes=5) #limite para considerar que existe relacao temporal entre os eventos
     tempo_zero = timedelta(minutes=0)
     while True:
-        data_atual = vetor[indice_atual][0].date() #data em que a busca se encontra
+        #data_atual = vetor[indice_atual][0].date() #data em que a busca se encontra para os dados do artigo
+        data_atual = vetor[indice_atual][0] #data em que a busca se encontra para os dados do hayashi
         hora_inicioY = datetime.combine(data_atual, vetor[indice_atual][-2]) #tempo de inicio do evento em que a busca se encontra
         hora_fimY = datetime.combine(data_atual, vetor[indice_atual][-1]) # tempo de fim do evento em que a busca se encontra
         if data_atual == data:
@@ -298,7 +301,8 @@ def relacao_temporal(start_end_vect_eventoX, start_end_vect_eventoY):
     resultado.append([0]*9)
     resultado[1].insert(0,start_end_vect_eventoY[0][1])
     for evento in start_end_vect_eventoX:
-        data = evento[0].date()
+        #data = evento[0].date() #para os dados do artigo
+        data = evento[0] # para os dados do hayashi
         hora_inicioX = datetime.combine(data, evento[2]) 
         hora_fimX = datetime.combine(data, evento[3]) 
         tipo = busca_relacao(start_end_vect_eventoY, data,hora_inicioX,hora_fimX, threshold) #contem o evento que sera avaliado na relacao temporal
@@ -376,10 +380,147 @@ def busca_probabilidade(sensor_avaliado, sensor_ocorrido, eventos):
             print("combinacao de sensores nao existe")
             return None
         indice_atual = prox_indice
-        
- 
-                 
+
+
+def classificador(start_end_vect, vetor_verificacao, lista_eventos):
+    relacoes = []
+    numero_ocorrencias = []
+    for elemento in start_end_vect:
+        relacoes.append([elemento[0][1]])
+        numero_ocorrencias.append(len(elemento))
+    for x in range(len(start_end_vect)):
+        resultado = [] #contem as relacoes de um dado sensorX com todos os outros sensores da base
+        for y in range(len(start_end_vect)):
+            if x != y:
+                #print("sensorX: ", start_end_vect[x][0][1])
+                resultado.append(relacao_temporal(start_end_vect[x],start_end_vect[y]))
+                #print(resultado[0])
+                #print(resultado[1])
+        relacoes[x].append(resultado)
+
+
+    probabilidades_eventos = probabilidade(relacoes,numero_ocorrencias) #contem a probabilidades dos eventos Y ocorrerem dado q ocorreu um evento X
+    valores_anormais = [] #valor de anormalidade de um evento Y dado que X ocorreu
+    valores_anormais_busca = []# vetor auxiliar para buscar o valor de anormalidade de Y
+    probabilidades_valores = []# vetor que contem apenas as probabilidades do vetor "valores_anormais"
+
+
+
+    for elemento in probabilidades_eventos:
+        valores_anormais.append([elemento[0],elemento[1],1-elemento[2]])
+        valores_anormais_busca.append([lista_eventos.index(elemento[0]),lista_eventos.index(elemento[1])])
+        probabilidades_valores.append(1 - elemento[2])
+    desv_pad = np.std(probabilidades_valores)
+    media = np.mean(probabilidades_valores)
+    threshold_ocorrido = media + 2 * desv_pad
+    if threshold_ocorrido > 1.0:
+        threshold_ocorrido = 1.0 
+    for ind_ultimo_dia in range(len(dados)):
+        if dados[ind_ultimo_dia][0] == ultimo_dia:
+            break
+
+
+    eventos_ocorridos = []
+    indice = 0
+    classificacao = [["evento", "probabilidade do evento", "valor de anormalidade","detectada anomalia"]]
+    while True:
+        sensor_avaliado = vetor_verificacao[indice][-2]
+        if sensor_avaliado in lista_eventos and sensor_avaliado not in eventos_ocorridos and vetor_verificacao[indice][-1] == "ON":
+            eventos_ocorridos.append(sensor_avaliado)
+        if len(eventos_ocorridos) == 2:
+            evento_avaliado = eventos_ocorridos[-1]
+            evento_ocorrido = eventos_ocorridos[-2]
+            indice_anormalidade = busca_probabilidade(lista_eventos.index(evento_avaliado),lista_eventos.index(evento_ocorrido),valores_anormais_busca) # indice no qual se encontra a probabilidade buscada
+            if valores_anormais[indice_anormalidade][2] >= threshold_ocorrido:
+                classificacao.append([evento_avaliado,probabilidades_eventos[indice_anormalidade][2], valores_anormais[indice_anormalidade][2], "SIM"])
+            else:
+                classificacao.append([evento_avaliado,probabilidades_eventos[indice_anormalidade][2], valores_anormais[indice_anormalidade][2],"NAO"])
+            break
+        indice +=1
+        if indice == len(vetor_verificacao):
+            print("nao occoreram eventos frequentes")
+            break
+
+    for i in range(indice, len(vetor_verificacao)):
+        sensor_avaliado = vetor_verificacao[i][-2]
+        if sensor_avaliado in lista_eventos and sensor_avaliado != eventos_ocorridos[-1] and vetor_verificacao[indice][-1] == "ON":
+            eventos_ocorridos.append(sensor_avaliado)
+            evento_avaliado = eventos_ocorridos[-1]
+            evento_ocorrido = eventos_ocorridos[-2]
+            indice_anormalidade = busca_probabilidade(lista_eventos.index(evento_avaliado),lista_eventos.index(evento_ocorrido),valores_anormais_busca) # indice no qual se encontra a probabilidade buscada
+            if valores_anormais[indice_anormalidade][2] >= threshold_ocorrido:
+                classificacao.append([evento_avaliado,probabilidades_eventos[indice_anormalidade][2], valores_anormais[indice_anormalidade][2], "SIM"])
+            else:
+                classificacao.append([evento_avaliado,probabilidades_eventos[indice_anormalidade][2], valores_anormais[indice_anormalidade][2],"NAO"])
+    return classificacao,threshold_ocorrido, media, desv_pad
+
+def prob_uniao(eventos_ocorridos, probabilidades_eventos, lista_probabilidade):
+    my_set = [False]*len(conjunto)
+    subconjuntos = []
+    gera_subconjunto(0,my_set,eventos_ocorridos,subconjuntos)
+    
+def gera_subconjunto(k,my_set, conjunto, subconjuntos):
+    if k== len(conjunto):
+        subconjunto = []
+        for i in range(len(my_set)):
+            if my_set[i]:
+                subconjunto.append(conjunto[i])
+        if len(subconjunto)>= 2:
+            subconjuntos.append(subconjunto)
+    else:
+        my_set[k] = True
+        gera_subconjunto(k + 1, my_set,conjunto,subconjuntos)
+        my_set[k] = False
+        gera_subconjunto(k + 1, my_set,conjunto,subconjuntos)
+
+coisa = []
+conjunto =[1,2,3,4]
+my_set = [False]*len(conjunto)
+gera_subconjunto(0,my_set,conjunto,coisa)
+print("a")
+
+def classificador2_0(start_end_vect, vetor_verificacao, lista_eventos):
+    relacoes = []
+    numero_ocorrencias = []
+    for elemento in start_end_vect:
+        relacoes.append([elemento[0][1]])
+        numero_ocorrencias.append(len(elemento))
+    for x in range(len(start_end_vect)):
+        resultado = [] #contem as relacoes de um dado sensorX com todos os outros sensores da base
+        for y in range(len(start_end_vect)):
+            if x != y:
+                #print("sensorX: ", start_end_vect[x][0][1])
+                resultado.append(relacao_temporal(start_end_vect[x],start_end_vect[y]))
+                #print(resultado[0])
+                #print(resultado[1])
+        relacoes[x].append(resultado)
+
+
+    probabilidades_eventos = probabilidade(relacoes,numero_ocorrencias) #contem a probabilidades dos eventos Y ocorrerem dado q ocorreu um evento X
+    valores_anormais = [] #valor de anormalidade de um evento Y dado que X ocorreu
+    valores_anormais_busca = []# vetor auxiliar para buscar o valor de anormalidade de Y
+    probabilidades_valores = []# vetor que contem apenas as probabilidades do vetor "probabilidades_eventos"
+    
+    for elemento in probabilidades_eventos:
+        valores_anormais.append([elemento[0],elemento[1],1-elemento[2]])
+        valores_anormais_busca.append([lista_eventos.index(elemento[0]),lista_eventos.index(elemento[1])])
+        probabilidades_valores.append(1 - elemento[2])
+    desv_pad = np.std(probabilidades_valores)
+    media = np.mean(probabilidades_valores)
+    threshold_ocorrido = media + 2 * desv_pad
+    if threshold_ocorrido > 1.0:
+        threshold_ocorrido = 1.0 
+    for ind_ultimo_dia in range(len(dados)):
+        if dados[ind_ultimo_dia][0] == ultimo_dia:
+            break
+
+
+    eventos_ocorridos = []
+    indice = 0
+    classificacao = [["evento", "probabilidade do evento", "valor de anormalidade","detectada anomalia"]]
+
 ########################################## dados hayashi ##########################################
+
 patterns = []
 def init_patterns():
     global patterns
@@ -404,34 +545,41 @@ for line in arquivo:
     dados_casa.append(lineSplit)
 arquivo.close()
 large1 = []
+flag_presenca = [False]* len(dados_casa[0])
 for coluna in range(2,len(dados_casa[0])):
     dia = datetime.strptime(dados_casa[1][1][1:-1], "%Y-%m-%d %H:%M") # hora atual para verificar a ordem
     hora = time(dia.hour,dia.minute)
-    
+    valor_atual = dados_casa[1][coluna]
     if coluna > 14 and coluna < 24 and coluna != 19:
-        valor_atual = dados_casa[1][coluna]
-        prox_valor = dados_casa[2][coluna]
-        if prox_valor < valor_atual and valor_atual > 100:
-            matrix_casa.append([dia.date(),hora,dados_casa[1][1],dados_casa[0][coluna],"presenca" ])
+        if valor_atual < 100:
+            matrix_casa.append([dia.date(),hora,dados_casa[1][1],dados_casa[0][coluna],"ON" ])
+            flag_presenca[coluna] = True
+        elif valor_atual > 100:
+            matrix_casa.append([dia.date(),hora,dados_casa[1][1],dados_casa[0][coluna],"OFF" ])
+            flag_presenca[coluna] = False
         large1.append(dados_casa[0][coluna])
     elif coluna != 19:
-        if dados_casa[1][coluna] == 0:
-            matrix_casa.append([dia.date(),hora,dados_casa[1][1],dados_casa[0][coluna], " OFF"])
-        elif dados_casa[1][coluna] == 1:
-            matrix_casa.append([dia.date(),hora,dados_casa[1][1], dados_casa[0][coluna], " ON"])
+        if valor_atual == 0:
+            matrix_casa.append([dia.date(),hora,dados_casa[1][1],dados_casa[0][coluna], "OFF"])
+        elif valor_atual == 1:
+            matrix_casa.append([dia.date(),hora,dados_casa[1][1], dados_casa[0][coluna], "ON"])
         else:
             print("Erro")
             break
         large1.append(dados_casa[0][coluna])
-for linha in range(3,len(dados_casa)-1):
+for linha in range(2,len(dados_casa)-1):
     for coluna in range(2, len(dados_casa[0])):
         dia = datetime.strptime(dados_casa[linha][1][1:-1], "%Y-%m-%d %H:%M") # hora atual para verificar a ordem
         hora = time(dia.hour,dia.minute)
         if coluna > 14 and coluna < 24 and coluna != 19:
             valor_atual = dados_casa[linha][coluna]
             prox_valor = dados_casa[linha + 1][coluna]
-            if prox_valor < valor_atual and valor_atual > 100:
-                matrix_casa.append([dia.date(),hora,dados_casa[linha][1], dados_casa[0][coluna],"presenca"])
+            if prox_valor < valor_atual and valor_atual > 100 and not flag_presenca[coluna]:
+                matrix_casa.append([dia.date(),hora,dados_casa[linha][1],dados_casa[0][coluna],"ON" ])
+                flag_presenca[coluna] = True
+            elif prox_valor > valor_atual and prox_valor > 100 and valor_atual < 100  and flag_presenca[coluna]:
+                matrix_casa.append([dia.date(),hora,dados_casa[linha][1],dados_casa[0][coluna],"OFF" ])
+                flag_presenca[coluna] = False
         elif coluna != 19:
             valor_atual = dados_casa[linha][coluna]
             valor_anterior = dados_casa[linha - 1][coluna]
@@ -450,9 +598,10 @@ matrix_casa_dia = [] # dados separados em dias
 for i in range(len(matrix_casa) -1): #verifica se os elementos estão em ordem e separa a matrix em dias
     atual = datetime.strptime(matrix_casa[i][2][1:-1], "%Y-%m-%d %H:%M") # hora atual para verificar a ordem
     depois = datetime.strptime(matrix_casa[i+1][2][1:-1], "%Y-%m-%d %H:%M") # hora atual + 1 para verificar a ordem
-    
-    dados_dia_aux.append(matrix_casa[i][-2])
+    if  matrix_casa[i][-1] == "ON":
+        dados_dia_aux.append(matrix_casa[i][-2])
     matrix_casa_aux.append(matrix_casa[i])
+    
 
     if atual.date() < depois.date():
         dados_dia.append(dados_dia_aux)
@@ -474,8 +623,8 @@ for vetores in patterns:
         if elemento not in lista_sensores_avaliados:
             lista_sensores_avaliados.append(elemento)
 
-
-eventos = AprioriAll(dados_dia, 1,large1) #patterns encontrados
+"""
+eventos = AprioriAll(dados_dia, 0.95,large1) #patterns encontrados
 print(eventos)
 arq_saida = open("patterns.txt", "w+")
 for sequencia_N in eventos:
@@ -485,6 +634,7 @@ for sequencia_N in eventos:
             arq_saida.write(",")
         arq_saida.write("\n")    
 arq_saida.close()
+"""
 
 init_patterns()
 lista_sensores_avaliados = []
@@ -492,6 +642,30 @@ for vetores in patterns:
     for elemento in vetores:
         if elemento not in lista_sensores_avaliados:
             lista_sensores_avaliados.append(elemento)
+
+lista_eventos = []
+for seq in patterns:
+    for sensor in seq:
+        if sensor not in lista_eventos:
+            lista_eventos.append(sensor)
+
+ultimo_dia = matrix_casa[-1][0]
+for i in range(len(matrix_casa)):
+    if matrix_casa[i][0] == ultimo_dia:
+        indice_ultimo_dia = i
+        break
+ 
+vetor_verificacao = matrix_casa[indice_ultimo_dia:].copy()
+matrix_casa_relacoes = matrix_casa[:indice_ultimo_dia]
+
+start_end_vect = start_end_time(matrix_casa_relacoes, lista_eventos)
+
+resultado,threshold_ocorrido, media, desv_pad = classificador(start_end_vect, vetor_verificacao, lista_eventos)
+
+avaliacao_anormais = []
+for avaliacao in resultado:
+    if avaliacao[-1] == "SIM":
+        avaliacao_anormais.append(avaliacao)
 print("a")
 
 
@@ -603,7 +777,7 @@ for i in range(indice, len(vetor_verificacao)):
         else:
             classificacao.append([evento_avaliado,probabilidades_eventos[indice_anormalidade][2], valores_anormais[indice_anormalidade][2],"NAO"])
 print("a")
-'''
+
 
 """
 for sensor in start_end_vect:
@@ -615,7 +789,7 @@ for sensor in start_end_vect:
 print("a")
 """
 
-'''
+
 frequencia = [0]*len(sensores)
 for elemento in dados:
     for sensor in sensores:
