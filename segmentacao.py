@@ -4,6 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import integrate
 import time
+import csv
+import pickle
 from datetime import datetime as dt
 from datetime import timedelta
 import datetime
@@ -416,10 +418,19 @@ def init_dados_acesso():
 init_dados_casa()
 init_dados_acesso()
 
+with open('Saidas/indices_transic_bin.txt',  'wb') as fileBin:
+    pickle.dump(transicoes, fileBin)
+fileBin.close()
+
+with open('Saidas/indices_transic.csv', 'w', newline='') as writeFile:
+    writer = csv.writer(writeFile)
+    writer.writerows(transicoes)
+
 ################### Extracao das features para classificacao #######################
 #indice = transicoes[3][2]
 indice = 7
 vetor = dados_casa[4:indice] 
+#fazer um FOR para toda a base
 
 print(vetor)
 
@@ -496,7 +507,7 @@ print(feature_vector_aparelho(vetor,[2,27]))
 #print(dados_casa[0][1],dados_casa[0][15])
 print(feature_tempo(vetor[0],1))
 #testa_trasicao(dados_casa,transicoes,3,limite_presenca)
-
+print("a")
 
 #for i in range(len(dias_acesso)-1):
 #	inicio = dias_acesso[i]

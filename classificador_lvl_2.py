@@ -9,20 +9,16 @@ def lerCSV(arquivo, matriz):
             matriz.append(linha.strip().split(','))
     arq.close()
 
-matriz_comodo_sensores = []
-matriz_atividades = []
 matriz_correlacao_sensores = []
 matriz_rotulos_lv1 = []
 matriz_rotulos_lv2 = []
 matriz_casa = []
 
-
 matriz_apriori = []
 with open('Saidas/AprioriAllBin.txt',  'rb') as fileBin:
     matriz_apriori = pickle.load(fileBin)
+fileBin.close()
 
-lerCSV("id_comodo_sensores.csv", matriz_comodo_sensores)
-lerCSV("atividades.csv", matriz_atividades)
 lerCSV("correlacao_sensores.csv", matriz_correlacao_sensores)
 lerCSV("Saidas/classif_results_lv1.csv", matriz_rotulos_lv1)
 lerCSV("Saidas/matrix_casa.csv", matriz_casa)
@@ -34,8 +30,8 @@ for i in range(1,len(matriz_casa)):
 
 def filtro_correl_sensores_novo():
     mtx_aux = []
-    data_inicio = '14-04-2019 00:00'
-    data_fim = '27-05-2019 23:59'
+    data_inicio = '14-04-2019 00:00' #Hardcoded adaptado para a base
+    data_fim = '27-05-2019 23:59' #Hardcoded adaptado para a base
 
     for i in range(1,len(matriz_correlacao_sensores)):
         id_sensor_1 = matriz_correlacao_sensores[i][0]
@@ -134,14 +130,23 @@ def filtro_correl_sensores_aprioriall():
 
     return saida
 
+def limpa_duplicatas_mtx2():
+    for i in range(len(matriz_rotulos_lv2)):
+        for j in range(i+1, len(matriz_rotulos_lv2)):
+            if matriz_rotulos_lv2[i] == matriz_rotulos_lv2[j]:
+                print("{} e {} repetidos".format(i,j))
+                matriz_rotulos_lv2.pop(j)
+                #limpa_duplicatas()
+
 # Modo de correlação pelo arquivo de configuração (usuário)
-'''
 matriz_rotulos_lv2 = filtro_correl_sensores_novo()
 
 def sortIdx(val):
     return int(val[0])
 
 matriz_rotulos_lv2.sort(key=sortIdx)
+
+#limpa_duplicatas_mtx2()
 
 with open('Saidas/classif_results_lv2.csv', 'w', newline='') as writeFile:
     writer = csv.writer(writeFile)
@@ -159,3 +164,4 @@ with open('Saidas/match_apriori.csv', 'w', newline='') as writeFile:
     writer.writerows(saida_match_apriori)
 
 writeFile.close()
+'''

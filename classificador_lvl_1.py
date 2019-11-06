@@ -11,7 +11,7 @@ print("Segmentação em andamento")
 indices_sensores = segmentacao.indices_sensores
 dados_casa = segmentacao.dados_casa
 dados_acesso = segmentacao.dados_acesso
-transicoes = segmentacao.transicoes
+transicoes = segmentacao.transicoes #Substituir esse e os outros por serialização
 print("Segmentação finalizada")
 
 #########################################
@@ -70,6 +70,7 @@ def filtro_atv_comodo(id_atividade, id_sensor_comodo, valor_sensor):
                         
     return False
 
+#ESTA FUNÇÃO SOMENTE TEM UTILIDADE NO CLASSIF NIVEL 2
 def filtro_correl_sensores(id_linha_base, id_atividade, id_sensor_comodo):
     result = True
     
