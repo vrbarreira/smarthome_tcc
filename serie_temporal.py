@@ -422,7 +422,7 @@ def classificador(start_end_vect, vetor_verificacao, lista_eventos):
 
     eventos_ocorridos = []
     indice = 0
-    classificacao = [["evento", "probabilidade do evento", "valor de anormalidade","detectada anomalia"]]
+    classificacao = [["evento","timestamp", "probabilidade do evento", "valor de anormalidade","detectada anomalia"]]
     while True:
         sensor_avaliado = vetor_verificacao[indice][-2]
         if sensor_avaliado in lista_eventos and sensor_avaliado not in eventos_ocorridos and vetor_verificacao[indice][-1] == "ON":
@@ -431,10 +431,11 @@ def classificador(start_end_vect, vetor_verificacao, lista_eventos):
             evento_avaliado = eventos_ocorridos[-1]
             evento_ocorrido = eventos_ocorridos[-2]
             indice_anormalidade = busca_probabilidade(lista_eventos.index(evento_avaliado),lista_eventos.index(evento_ocorrido),valores_anormais_busca) # indice no qual se encontra a probabilidade buscada
+            timeStamp = vetor_verificacao[indice][2]
             if valores_anormais[indice_anormalidade][2] >= threshold_ocorrido:
-                classificacao.append([evento_avaliado,probabilidades_eventos[indice_anormalidade][2], valores_anormais[indice_anormalidade][2], "SIM"])
+                classificacao.append([evento_avaliado,timeStamp,probabilidades_eventos[indice_anormalidade][2], valores_anormais[indice_anormalidade][2], "SIM"])
             else:
-                classificacao.append([evento_avaliado,probabilidades_eventos[indice_anormalidade][2], valores_anormais[indice_anormalidade][2],"NAO"])
+                classificacao.append([evento_avaliado,timeStamp,probabilidades_eventos[indice_anormalidade][2], valores_anormais[indice_anormalidade][2],"NAO"])
             break
         indice +=1
         if indice == len(vetor_verificacao):
@@ -443,15 +444,16 @@ def classificador(start_end_vect, vetor_verificacao, lista_eventos):
 
     for i in range(indice, len(vetor_verificacao)):
         sensor_avaliado = vetor_verificacao[i][-2]
-        if sensor_avaliado in lista_eventos and sensor_avaliado != eventos_ocorridos[-1] and vetor_verificacao[indice][-1] == "ON":
+        if sensor_avaliado in lista_eventos and sensor_avaliado != eventos_ocorridos[-1] and vetor_verificacao[i][-1] == "ON":
             eventos_ocorridos.append(sensor_avaliado)
             evento_avaliado = eventos_ocorridos[-1]
             evento_ocorrido = eventos_ocorridos[-2]
+            timeStamp = vetor_verificacao[i][2]
             indice_anormalidade = busca_probabilidade(lista_eventos.index(evento_avaliado),lista_eventos.index(evento_ocorrido),valores_anormais_busca) # indice no qual se encontra a probabilidade buscada
             if valores_anormais[indice_anormalidade][2] >= threshold_ocorrido:
-                classificacao.append([evento_avaliado,probabilidades_eventos[indice_anormalidade][2], valores_anormais[indice_anormalidade][2], "SIM"])
+                classificacao.append([evento_avaliado,timeStamp,probabilidades_eventos[indice_anormalidade][2], valores_anormais[indice_anormalidade][2], "SIM"])
             else:
-                classificacao.append([evento_avaliado,probabilidades_eventos[indice_anormalidade][2], valores_anormais[indice_anormalidade][2],"NAO"])
+                classificacao.append([evento_avaliado,timeStamp,probabilidades_eventos[indice_anormalidade][2], valores_anormais[indice_anormalidade][2],"NAO"])
     return classificacao,threshold_ocorrido, media, desv_pad
 
 def prob_uniao(eventos_ocorridos, probabilidades_eventos, lista_probabilidade):
@@ -479,9 +481,34 @@ my_set = [False]*len(conjunto)
 gera_subconjunto(0,my_set,conjunto,coisa)
 print("a")
 
+def probabilidade_eventoX(probabilidade_ocorridos, eventos_ocorridos,lista_eventos,valores_anormais_busca, probabilidades_eventos):
+    evento_ocorrido_A = eventos_ocorridos[-3]
+    P_A = probabilidade_ocorridos[-2]
+    evento_ocorrido_B = eventos_ocorridos[-2]
+    P_B = probabilidade_ocorridos[-1]
+    evento_avaliado = eventos_ocorridos[-1]
+    indice_XA = busca_probabilidade(lista_eventos.index(evento_avaliado),lista_eventos.index(evento_ocorrido_A),valores_anormais_busca) # indice no qual se encontra a probabilidade buscada
+    indice_XB = busca_probabilidade(lista_eventos.index(evento_avaliado),lista_eventos.index(evento_ocorrido_B),valores_anormais_busca) # indice no qual se encontra a probabilidade buscada
+    if indice_XA != None:
+        indice_AB = busca_probabilidade(lista_eventos.index(evento_ocorrido_A),lista_eventos.index(evento_ocorrido_B),valores_anormais_busca) # indice no qual se encontra a probabilidade buscada
+        P_XA = probabilidades_eventos[indice_XA][2]
+        P_XB = probabilidades_eventos[indice_XB][2]
+        P_AB = probabilidades_eventos[indice_AB][2]
+        P_AB_B = P_AB * P_B
+        probabilidade_X = (P_XA * P_A + P_XB * P_B)/ (P_A + P_B - P_AB_B)
+    else: 
+        probabilidade_X = probabilidades_eventos[indice_XB][2]
+    if probabilidade_X > 1.0:
+        probabilidade_X = 1.0
+    probabilidade_ocorridos.append(probabilidade_X)
+    return probabilidade_X
+
+probabilidades_eventos = []
+
 def classificador2_0(start_end_vect, vetor_verificacao, lista_eventos):
     relacoes = []
     numero_ocorrencias = []
+    global probabilidades_eventos
     for elemento in start_end_vect:
         relacoes.append([elemento[0][1]])
         numero_ocorrencias.append(len(elemento))
@@ -514,10 +541,47 @@ def classificador2_0(start_end_vect, vetor_verificacao, lista_eventos):
         if dados[ind_ultimo_dia][0] == ultimo_dia:
             break
 
-
     eventos_ocorridos = []
+    probabilidade_ocorridos =[] # probabilidade do evento ocorrer para os eventos ocorridos
     indice = 0
-    classificacao = [["evento", "probabilidade do evento", "valor de anormalidade","detectada anomalia"]]
+    classificacao = [["evento","timestamp", "probabilidade do evento", "valor de anormalidade","detectada anomalia"]]
+    entra = False
+    while len(eventos_ocorridos) < 3:
+        sensor_avaliado = vetor_verificacao[indice][-2]
+        if sensor_avaliado in lista_eventos and len(eventos_ocorridos) == 0 and vetor_verificacao[indice][-1] == "ON":
+            eventos_ocorridos.append(sensor_avaliado)
+        elif sensor_avaliado in lista_eventos and sensor_avaliado != eventos_ocorridos[-1] and vetor_verificacao[indice][-1] == "ON":
+            eventos_ocorridos.append(sensor_avaliado)
+            entra = True
+        if len(eventos_ocorridos) >= 2 and entra:
+            evento_avaliado = eventos_ocorridos[-1]
+            evento_ocorrido = eventos_ocorridos[-2]
+            indice_anormalidade = busca_probabilidade(lista_eventos.index(evento_avaliado),lista_eventos.index(evento_ocorrido),valores_anormais_busca) # indice no qual se encontra a probabilidade buscada
+            timeStamp = vetor_verificacao[indice][2]
+            if valores_anormais[indice_anormalidade][2] >= threshold_ocorrido:
+                classificacao.append([evento_avaliado,timeStamp,probabilidades_eventos[indice_anormalidade][2], valores_anormais[indice_anormalidade][2], "SIM"])
+                probabilidade_ocorridos.append(probabilidades_eventos[indice_anormalidade][2])
+            else:
+                classificacao.append([evento_avaliado,timeStamp,probabilidades_eventos[indice_anormalidade][2], valores_anormais[indice_anormalidade][2],"NAO"])
+                probabilidade_ocorridos.append(probabilidades_eventos[indice_anormalidade][2])
+            entra = False
+        indice +=1
+        if indice == len(vetor_verificacao):
+            print("nao occoreram eventos frequentes")
+            break
+    for i in range(indice, len(vetor_verificacao)):
+        sensor_avaliado = vetor_verificacao[i][-2]
+        if sensor_avaliado in lista_eventos and sensor_avaliado != eventos_ocorridos[-1] and vetor_verificacao[i][-1] == "ON":
+            eventos_ocorridos.append(sensor_avaliado)
+            P_X = probabilidade_eventoX(probabilidade_ocorridos, eventos_ocorridos,lista_eventos,valores_anormais_busca, probabilidades_eventos)
+            timeStamp = vetor_verificacao[indice][2]
+            if (1 - P_X) >= threshold_ocorrido:
+                classificacao.append([sensor_avaliado,timeStamp, P_X, 1 - P_X, "SIM"])
+            else:
+                classificacao.append([sensor_avaliado,timeStamp, P_X, 1 - P_X,"NAO"])
+    return classificacao,threshold_ocorrido, media, desv_pad
+
+            
 
 ########################################## dados hayashi ##########################################
 
@@ -660,12 +724,45 @@ matrix_casa_relacoes = matrix_casa[:indice_ultimo_dia]
 
 start_end_vect = start_end_time(matrix_casa_relacoes, lista_eventos)
 
-resultado,threshold_ocorrido, media, desv_pad = classificador(start_end_vect, vetor_verificacao, lista_eventos)
+'''
+resultado1,threshold_ocorrido, media, desv_pad = classificador(start_end_vect, vetor_verificacao, lista_eventos)
+resultado2,threshold_ocorrido, media, desv_pad = classificador2_0(start_end_vect, vetor_verificacao, lista_eventos)
 
-avaliacao_anormais = []
-for avaliacao in resultado:
+prob_result1 = []
+prob_result2 = []
+for elemento in resultado1[1:]:
+    prob_result1.append(elemento[2])
+for elemento in resultado2[1:]:
+    prob_result2.append(elemento[2])
+
+desv_pad1 = np.std(prob_result1)
+media1 = np.mean(prob_result1)
+desv_pad2 = np.std(prob_result2)
+media2 = np.mean(prob_result2)
+
+avaliacao_anormais1 = []
+avaliacao_anormais2 = []
+r = []
+for elemento in probabilidades_eventos:
+    if elemento[-1] < 0.3:
+        menor_prob.append(elemento)
+for avaliacao in resultado1:
     if avaliacao[-1] == "SIM":
-        avaliacao_anormais.append(avaliacao)
+        avaliacao_anormais1.append(avaliacao)
+for avaliacao in resultado2:
+    if avaliacao[-1] == "SIM":
+        avaliacao_anormais2.append(avaliacao)
+'''
+vetor_teste = []
+vetor_teste.append(vetor_verificacao[0])
+dia = vetor_teste[0][0]
+hora = vetor_teste[0][1]
+data = vetor_teste[0][2]
+vetor_teste.append([dia,hora,data,'pres_lavanderia','ON'])
+vetor_teste.append([dia,hora,data,'luz_corredor','ON'])
+vetor_teste.append([dia,hora,data,'pres_quarto3','ON'])
+resultado,threshold_ocorrido, media, desv_pad = classificador2_0(start_end_vect, vetor_teste, lista_eventos)
+
 print("a")
 
 
