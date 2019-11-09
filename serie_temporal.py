@@ -724,7 +724,7 @@ matrix_casa_relacoes = matrix_casa[:indice_ultimo_dia]
 
 start_end_vect = start_end_time(matrix_casa_relacoes, lista_eventos)
 
-'''
+
 resultado1,threshold_ocorrido, media, desv_pad = classificador(start_end_vect, vetor_verificacao, lista_eventos)
 resultado2,threshold_ocorrido, media, desv_pad = classificador2_0(start_end_vect, vetor_verificacao, lista_eventos)
 
@@ -742,7 +742,7 @@ media2 = np.mean(prob_result2)
 
 avaliacao_anormais1 = []
 avaliacao_anormais2 = []
-r = []
+menor_prob = []
 for elemento in probabilidades_eventos:
     if elemento[-1] < 0.3:
         menor_prob.append(elemento)
@@ -762,7 +762,7 @@ vetor_teste.append([dia,hora,data,'pres_lavanderia','ON'])
 vetor_teste.append([dia,hora,data,'luz_corredor','ON'])
 vetor_teste.append([dia,hora,data,'pres_quarto3','ON'])
 resultado,threshold_ocorrido, media, desv_pad = classificador2_0(start_end_vect, vetor_teste, lista_eventos)
-
+'''
 print("a")
 
 

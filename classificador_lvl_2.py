@@ -36,6 +36,7 @@ def filtro_correl_sensores_novo():
     for i in range(1,len(matriz_correlacao_sensores)):
         id_sensor_1 = matriz_correlacao_sensores[i][0]
         id_sensor_2 = matriz_correlacao_sensores[i][1]
+        id_atividade = matriz_correlacao_sensores[i][2]
 
         for j in range(1,len(matriz_rotulos_lv1)):
 
@@ -43,21 +44,24 @@ def filtro_correl_sensores_novo():
                 dt_aux = dt.strptime(matriz_rotulos_lv1[j][1], '%Y-%m-%d %H:%M')
 
                 if dt_aux >= dt.strptime(data_inicio, '%d-%m-%Y %H:%M') and dt_aux <= dt.strptime(data_fim, '%d-%m-%Y %H:%M'):
-                    k = 1
-                    while matriz_rotulos_lv1[j][0] == matriz_rotulos_lv1[j+k][0]:
-                        if matriz_rotulos_lv1[j][0] == matriz_rotulos_lv1[j+k][0]:
-                            teste1 = matriz_rotulos_lv1[j][2] == id_sensor_1 and matriz_rotulos_lv1[j+k][2] == id_sensor_2
-                            teste2 = matriz_rotulos_lv1[j][4] == matriz_correlacao_sensores[i][2] and matriz_rotulos_lv1[j+k][4] == matriz_correlacao_sensores[i][2]
+                    
+                    if id_sensor_2 == '' and matriz_rotulos_lv1[j][2] == id_sensor_1 and matriz_rotulos_lv1[j][4] == id_atividade:
+                        mtx_aux.append(matriz_rotulos_lv1[j])
+                    else:
+                        k = 1
+                        while matriz_rotulos_lv1[j][0] == matriz_rotulos_lv1[j+k][0]:
+                            if matriz_rotulos_lv1[j][0] == matriz_rotulos_lv1[j+k][0]:
+                                teste1 = matriz_rotulos_lv1[j][2] == id_sensor_1 and matriz_rotulos_lv1[j+k][2] == id_sensor_2
+                                teste2 = matriz_rotulos_lv1[j][4] == id_atividade and matriz_rotulos_lv1[j+k][4] == id_atividade
+                                
+                                if teste1 and teste2:
+                                    mtx_aux.append(matriz_rotulos_lv1[j])
+                                    mtx_aux.append(matriz_rotulos_lv1[j+k])                          
                             
-                            if teste1 and teste2:
-                                mtx_aux.append(matriz_rotulos_lv1[j])
-                                mtx_aux.append(matriz_rotulos_lv1[j+k])
-                        
-                        
-                        if j+k < len(matriz_rotulos_lv1)-1:
-                            k = k+1
-                        else:
-                            break
+                            if j+k < len(matriz_rotulos_lv1)-1:
+                                k = k+1
+                            else:
+                                break
         
     return mtx_aux
 

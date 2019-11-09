@@ -1,14 +1,14 @@
 id_atividade,desc_atividade,periodo_dia,hora_1,hora_2,categ_dia,id_comodo,tipo_sensor,valor_sensor
 1,Acordar (dia util),1,05:00,06:30,1,0,,
 2,Acordar (fds),2,07:30,08:30,2,0,,
-3,Entrada,1,,,0,1,,
-4,Entrada,2,,,0,1,,
-5,Entrada,3,,,0,1,,
-6,Entrada,4,,,0,1,,
-7,Saída,1,,,0,1,,
-8,Saída,2,,,0,1,,
-9,Saída,3,,,0,1,,
-10,Saída,4,,,0,1,,
+3,Entrada (madrugada),1,,,0,1,,
+4,Entrada (manhã),2,,,0,1,,
+5,Entrada (tarde),3,,,0,1,,
+6,Entrada (noite),4,,,0,1,,
+7,Saída (madrugada),1,,,0,1,,
+8,Saída (manhã),2,,,0,1,,
+9,Saída (tarde),3,,,0,1,,
+10,Saída (noite),4,,,0,1,,
 11,Cozinha (madrugada),1,,,0,4,1,250
 12,Cozinha (manhã),2,,,0,4,1,250
 13,Cozinha (tarde),3,,,0,4,1,250
@@ -17,8 +17,8 @@ id_atividade,desc_atividade,periodo_dia,hora_1,hora_2,categ_dia,id_comodo,tipo_s
 16,Lazer sala (manhã),2,,,0,3,1,250
 17,Lazer sala (tarde),3,,,0,3,1,250
 18,Lazer sala (noite),4,,,0,3,1,250
-19,Assistir TV,1,,,0,3,,
-20,Assistir TV,2,,,0,3,,
-21,Assistir TV,3,,,0,3,,
-22,Assistir TV,4,,,0,3,,
+19,Assistir TV (madrugada),1,,,0,3,,
+20,Assistir TV (manhã),2,,,0,3,,
+21,Assistir TV (tarde),3,,,0,3,,
+22,Assistir TV (noite),4,,,0,3,,
 23,Dormir,1,01:00,02:00,0,0,,

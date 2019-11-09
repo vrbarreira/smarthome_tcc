@@ -1,7 +1,18 @@
 from datetime import datetime as dt
 import csv
 import pickle
+import datetime
 
+dias_da_semana = [
+    'Segunda-feira',
+    'Terça-feira',
+    'Quarta-feira',
+    'Quinta-Feira',
+    'Sexta-feira',
+    'Sábado',
+    'Domingo'
+]
+dict_transicoes = {}
 dados_casa = []
 matriz_rotulos_lv2 = []
 
@@ -34,7 +45,7 @@ def feature_vector_aparelho(vetor, vetor_col):
 
 	for aparelho in vetor:
 		for indice in vetor_col:
-			if aparelho[indice] == 1:
+			if aparelho[indice] == '1':
 				tempo_ligado[indice] += 1
 			if aparelho[indice] != estado[indice]:
 				transicao_on_off[indice] += 1 
@@ -86,7 +97,11 @@ with open('Saidas/indices_transic_bin.txt',  'rb') as fileBin:
 fileBin.close()
 
 for sensor in transicoes:
+    sensor.pop()
     sensor.pop(1)
+
+for i in range(len(dados_casa)):
+    if i > 0: dict_transicoes[dados_casa[i][0]] = i
 
 def add_features():
     vetor = []
@@ -126,8 +141,15 @@ def add_features():
                     return
 
                 for k in range(1, len(transicoes[j])-1):
-                    if transicoes[j][k] == int(matriz_rotulos_lv2[i][0]):
-                        vetor = dados_casa[transicoes[j][k]:transicoes[j][k+1]]
+                    if transicoes[j][k] == int(matriz_rotulos_lv2[i][0]):                       
+                        idx_vec_inicio = dict_transicoes[str(transicoes[j][k])]
+                        idx_vec_fim = dict_transicoes[str(transicoes[j][k+1])]
+
+                        #if idx_vec_fim == len(dados_casa): idx_vec_fim = idx_vec_fim - 1
+                        
+                        vetor = dados_casa[idx_vec_inicio:idx_vec_fim]
+                        
+                        hora_inicio, dia_semana, dia_data, periodo, fim_semana = feature_tempo(vetor[0], 1)
 
                         if tipo == 1:
                             vec_on_off, vec_tempo_ligado = feature_vector_aparelho(vetor,[sensor_luz])
@@ -140,17 +162,35 @@ def add_features():
                         elif tipo == 3:
                             vec_on_off, vec_tempo_ligado = feature_vector_aparelho(vetor,[sensor_luz,sensor_presenca,sensor_aparelho])
                             lig_desl_luz, lig_desl_presenca, lig_desl_aparelho = vec_on_off[sensor_luz], vec_on_off[sensor_presenca], vec_on_off[sensor_aparelho]
-                            tempo_lig_luz, tempo_lig_presenca, tempo_lig_aparelho = vec_tempo_ligado[sensor_luz], vec_tempo_ligado[sensor_presenca], vec_tempo_ligado[tempo_lig_aparelho]
+                            tempo_lig_luz, tempo_lig_presenca, tempo_lig_aparelho = vec_tempo_ligado[sensor_luz], vec_tempo_ligado[sensor_presenca], vec_tempo_ligado[sensor_aparelho]
                         
-                        mtx_features.append(matriz_rotulos_lv2[i][:4] + [lig_desl_luz] + [lig_desl_aparelho] +
-                            [tempo_lig_luz] + [tempo_lig_aparelho] + matriz_rotulos_lv2[i][4:])
+                        mtx_features.append(matriz_rotulos_lv2[i][:2] + [str(hora_inicio), periodo, str(fim_semana)] + matriz_rotulos_lv2[i][2:4] + 
+                            [lig_desl_luz,lig_desl_aparelho,tempo_lig_luz,tempo_lig_aparelho] + matriz_rotulos_lv2[i][4:])
     
     return mtx_features
+
+def vetor_indices(transic_inicio, transic_fim):
+    vec_aux = []
+    
+    iniciar = False
+    finalizar = False
+    for i in range(1,len(dados_casa)):
+        if dados_casa[i][0] == transic_inicio:
+            iniciar = True
+        elif dados_casa[i][0] == transic_fim:
+            finalizar = True
+        
+        if iniciar:
+            vec_aux.append(dados_casa[i])
+        if finalizar:
+            break
+
+    return vec_aux
 
 mtx_classif_features = add_features()
 
 with open('Saidas/features_random_forest.csv', 'w', newline='') as writeFile:
     writer = csv.writer(writeFile)
-    writer.writerow(['Id Home', 'Timestamp', 'Sensor Comodo', 'Comodo', 
+    writer.writerow(['Id Home', 'Timestamp', 'Horário', 'Período', 'Fim de Semana','Sensor Comodo', 'Comodo', 
         'lig_desl_luz','lig_desl_aparelho','tempo_lig_luz','tempo_lig_aparelho','Id Atividade', 'Atividade'])
     writer.writerows(mtx_classif_features)
