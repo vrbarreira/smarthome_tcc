@@ -164,7 +164,7 @@ def add_features():
                             lig_desl_luz, lig_desl_presenca, lig_desl_aparelho = vec_on_off[sensor_luz], vec_on_off[sensor_presenca], vec_on_off[sensor_aparelho]
                             tempo_lig_luz, tempo_lig_presenca, tempo_lig_aparelho = vec_tempo_ligado[sensor_luz], vec_tempo_ligado[sensor_presenca], vec_tempo_ligado[sensor_aparelho]
                         
-                        mtx_features.append(matriz_rotulos_lv2[i][:2] + [str(hora_inicio), periodo, str(fim_semana)] + matriz_rotulos_lv2[i][2:4] + 
+                        mtx_features.append(matriz_rotulos_lv2[i][:2] + [str(hora_inicio.hour), str(hora_inicio.minute), periodo, str(fim_semana)] + matriz_rotulos_lv2[i][2:4] + 
                             [lig_desl_luz,lig_desl_aparelho,tempo_lig_luz,tempo_lig_aparelho] + matriz_rotulos_lv2[i][4:])
     
     return mtx_features
@@ -191,6 +191,6 @@ mtx_classif_features = add_features()
 
 with open('Saidas/features_random_forest.csv', 'w', newline='') as writeFile:
     writer = csv.writer(writeFile)
-    writer.writerow(['Id Home', 'Timestamp', 'Horário', 'Período', 'Fim de Semana','Sensor Comodo', 'Comodo', 
+    writer.writerow(['Id Home', 'Timestamp', 'Hora', 'Minuto', 'Periodo', 'Fim de Semana','Sensor Comodo', 'Comodo', 
         'lig_desl_luz','lig_desl_aparelho','tempo_lig_luz','tempo_lig_aparelho','Id Atividade', 'Atividade'])
     writer.writerows(mtx_classif_features)

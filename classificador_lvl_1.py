@@ -40,6 +40,7 @@ def filtro_periodo_dia(timestamp, id_periodo_dia, hora1, hora2, categ_dia):
     if (dt_aux.weekday() == 5 or dt_aux.weekday() == 6) and categ_dia != '2' and categ_dia != '0':
         return False
     
+    '''
     if id_periodo_dia == '1' and (dt_aux.time() >= dt.strptime("00:00",'%H:%M').time()) and (dt_aux.time() < dt.strptime("06:00",'%H:%M').time()):
         return True
     
@@ -51,8 +52,10 @@ def filtro_periodo_dia(timestamp, id_periodo_dia, hora1, hora2, categ_dia):
     
     if id_periodo_dia == '4' and dt_aux.time() >= dt.strptime("18:00",'%H:%M').time() and dt_aux.time() <= dt.strptime("23:59",'%H:%M').time():
         return True
+    '''
     
-    return False
+    #return False
+    return True
 
 def filtro_atv_comodo(id_atividade, id_sensor_comodo, valor_sensor):
     for i in range(1,len(matriz_atividades)):
@@ -69,31 +72,6 @@ def filtro_atv_comodo(id_atividade, id_sensor_comodo, valor_sensor):
                         return True
                         
     return False
-
-#ESTA FUNÇÃO SOMENTE TEM UTILIDADE NO CLASSIF NIVEL 2
-def filtro_correl_sensores(id_linha_base, id_atividade, id_sensor_comodo):
-    result = True
-    
-    for i in range(1,len(matriz_correlacao_sensores)):
-        if matriz_correlacao_sensores[i][2] == id_atividade:
-            id_sensor_1 = int(matriz_correlacao_sensores[i][0])
-            id_sensor_2 = int(matriz_correlacao_sensores[i][1])
-            
-            '''
-            tipo_1 = matriz_correlacao_sensores[i][3]
-            tipo_2 = matriz_correlacao_sensores[i][4]
-            valor_1 = int(matriz_correlacao_sensores[i][5])
-            valor_2 = int(matriz_correlacao_sensores[i][6])
-            '''
-
-            #teste_1 = (tipo_1 == '1' and int(dados_casa[id_linha_base][id_sensor_1]) <= valor_1) or (tipo_1 == '2' and int(dados_casa[id_linha_base][id_sensor_1]) == valor_1)    
-            #teste_2 = (tipo_2 == '1' and int(dados_casa[id_linha_base][id_sensor_2]) <= valor_2) or (tipo_2 == '2' and int(dados_casa[id_linha_base][id_sensor_2]) == valor_2)
-
-            #result = result and teste_1 and teste_2
-
-            if not result: break
-
-    return result
 
 indices_transicoes = []
 matriz_comodo_sensores = []
