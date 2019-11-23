@@ -257,7 +257,7 @@ def init_dados_casa():
 	lineSplit = line.split(",") #separa os campos do cabeçalho num vetor
 	lineSplit[-1] = lineSplit[-1][:-1]
 	dados_casa.append(lineSplit)
-
+	time_interval =  timedelta(minutes= 15) #configura o tamanho da janela
 	#Tratamento dos dados de sensores
 	for line in arquivo:
 		lineSplit = line.split(",")
@@ -266,6 +266,7 @@ def init_dados_casa():
 	arquivo.close()
 	#Identificação de transições (escada, aquario, banho, presença)
 	add_transicao = True
+	add_janela = False
 	for j in indices_sensores: 
 		transicao_col = [j]
 		acesa = dados_casa[1][j] #indica se a luz esta acesa ou nao
@@ -273,6 +274,7 @@ def init_dados_casa():
 			add_transicao = False
 			if dados_casa[1][j] < limite_presenca:
 				presente = True
+				start_time_interval =  dt.strptime(dados_casa[1][1][1:-1], '%Y-%m-%d %H:%M')
 			else:
 				presente = False
 		
@@ -285,29 +287,33 @@ def init_dados_casa():
 					#if dados_casa[i][j] <= dados_casa[i+k][j]:  
 						#add_transicao = False
 						#break
-				
+				'''
 				if j == id_pres_lavanderia and int(dados_casa[i][0]) >= 7332:
 					a = dados_casa[i][j]
 					b = dados_casa[i+1][j]
 					c = dados_casa[i][0]
 					d = dados_casa[i][j] > dados_casa[i+1][j]
 					e = dados_casa[i+1][j] < limite_presenca
-				
+				'''
 				if hora_casa_seguinte - hora_casa_atual > intervalo_leitura: #verifica se houve uma quebra na continuidade da coleta
-					a = dados_casa[i][j]
-					b = dados_casa[i+1][j]
-					c = dados_casa[i][0]
+					#a = dados_casa[i][j]
+					#b = dados_casa[i+1][j]
+					#c = dados_casa[i][0]
 					if dados_casa[i+1][j] < limite_presenca:
 						presente = True
+						start_time_interval =  dt.strptime(dados_casa[i][1][1:-1], '%Y-%m-%d %H:%M')
 					else:
 						presente = False
 					add_transicao = True
 				elif (dados_casa[i][j] > dados_casa[i+1][j] or dados_casa[i+1][j] < limite_presenca) and not(presente): #verifica se na linha seguinte o sensor de presenca resetou
 					presente = True
 					add_transicao = True
+					start_time_interval =  dt.strptime(dados_casa[i][1][1:-1], '%Y-%m-%d %H:%M')
 				elif presente and (dados_casa[i+1][j] >= limite_presenca):# verifica se na linha seguinte a pessoa esta ausente
 					presente = False
 					add_transicao = True
+				elif (hora_casa_atual - start_time_interval) > time_interval and presente:
+						add_janela = True
 				
 				
 			else: #luz_escada, luz_aquario, luz_banho (Cômodos s/ sensor de presença)
@@ -338,12 +344,13 @@ def init_dados_casa():
 								
 						if not(add_transicao):
 							break
-			if add_transicao:
+			if add_transicao or add_janela:
 				if j<= 14:
 					if dados_casa[i+1][j] == 1:
 						acesa = True
 					else:
 						acesa = False
+				add_janela = False
 				transicao_col.append(i+1)
 
 			if j <= 14:
