@@ -3,6 +3,7 @@ from datetime import time
 from datetime import timedelta
 from operator import itemgetter 
 from math import ceil
+from random import randint
 import numpy as np
 
 dados = []
@@ -526,7 +527,7 @@ def classificador2_0(start_end_vect, vetor_verificacao, lista_eventos):
     probabilidades_eventos = probabilidade(relacoes,numero_ocorrencias) #contem a probabilidades dos eventos Y ocorrerem dado q ocorreu um evento X
     valores_anormais = [] #valor de anormalidade de um evento Y dado que X ocorreu
     valores_anormais_busca = []# vetor auxiliar para buscar o valor de anormalidade de Y
-    probabilidades_valores = []# vetor que contem apenas as probabilidades do vetor "probabilidades_eventos"
+    probabilidades_valores = []# vetor que contem apenas as probabilidades do vetor "valores_anormais"
     
     for elemento in probabilidades_eventos:
         valores_anormais.append([elemento[0],elemento[1],1-elemento[2]])
@@ -548,8 +549,9 @@ def classificador2_0(start_end_vect, vetor_verificacao, lista_eventos):
     entra = False
     while len(eventos_ocorridos) < 3:
         sensor_avaliado = vetor_verificacao[indice][-2]
-        if sensor_avaliado in lista_eventos and len(eventos_ocorridos) == 0 and vetor_verificacao[indice][-1] == "ON":
-            eventos_ocorridos.append(sensor_avaliado)
+        if len(eventos_ocorridos) == 0:
+            if sensor_avaliado in lista_eventos and vetor_verificacao[indice][-1] == "ON":
+                eventos_ocorridos.append(sensor_avaliado)
         elif sensor_avaliado in lista_eventos and sensor_avaliado != eventos_ocorridos[-1] and vetor_verificacao[indice][-1] == "ON":
             eventos_ocorridos.append(sensor_avaliado)
             entra = True
@@ -582,7 +584,22 @@ def classificador2_0(start_end_vect, vetor_verificacao, lista_eventos):
     return classificacao,threshold_ocorrido, media, desv_pad
 
             
-
+def dia_teste(matrix_casa, dia):
+    inicio_encontrado = False
+    indice_inicial = 0
+    indice_final = len(matrix_casa)
+    for i in range(len(matrix_casa)):
+        if matrix_casa[i][0] == dia and not(inicio_encontrado):
+            indice_inicial = i
+            inicio_encontrado = True
+        elif matrix_casa[i][0] != dia and inicio_encontrado:
+            indice_final = i
+            break
+    treino = matrix_casa.copy()
+    teste = matrix_casa[indice_inicial:indice_final]
+    del treino[indice_inicial:indice_final]
+    return treino, teste
+    
 ########################################## dados hayashi ##########################################
 
 patterns = []
@@ -594,74 +611,82 @@ def init_patterns():
         patterns.append(linesplit[:-1])
     arquivo_patterns.close()
 
-dados_casa = [] #dados da casa
-matrix_casa = [] #dados da casa tratados para usar data mining
-arquivo = open("home.csv", "r")
-line = arquivo.readline()
-lineSplit = line.split(",") 
-lineSplit[-1] = lineSplit[-1][:-1]
-dados_casa.append(lineSplit)
-
-
-for line in arquivo:
-    lineSplit = line.split(",")
-    lineSplit[2:] =  list(map(int,lineSplit[2:])) 
+def read_arq(name, matrix_casa, dados_casa):
+    arquivo = open(name, "r")
+    lines = arquivo.readlines()
+    lineSplit = lines[0].split(",") 
+    lineSplit[-1] = lineSplit[-1][:-1]
     dados_casa.append(lineSplit)
-arquivo.close()
-large1 = []
-flag_presenca = [False]* len(dados_casa[0])
-for coluna in range(2,len(dados_casa[0])):
-    dia = datetime.strptime(dados_casa[1][1][1:-1], "%Y-%m-%d %H:%M") # hora atual para verificar a ordem
-    hora = time(dia.hour,dia.minute)
-    valor_atual = dados_casa[1][coluna]
-    if coluna > 14 and coluna < 24 and coluna != 19:
-        if valor_atual < 100:
-            matrix_casa.append([dia.date(),hora,dados_casa[1][1],dados_casa[0][coluna],"ON" ])
-            flag_presenca[coluna] = True
-        elif valor_atual > 100:
-            matrix_casa.append([dia.date(),hora,dados_casa[1][1],dados_casa[0][coluna],"OFF" ])
-            flag_presenca[coluna] = False
-        large1.append(dados_casa[0][coluna])
-    elif coluna != 19:
-        if valor_atual == 0:
-            matrix_casa.append([dia.date(),hora,dados_casa[1][1],dados_casa[0][coluna], "OFF"])
-        elif valor_atual == 1:
-            matrix_casa.append([dia.date(),hora,dados_casa[1][1], dados_casa[0][coluna], "ON"])
-        else:
-            print("Erro")
-            break
-        large1.append(dados_casa[0][coluna])
-for linha in range(2,len(dados_casa)-1):
-    for coluna in range(2, len(dados_casa[0])):
-        dia = datetime.strptime(dados_casa[linha][1][1:-1], "%Y-%m-%d %H:%M") # hora atual para verificar a ordem
+
+
+    for line in lines[1:]:
+        lineSplit = line.split(",")
+        lineSplit[2:] =  list(map(int,lineSplit[2:])) 
+        dados_casa.append(lineSplit)
+    arquivo.close()
+    #large1 = []
+    flag_presenca = [False]* len(dados_casa[0])
+    for coluna in range(2,len(dados_casa[0])):
+        #dia = datetime.strptime(dados_casa[1][1][1:-1], "%Y-%m-%d %H:%M") # hora atual para verificar a ordem
+        dia = datetime.strptime(dados_casa[1][1], "%Y-%m-%d %H:%M") # hora atual para verificar a ordem
         hora = time(dia.hour,dia.minute)
+        valor_atual = dados_casa[1][coluna]
         if coluna > 14 and coluna < 24 and coluna != 19:
-            valor_atual = dados_casa[linha][coluna]
-            prox_valor = dados_casa[linha + 1][coluna]
-            if prox_valor < valor_atual and valor_atual > 100 and not flag_presenca[coluna]:
-                matrix_casa.append([dia.date(),hora,dados_casa[linha][1],dados_casa[0][coluna],"ON" ])
+            if valor_atual < 100:
+                matrix_casa.append([dia.date(),hora,dados_casa[1][1],dados_casa[0][coluna],"ON" ])
                 flag_presenca[coluna] = True
-            elif prox_valor > valor_atual and prox_valor > 100 and valor_atual < 100  and flag_presenca[coluna]:
-                matrix_casa.append([dia.date(),hora,dados_casa[linha][1],dados_casa[0][coluna],"OFF" ])
+            elif valor_atual > 100:
+                matrix_casa.append([dia.date(),hora,dados_casa[1][1],dados_casa[0][coluna],"OFF" ])
                 flag_presenca[coluna] = False
+            #large1.append(dados_casa[0][coluna])
         elif coluna != 19:
-            valor_atual = dados_casa[linha][coluna]
-            valor_anterior = dados_casa[linha - 1][coluna]
-            if valor_atual == 0 and valor_atual != valor_anterior:
-                matrix_casa.append([dia.date(),hora,dados_casa[linha][1], dados_casa[0][coluna], "OFF"])
-            elif valor_atual == 1 and valor_atual != valor_anterior:
-                matrix_casa.append([dia.date(),hora,dados_casa[linha][1], dados_casa[0][coluna], "ON"])
-            elif valor_atual != 0 and valor_atual != 1:
+            if valor_atual == 0:
+                matrix_casa.append([dia.date(),hora,dados_casa[1][1],dados_casa[0][coluna], "OFF"])
+            elif valor_atual == 1:
+                matrix_casa.append([dia.date(),hora,dados_casa[1][1], dados_casa[0][coluna], "ON"])
+            else:
                 print("Erro")
                 break
+            #large1.append(dados_casa[0][coluna])
+    for linha in range(2,len(dados_casa)-1):
+        for coluna in range(2, len(dados_casa[0])):
+            #dia = datetime.strptime(dados_casa[linha][1][1:-1], "%Y-%m-%d %H:%M") # hora atual para verificar a ordem
+            dia = datetime.strptime(dados_casa[linha][1], "%Y-%m-%d %H:%M") # hora atual para verificar a ordem
+            hora = time(dia.hour,dia.minute)
+            if coluna > 14 and coluna < 24 and coluna != 19:
+                valor_atual = dados_casa[linha][coluna]
+                prox_valor = dados_casa[linha + 1][coluna]
+                if prox_valor < valor_atual and valor_atual > 100 and not flag_presenca[coluna]:
+                    matrix_casa.append([dia.date(),hora,dados_casa[linha][1],dados_casa[0][coluna],"ON" ])
+                    flag_presenca[coluna] = True
+                elif prox_valor > valor_atual and prox_valor > 100 and valor_atual < 100  and flag_presenca[coluna]:
+                    matrix_casa.append([dia.date(),hora,dados_casa[linha][1],dados_casa[0][coluna],"OFF" ])
+                    flag_presenca[coluna] = False
+            elif coluna != 19:
+                valor_atual = dados_casa[linha][coluna]
+                valor_anterior = dados_casa[linha - 1][coluna]
+                if valor_atual == 0 and valor_atual != valor_anterior:
+                    matrix_casa.append([dia.date(),hora,dados_casa[linha][1], dados_casa[0][coluna], "OFF"])
+                elif valor_atual == 1 and valor_atual != valor_anterior:
+                    matrix_casa.append([dia.date(),hora,dados_casa[linha][1], dados_casa[0][coluna], "ON"])
+                elif valor_atual != 0 and valor_atual != 1:
+                    print("Erro")
+                    break
+
+dados_casa = [] #dados da casa
+matrix_casa = [] #dados da casa tratados para usar na serie temporal
+
+read_arq("home_sem_aspa.csv", matrix_casa, dados_casa)
 
 dados_dia = [] # dados formatados para o datamining separados em dias
 dados_dia_aux = [] # auxilia na formatacao dos dados para o datamining
 matrix_casa_aux = [] # auxlia na separacao dos dados em dias
 matrix_casa_dia = [] # dados separados em dias
 for i in range(len(matrix_casa) -1): #verifica se os elementos estão em ordem e separa a matrix em dias
-    atual = datetime.strptime(matrix_casa[i][2][1:-1], "%Y-%m-%d %H:%M") # hora atual para verificar a ordem
-    depois = datetime.strptime(matrix_casa[i+1][2][1:-1], "%Y-%m-%d %H:%M") # hora atual + 1 para verificar a ordem
+    #atual = datetime.strptime(matrix_casa[i][2][1:-1], "%Y-%m-%d %H:%M") # hora atual para verificar a ordem
+    #depois = datetime.strptime(matrix_casa[i+1][2][1:-1], "%Y-%m-%d %H:%M") # hora atual + 1 para verificar a ordem
+    atual = datetime.strptime(matrix_casa[i][2], "%Y-%m-%d %H:%M") # hora atual para verificar a ordem
+    depois = datetime.strptime(matrix_casa[i+1][2], "%Y-%m-%d %H:%M") # hora atual + 1 para verificar a ordem
     if  matrix_casa[i][-1] == "ON":
         dados_dia_aux.append(matrix_casa[i][-2])
     matrix_casa_aux.append(matrix_casa[i])
@@ -680,13 +705,6 @@ for i in range(len(matrix_casa) -1): #verifica se os elementos estão em ordem e
     if atual > depois:
         print("erro na matrix_casa indice: ",i)
 
-init_patterns()
-lista_sensores_avaliados = []
-for vetores in patterns:
-    for elemento in vetores:
-        if elemento not in lista_sensores_avaliados:
-            lista_sensores_avaliados.append(elemento)
-
 """
 eventos = AprioriAll(dados_dia, 0.95,large1) #patterns encontrados
 print(eventos)
@@ -701,11 +719,6 @@ arq_saida.close()
 """
 
 init_patterns()
-lista_sensores_avaliados = []
-for vetores in patterns:
-    for elemento in vetores:
-        if elemento not in lista_sensores_avaliados:
-            lista_sensores_avaliados.append(elemento)
 
 lista_eventos = []
 for seq in patterns:
@@ -718,40 +731,272 @@ for i in range(len(matrix_casa)):
     if matrix_casa[i][0] == ultimo_dia:
         indice_ultimo_dia = i
         break
- 
-vetor_verificacao = matrix_casa[indice_ultimo_dia:].copy()
-matrix_casa_relacoes = matrix_casa[:indice_ultimo_dia]
+
+#vetor_verificacao = matrix_casa[indice_ultimo_dia:].copy()
+#matrix_casa_relacoes = matrix_casa[:indice_ultimo_dia]
+
+##########################################teste cenarios ############################################
+teste_invasao = []
+teste_visita = []
+
+read_arq("invasao.csv",teste_invasao,[])
+read_arq("visita.csv",teste_visita,[])
+
+matrix_casa_relacoes, vetor_verificacao= dia_teste(matrix_casa, matrix_casa[-1][0])
 
 start_end_vect = start_end_time(matrix_casa_relacoes, lista_eventos)
+'''
+vetor_teste = []
+dia = vetor_verificacao[0][0]
+hora = vetor_verificacao[0][1]
+data = vetor_verificacao[0][2]
+for elemento in vetor_verificacao:
+    if  elemento[-2] in lista_eventos:
+        evento = lista_eventos[randint(0,len(lista_eventos)-1)]
+        elemento[-2] = evento
+    vetor_teste.append(elemento)
+'''
+
+vetor_teste_N_2 = []
+dia = vetor_verificacao[0][0]
+hora = vetor_verificacao[0][1]
+data = vetor_verificacao[0][2]
+for eventoA in lista_eventos:
+    for eventoB in lista_eventos:
+        for evento_ocorrido in lista_eventos:
+            if evento_ocorrido != eventoB:
+                vetor_teste_N_2.append([dia,hora,data,eventoA,'ON'])
+                vetor_teste_N_2.append([dia,hora,data,eventoB,'ON'])
+                vetor_teste_N_2.append([dia,hora,data,evento_ocorrido,'ON'])
+
+resultado_N2,threshold_ocorrido, media, desv_pad = classificador2_0(start_end_vect, vetor_teste_N_2, lista_eventos)
+
+resultado1,threshold, media, desv_pad = classificador(start_end_vect, vetor_verificacao, lista_eventos)
+resultado2,threshold, media, desv_pad = classificador2_0(start_end_vect, vetor_verificacao, lista_eventos)
+resultado_invasao, threshold, media, desv_pad = classificador2_0(start_end_vect, teste_invasao, lista_eventos)
+resultado_visita, threshold, media_hist_N_1, desv_pad_hist_N_1 = classificador2_0(start_end_vect, teste_visita, lista_eventos)
+
+def calc_estatisticas(resultado):
+    prob_result = []
+    for elemento in resultado[1:]:
+        prob_result.append(elemento[3])
+    
+    desv_pad = np.std(prob_result)
+    media = np.mean(prob_result)
+    return desv_pad, media
+
+def analisa_resultado(resultado):
+    avaliacao_anormal =[]
+    valores_anormais_faixa = [["0 - 20", "21 - 40", "41 - 60", "61 - 80", "81+"],[0,0,0,0,0]]
+    maior_valor_anormal = 0
+    valores_anormais = []
+    numero_alertas = [0,0,0]
+    log = []
+    for avaliacao in resultado[1:]:
+        if avaliacao[-1] == "SIM":
+            avaliacao_anormal.append(avaliacao)
+        if avaliacao[-2] > maior_valor_anormal:
+            maior_valor_anormal = avaliacao[-2]
+            valores_anormais.append(avaliacao)
+        if avaliacao[-2] > 0.8 and avaliacao[-2] <= 0.89:
+            numero_alertas[0] += 1
+            log.append(avaliacao)
+        elif avaliacao[-2] > 0.89 and avaliacao[-2] <= threshold:
+            numero_alertas[1] += 1
+            log.append(avaliacao)
+        elif avaliacao[-2] > threshold:
+            numero_alertas[2] += 1
+            log.append(avaliacao)
+        if avaliacao[-2] <= 0.2:
+            valores_anormais_faixa[1][0] += 1
+        elif avaliacao[-2] > 0.2 and avaliacao[-2] <= 0.4:
+            valores_anormais_faixa[1][1] += 1
+        elif avaliacao[-2] > 0.4 and avaliacao[-2] <= 0.6:
+            valores_anormais_faixa[1][2] += 1
+        elif avaliacao[-2] > 0.6 and avaliacao[-2] <= 0.8:
+            valores_anormais_faixa[1][3] += 1
+        elif avaliacao[-2] > 0.8:
+            valores_anormais_faixa[1][4] += 1
+    return avaliacao_anormal, valores_anormais_faixa, valores_anormais, numero_alertas, log
+
+desv_pad_N_1 = []
+media_N_1 = [] 
+desv_pad_N_2 = []
+media_N_2 = []
+desv_pad_invasao = []
+media_invasao = []
+desv_pad_visita = []
+media_visita = []
+media_hist_N_2 = []
+desv_pad_hist_N_2 = []
 
 
-resultado1,threshold_ocorrido, media, desv_pad = classificador(start_end_vect, vetor_verificacao, lista_eventos)
-resultado2,threshold_ocorrido, media, desv_pad = classificador2_0(start_end_vect, vetor_verificacao, lista_eventos)
+desv_pad_N_1, media_N_1 = calc_estatisticas(resultado1)
+desv_pad_N_2, media_N_2 = calc_estatisticas(resultado2)
+desv_pad_invasao, media_invasao = calc_estatisticas(resultado_invasao)
+desv_pad_visita, media_visita = calc_estatisticas(resultado_visita)
+desv_pad_hist_N_2, media_hist_N_2 = calc_estatisticas(resultado_N2)
 
+avaliacao_anormal_N_1 = []
+avaliacao_anormal_N_2 = []
+avaliacao_anormal_invasao = []
+avaliacao_anormal_visita = []
+
+valores_anormais_faixa_N_1 = []
+valores_anormais_faixa_N_2 = []
+valores_anormais_faixa_invasao = []
+valores_anormais_faixa_visita = []
+
+valores_anormais_N_1 = []
+valores_anormais_N_2 = []
+valores_anormais_invasao = []
+valores_anormais_visita = []
+
+numero_alertas_N_1 = []
+numero_alertas_N_2 = []
+numero_alertas_invasao = []
+numero_alertas_visita = []
+
+log_alertas_N_1 = []
+log_alertas_N_2 = []
+log_alertas_invasao = []
+log_alertas_visita = []
+
+avaliacao_anormal_N_1,valores_anormais_faixa_N_1,valores_anormais_N_1,numero_alertas_N_1, log_alertas_N_1 = analisa_resultado(resultado1)
+avaliacao_anormal_N_2,valores_anormais_faixa_N_2,valores_anormais_N_2,numero_alertas_N_2, log_alertas_N_2 = analisa_resultado(resultado2)
+avaliacao_anormal_invasao,valores_anormais_faixa_invasao,valores_anormais_invasao,numero_alertas_invasao, log_alertas_invasao = analisa_resultado(resultado_invasao)
+avaliacao_anormal_visita,valores_anormais_faixa_visita,valores_anormais_visita,numero_alertas_visita, log_alertas_visita = analisa_resultado(resultado_visita)
+
+
+
+
+'''
 prob_result1 = []
 prob_result2 = []
 for elemento in resultado1[1:]:
-    prob_result1.append(elemento[2])
+    prob_result1.append(elemento[3])
 for elemento in resultado2[1:]:
-    prob_result2.append(elemento[2])
+    prob_result2.append(elemento[3])
 
 desv_pad1 = np.std(prob_result1)
 media1 = np.mean(prob_result1)
 desv_pad2 = np.std(prob_result2)
 media2 = np.mean(prob_result2)
-
+'''
+'''
 avaliacao_anormais1 = []
 avaliacao_anormais2 = []
-menor_prob = []
+avaliacao_anormais_invasao = []
+avaliacao_anormais_visita = []
+valores_anormais_faixa_N_1 = [["0 - 20", "21 - 40", "41 - 60", "61 - 80", "81+"],[0,0,0,0,0]]
+valores_anormais_faixa_N_2 = [["0 - 20", "21 - 40", "41 - 60", "61 - 80", "81+"],[0,0,0,0,0]]
+valores_anormais_faixa_invasao = [["0 - 20", "21 - 40", "41 - 60", "61 - 80", "81+"],[0,0,0,0,0]]
+valores_anormais_faixa_visita = [["0 - 20", "21 - 40", "41 - 60", "61 - 80", "81+"],[0,0,0,0,0]]
+#menor_prob = []
+maior_valor_anormal1 = 0
+valores_anormais1 = []
+maior_valor_anormal2 = 0
+valores_anormais2 = []
+maior_valor_anormal_invasao = 0
+valores_anormais_invasao = []
+maior_valor_anormal_visita = 0
+valores_anormais_visita = []
+numero_alertas_N_1 = [0,0,0,0]
+numero_alertas_N_2 = [0,0,0]
+numero_alertas_invasao = [0,0,0]
+numero_alertas_visita = [0,0,0]
+
 for elemento in probabilidades_eventos:
     if elemento[-1] < 0.3:
         menor_prob.append(elemento)
-for avaliacao in resultado1:
+
+
+for avaliacao in resultado1[1:]:
     if avaliacao[-1] == "SIM":
         avaliacao_anormais1.append(avaliacao)
-for avaliacao in resultado2:
+    if avaliacao[-2] > maior_valor_anormal1:
+        maior_valor_anormal1 = avaliacao[-2]
+        valores_anormais1.append(avaliacao)
+    if avaliacao[-2] <= 0.2:
+        valores_anormais_faixa_N_1[1][0] += 1
+    elif avaliacao[-2] > 0.2 and avaliacao[-2] <= 0.4:
+        valores_anormais_faixa_N_1[1][1] += 1
+    elif avaliacao[-2] > 0.4 and avaliacao[-2] <= 0.6:
+        valores_anormais_faixa_N_1[1][2] += 1
+    elif avaliacao[-2] > 0.6 and avaliacao[-2] <= 0.8:
+        valores_anormais_faixa_N_1[1][3] += 1
+    elif avaliacao[-2] > 0.8:
+        valores_anormais_faixa_N_1[1][4] += 1
+
+for avaliacao in resultado2[1:]:
     if avaliacao[-1] == "SIM":
         avaliacao_anormais2.append(avaliacao)
+    if avaliacao[-2] > maior_valor_anormal2:
+        maior_valor_anormal2 = avaliacao[-2]
+        valores_anormais2.append(avaliacao)
+    if avaliacao[-2] > 0.8 and avaliacao[-2] <= 0.89:
+        numero_alertas[0] += 1
+    elif avaliacao[-2] > 0.89 and avaliacao[-2] <= threshold:
+        numero_alertas[1] += 1
+    elif avaliacao[-2] > threshold:
+        numero_alertas[2] += 1
+    if avaliacao[-2] <= 0.2:
+        valores_anormais_faixa_N_2[1][0] += 1
+    elif avaliacao[-2] > 0.2 and avaliacao[-2] <= 0.4:
+        valores_anormais_faixa_N_2[1][1] += 1
+    elif avaliacao[-2] > 0.4 and avaliacao[-2] <= 0.6:
+        valores_anormais_faixa_N_2[1][2] += 1
+    elif avaliacao[-2] > 0.6 and avaliacao[-2] <= 0.8:
+        valores_anormais_faixa_N_2[1][3] += 1
+    elif avaliacao[-2] > 0.8:
+        valores_anormais_faixa_N_2[1][4] += 1
+
+for avaliacao in resultado_invasao[1:]:
+    if avaliacao[-1] == "SIM":
+        avaliacao_anormais_invasao.append(avaliacao)
+    if avaliacao[-2] > maior_valor_anormal2:
+        maior_valor_anormal_invasao = avaliacao[-2]
+        valores_anormais_invasao.append(avaliacao)
+    if avaliacao[-2] > 0.8 and avaliacao[-2] <= 0.89:
+        numero_alertas[0] += 1
+    elif avaliacao[-2] > 0.89 and avaliacao[-2] <= threshold:
+        numero_alertas[1] += 1
+    elif avaliacao[-2] > threshold:
+        numero_alertas[2] += 1
+    if avaliacao[-2] <= 0.2:
+        valores_anormais_faixa_invasao[1][0] += 1
+    elif avaliacao[-2] > 0.2 and avaliacao[-2] <= 0.4:
+        valores_anormais_faixa_invasao[1][1] += 1
+    elif avaliacao[-2] > 0.4 and avaliacao[-2] <= 0.6:
+        valores_anormais_faixa_invasao[1][2] += 1
+    elif avaliacao[-2] > 0.6 and avaliacao[-2] <= 0.8:
+        valores_anormais_faixa_invasao[1][3] += 1
+    elif avaliacao[-2] > 0.8:
+        valores_anormais_faixa_invasao[1][4] += 1
+
+for avaliacao in resultado_visita[1:]:
+    if avaliacao[-1] == "SIM":
+        avaliacao_anormais_visita.append(avaliacao)
+    if avaliacao[-2] > maior_valor_anormal2:
+        maior_valor_anormal_visita = avaliacao[-2]
+        valores_anormais_visita.append(avaliacao)
+    if avaliacao[-2] > 0.8 and avaliacao[-2] <= 0.89:
+        numero_alertas[0] += 1
+    elif avaliacao[-2] > 0.89 and avaliacao[-2] <= threshold:
+        numero_alertas[1] += 1
+    elif avaliacao[-2] > threshold:
+        numero_alertas[2] += 1
+    if avaliacao[-2] <= 0.2:
+        valores_anormais_faixa_N_2[1][0] += 1
+    elif avaliacao[-2] > 0.2 and avaliacao[-2] <= 0.4:
+        valores_anormais_faixa_N_2[1][1] += 1
+    elif avaliacao[-2] > 0.4 and avaliacao[-2] <= 0.6:
+        valores_anormais_faixa_N_2[1][2] += 1
+    elif avaliacao[-2] > 0.6 and avaliacao[-2] <= 0.8:
+        valores_anormais_faixa_N_2[1][3] += 1
+    elif avaliacao[-2] > 0.8:
+        valores_anormais_faixa_N_2[1][4] += 1
+'''
 '''
 vetor_teste = []
 vetor_teste.append(vetor_verificacao[0])
