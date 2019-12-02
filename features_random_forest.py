@@ -96,9 +96,11 @@ with open('Saidas/indices_transic_bin.txt',  'rb') as fileBin:
     transicoes = pickle.load(fileBin)
 fileBin.close()
 
+"""
 for sensor in transicoes:
     sensor.pop()
     sensor.pop(1)
+"""
 
 for i in range(len(dados_casa)):
     if i > 0: dict_transicoes[dados_casa[i][0]] = i
@@ -108,28 +110,34 @@ def add_features():
     matriz_comodo_sensores = []
     vec_on_off, vec_tempo_ligado = [],[]
     mtx_features = []
+    id_linha_base = 0
 
     lerCSV("id_comodo_sensores.csv", matriz_comodo_sensores)
     
     for i in range(1,len(matriz_rotulos_lv2)):
+        if int(matriz_rotulos_lv2[i][0]) != id_linha_base:
+            id_linha_base = int(matriz_rotulos_lv2[i][0])
+
         for j in range(len(transicoes)):
-            if transicoes[j][0] == int(matriz_rotulos_lv2[i][2]):
+            id_sensor_aparelho = transicoes[j][0]
+
+            if id_sensor_aparelho == int(matriz_rotulos_lv2[i][2]):
                 tipo = 0
                 sensor_luz, sensor_presenca, sensor_aparelho = 0,0,0
                 lig_desl_luz, lig_desl_presenca, lig_desl_aparelho = 0,0,0
                 tempo_lig_luz, tempo_lig_presenca, tempo_lig_aparelho = 0,0,0
 
                 for k in range(1,len(matriz_comodo_sensores)):
-                    if str(transicoes[j][0]) == matriz_comodo_sensores[k][3] and matriz_comodo_sensores[k][2] == '1':
+                    if str(id_sensor_aparelho) == matriz_comodo_sensores[k][3] and matriz_comodo_sensores[k][2] == '1':
                         tipo = int(matriz_comodo_sensores[k][2])
                         sensor_luz = int(matriz_comodo_sensores[k][3])
                         break
-                    elif str(transicoes[j][0]) == matriz_comodo_sensores[k][4] and matriz_comodo_sensores[k][2] == '2':
+                    elif str(id_sensor_aparelho) == matriz_comodo_sensores[k][4] and matriz_comodo_sensores[k][2] == '2':
                         tipo = int(matriz_comodo_sensores[k][2])
                         sensor_luz = int(matriz_comodo_sensores[k][3])
                         sensor_presenca = int(matriz_comodo_sensores[k][4])
                         break
-                    elif str(transicoes[j][0]) == matriz_comodo_sensores[k][4] and matriz_comodo_sensores[k][2] == '3':
+                    elif str(id_sensor_aparelho) == matriz_comodo_sensores[k][4] and matriz_comodo_sensores[k][2] == '3':
                         tipo = int(matriz_comodo_sensores[k][2])
                         sensor_luz = int(matriz_comodo_sensores[k][3])
                         sensor_presenca = int(matriz_comodo_sensores[k][4])
@@ -140,32 +148,53 @@ def add_features():
                     print("ERRO!")
                     return
 
-                for k in range(1, len(transicoes[j])-1):
-                    if transicoes[j][k] == int(matriz_rotulos_lv2[i][0]):                       
-                        idx_vec_inicio = dict_transicoes[str(transicoes[j][k])]
-                        idx_vec_fim = dict_transicoes[str(transicoes[j][k+1])]
+                idx_vec_inicio = id_linha_base
+                valor_atual = int(dados_casa[k][id_sensor_aparelho])
+                for k in range(id_linha_base, len(dados_casa)):
+                    if id_sensor_aparelho >= 15 and int(dados_casa[k][id_sensor_aparelho]) > 180:
+                        idx_vec_fim = k
+                        break 
+                    elif id_sensor_aparelho < 15 and valor_atual != int(dados_casa[k][id_sensor_aparelho]):
+                        idx_vec_fim = k
+                        break
+                
+
+
+
+                #for k in range(1, len(transicoes[j])-1):
+                    #if i == transicoes[j][k] and int(dados_casa[i][id_sensor_aparelho]) <= 180:                       
+                        #idx_vec_inicio = transicoes[j][k]
+                        #idx_vec_fim = transicoes[j][k+1]
 
                         #if idx_vec_fim == len(dados_casa): idx_vec_fim = idx_vec_fim - 1
-                        
-                        vetor = dados_casa[idx_vec_inicio:idx_vec_fim]
-                        
-                        hora_inicio, dia_semana, dia_data, periodo, fim_semana = feature_tempo(vetor[0], 1)
+                
+                if idx_vec_inicio == idx_vec_fim:
+                    idx_vec_fim += 1
+                elif k == len(dados_casa)-1:
+                    idx_vec_fim = len(dados_casa)-1
 
-                        if tipo == 1:
-                            vec_on_off, vec_tempo_ligado = feature_vector_aparelho(vetor,[sensor_luz])
-                            lig_desl_luz = vec_on_off[sensor_luz]
-                            tempo_lig_luz = vec_tempo_ligado[sensor_luz]
-                        elif tipo == 2:
-                            vec_on_off, vec_tempo_ligado = feature_vector_aparelho(vetor,[sensor_luz,sensor_presenca])
-                            lig_desl_luz, lig_desl_presenca = vec_on_off[sensor_luz], vec_on_off[sensor_presenca]
-                            tempo_lig_luz, tempo_lig_presenca = vec_tempo_ligado[sensor_luz], vec_tempo_ligado[sensor_presenca]
-                        elif tipo == 3:
-                            vec_on_off, vec_tempo_ligado = feature_vector_aparelho(vetor,[sensor_luz,sensor_presenca,sensor_aparelho])
-                            lig_desl_luz, lig_desl_presenca, lig_desl_aparelho = vec_on_off[sensor_luz], vec_on_off[sensor_presenca], vec_on_off[sensor_aparelho]
-                            tempo_lig_luz, tempo_lig_presenca, tempo_lig_aparelho = vec_tempo_ligado[sensor_luz], vec_tempo_ligado[sensor_presenca], vec_tempo_ligado[sensor_aparelho]
-                        
-                        mtx_features.append(matriz_rotulos_lv2[i][:2] + [str(hora_inicio.hour), str(hora_inicio.minute), periodo, str(fim_semana)] + matriz_rotulos_lv2[i][2:4] + 
-                            [lig_desl_luz,lig_desl_aparelho,tempo_lig_luz,tempo_lig_aparelho] + matriz_rotulos_lv2[i][4:])
+                vetor = dados_casa[idx_vec_inicio:idx_vec_fim]
+                
+                hora_inicio, dia_semana, dia_data, periodo, fim_semana = feature_tempo(vetor[0], 1)
+
+                if tipo == 1:
+                    vec_on_off, vec_tempo_ligado = feature_vector_aparelho(vetor,[sensor_luz])
+                    lig_desl_luz = vec_on_off[sensor_luz]
+                    tempo_lig_luz = vec_tempo_ligado[sensor_luz]
+                elif tipo == 2:
+                    vec_on_off, vec_tempo_ligado = feature_vector_aparelho(vetor,[sensor_luz,sensor_presenca])
+                    lig_desl_luz, lig_desl_presenca = vec_on_off[sensor_luz], vec_on_off[sensor_presenca]
+                    tempo_lig_luz, tempo_lig_presenca = vec_tempo_ligado[sensor_luz], vec_tempo_ligado[sensor_presenca]
+                elif tipo == 3:
+                    vec_on_off, vec_tempo_ligado = feature_vector_aparelho(vetor,[sensor_luz,sensor_presenca,sensor_aparelho])
+                    lig_desl_luz, lig_desl_presenca, lig_desl_aparelho = vec_on_off[sensor_luz], vec_on_off[sensor_presenca], vec_on_off[sensor_aparelho]
+                    tempo_lig_luz, tempo_lig_presenca, tempo_lig_aparelho = vec_tempo_ligado[sensor_luz], vec_tempo_ligado[sensor_presenca], vec_tempo_ligado[sensor_aparelho]
+                
+                mtx_features.append(matriz_rotulos_lv2[i][:2] + 
+                    #[str(hora_inicio.hour), str(hora_inicio.minute), periodo, str(fim_semana)] + 
+                    [hora_inicio.strftime("%H:%M"), str(fim_semana)] +
+                    matriz_rotulos_lv2[i][2:4] + 
+                    [lig_desl_luz,lig_desl_aparelho,tempo_lig_luz,tempo_lig_aparelho] + matriz_rotulos_lv2[i][4:])
     
     return mtx_features
 
@@ -191,6 +220,6 @@ mtx_classif_features = add_features()
 
 with open('Saidas/features_random_forest.csv', 'w', newline='') as writeFile:
     writer = csv.writer(writeFile)
-    writer.writerow(['Id Home', 'Timestamp', 'Hora', 'Minuto', 'Periodo', 'Fim de Semana','Sensor Comodo', 'Comodo', 
+    writer.writerow(['Id Linha Base', 'Timestamp', 'Horario', 'Fim de Semana','Sensor Comodo', 'Comodo', 
         'lig_desl_luz','lig_desl_aparelho','tempo_lig_luz','tempo_lig_aparelho','Id Atividade', 'Atividade'])
     writer.writerows(mtx_classif_features)

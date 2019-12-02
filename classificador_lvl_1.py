@@ -57,19 +57,25 @@ def filtro_periodo_dia(timestamp, id_periodo_dia, hora1, hora2, categ_dia):
     #return False
     return True
 
-def filtro_atv_comodo(id_atividade, id_sensor_comodo, valor_sensor):
+#def filtro_atv_comodo(id_atividade, id_sensor_comodo, id_sensor_aparelho, valor_sensor):
+def filtro_atv_comodo(id_atividade, id_sensor_comodo):
     for i in range(1,len(matriz_atividades)):
         if id_atividade == matriz_atividades[i][0]:
             if matriz_atividades[i][6] == '0': return True
 
             for j in range(1,len(matriz_comodo_sensores)):
                 if matriz_atividades[i][6] == matriz_comodo_sensores[j][0] and (str(id_sensor_comodo) == matriz_comodo_sensores[j][3] or str(id_sensor_comodo) == matriz_comodo_sensores[j][4] or str(id_sensor_comodo) == matriz_comodo_sensores[j][5]):
+                    
+                    return True
+                    """
+                    #PROVAVEL QUE VOU DESCONSIDERAR ISSO (ESTUDAR!!!!)
                     if matriz_atividades[i][7] == ''  or matriz_atividades[i][8] == '' or valor_sensor is None:
                         return True
                     elif matriz_atividades[i][7] == '1' and int(valor_sensor) <= int(matriz_atividades[i][8]):
                         return True
                     elif matriz_atividades[i][7] == '2' and int(valor_sensor) == int(matriz_atividades[i][8]):
                         return True
+                    """
                         
     return False
 
@@ -114,8 +120,12 @@ for k in range(len(transicoes)):
     indices_transicoes = transicoes[k][1:len(transicoes[k])]
 
     for i in range(1,len(dados_casa)):
-        if int(dados_casa[i][0]) in indices_transicoes: #Houve transição na linha da base analisada
+        if i in indices_transicoes: #Houve transição na linha da base analisada
             for j in range(1,len(matriz_atividades)): #Varrer lista de atividades registradas pra fazer match
+                
+                #Descartar registro se o valor de presença tiver acima do valor de threshold de presença
+                if int(dados_casa[i][indice_sensor_comodo]) > 180: continue
+                
                 #Verifica se os requisitos descritos no arquivo de atividades são atendidos
                 test_periodo = filtro_periodo_dia(dados_casa[i][1], matriz_atividades[j][2], matriz_atividades[j][3], matriz_atividades[j][4], matriz_atividades[j][5])
                 
@@ -125,11 +135,31 @@ for k in range(len(transicoes)):
                 #Apenas considera sensores elegíveis para identificar transições (sensores de luz ou presença de acordo com o cômodo)
                 if not indice_sensor_comodo in dict_transic_sensores.keys(): continue
 
-                test_atv_comodo = filtro_atv_comodo(matriz_atividades[j][0], indice_sensor_comodo, dados_casa[i][indice_sensor_comodo])
+                comodo = dict_transic_sensores[indice_sensor_comodo]
+                indice_sensor_luz = ''
+                indice_sensor_presenca = ''
+                indice_sensor_aparelho = ''
+                for k in range(1, len(matriz_comodo_sensores)):
+                    if comodo == matriz_comodo_sensores[k][1]:
+                        indice_sensor_luz      = matriz_comodo_sensores[k][3]
+                        indice_sensor_presenca = matriz_comodo_sensores[k][4]
+                        indice_sensor_aparelho = matriz_comodo_sensores[k][5]
+                
+                if indice_sensor_luz != '' and matriz_atividades[j][7] != '':
+                    indice_sensor_luz = int(indice_sensor_luz)
+                    if dados_casa[i][indice_sensor_luz] != int(matriz_atividades[j][7]):
+                        continue
+
+                if indice_sensor_aparelho != '' and matriz_atividades[j][8] != '':
+                    indice_sensor_aparelho = int(indice_sensor_aparelho)
+                    if dados_casa[i][indice_sensor_aparelho] != int(matriz_atividades[j][8]):
+                        continue
+
+                test_atv_comodo = filtro_atv_comodo(matriz_atividades[j][0], indice_sensor_comodo)
 
                 if test_atv_comodo:
                     #dict_transic_rotulo[dados_casa[i][0]] = matriz_atividades[j][1]
-                    aux_classif = [dados_casa[i][0], dados_casa[i][1].replace('"',''), indice_sensor_comodo, dict_transic_sensores[indice_sensor_comodo], matriz_atividades[j][0], matriz_atividades[j][1]]
+                    aux_classif = [i, dados_casa[i][1].replace('"',''), indice_sensor_comodo, dict_transic_sensores[indice_sensor_comodo], matriz_atividades[j][0], matriz_atividades[j][1]]
                     matriz_rotulos_lv1.append(aux_classif)
                 else: continue
                 
@@ -148,20 +178,11 @@ def sortIdx(val):
 
 matriz_rotulos_lv1.sort(key=sortIdx)
 
-with open('Saidas/classif_results_lv1.csv', 'w', newline='') as writeFile:
+with open('Saidas/classif_results_lv1_invasao.csv', 'w', newline='') as writeFile:
     writer = csv.writer(writeFile)
-    writer.writerow(['Id Home', 'Timestamp', 'Sensor Comodo', 'Comodo', 'Id Atividade', 'Atividade'])
+    writer.writerow(['Id Linha Base', 'Timestamp', 'Sensor Comodo', 'Comodo', 'Id Atividade', 'Atividade'])
     writer.writerows(matriz_rotulos_lv1)
 
 writeFile.close()
-
-'''
-matriz_rotulos_lv2 = filtro_correl_sensores_novo()
-
-with open('Saidas/classif_results_lv2.csv', 'w', newline='') as writeFile2:
-    writer = csv.writer(writeFile2)
-    writer.writerow(['Id Home', 'Timestamp', 'Sensor Comodo', 'Comodo', 'Rotulo'])
-    writer.writerows(matriz_rotulos_lv2)
-'''
 
 print("Classificação finalizada")

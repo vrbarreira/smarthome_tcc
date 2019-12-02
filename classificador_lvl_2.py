@@ -55,8 +55,14 @@ def filtro_correl_sensores_novo():
                                 teste2 = matriz_rotulos_lv1[j][4] == id_atividade and matriz_rotulos_lv1[j+k][4] == id_atividade
                                 
                                 if teste1 and teste2:
-                                    mtx_aux.append(matriz_rotulos_lv1[j])
-                                    mtx_aux.append(matriz_rotulos_lv1[j+k])                          
+                                    if matriz_rotulos_lv1[j] not in mtx_aux:
+                                        mtx_aux.append(matriz_rotulos_lv1[j])
+                                    
+                                    if matriz_rotulos_lv1[j+k] not in mtx_aux:
+                                        mtx_aux.append(matriz_rotulos_lv1[j+k])
+
+                                    #mtx_aux.append(matriz_rotulos_lv1[j])
+                                    #mtx_aux.append(matriz_rotulos_lv1[j+k])                          
                             
                             if j+k < len(matriz_rotulos_lv1)-1:
                                 k = k+1
@@ -154,7 +160,7 @@ matriz_rotulos_lv2.sort(key=sortIdx)
 
 with open('Saidas/classif_results_lv2.csv', 'w', newline='') as writeFile:
     writer = csv.writer(writeFile)
-    writer.writerow(['Id Home', 'Timestamp', 'Sensor Comodo', 'Comodo', 'Id Atividade', 'Atividade'])
+    writer.writerow(['Id Linha Base', 'Timestamp', 'Sensor Comodo', 'Comodo', 'Id Atividade', 'Atividade'])
     writer.writerows(matriz_rotulos_lv2)
 
 writeFile.close()

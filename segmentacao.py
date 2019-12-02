@@ -250,7 +250,7 @@ def init_dados_casa():
 	global indices_sensores
 
 	#Obs: sempre se atentar ao modelo de dados fornecido (quais colunas são fornecidas)
-	arquivo = open("home.csv", "r") #leitura inicial do arquivo
+	arquivo = open("teste invasao.csv", "r") #leitura inicial do arquivo
 
 	#Tratamento do cabeçalho
 	line = arquivo.readline()
@@ -263,6 +263,16 @@ def init_dados_casa():
 		lineSplit = line.split(",")
 		lineSplit[2:] =  list(map(int,lineSplit[2:])) #Conversão das leituras de sensores para int
 		dados_casa.append(lineSplit)
+		
+		
+		##################################
+		########## EXCLUIR ISSO!!! #######
+		##################################
+		dados_casa[len(dados_casa)-1][1] = "\"" + dados_casa[len(dados_casa)-1][1] + "\""
+		##################################
+		##################################
+		##################################
+
 	arquivo.close()
 	#Identificação de transições (escada, aquario, banho, presença)
 	add_transicao = True
@@ -314,6 +324,7 @@ def init_dados_casa():
 					add_transicao = True
 				elif (hora_casa_atual - start_time_interval) > time_interval and presente:
 						add_janela = True
+						start_time_interval = dt.strptime(dados_casa[i][1][1:-1], '%Y-%m-%d %H:%M')
 				
 				
 			else: #luz_escada, luz_aquario, luz_banho (Cômodos s/ sensor de presença)

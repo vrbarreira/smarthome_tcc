@@ -309,6 +309,7 @@ def match_acesso_casa(dados_casa, dados_acesso):
 #luz_escada, luz_aquario, luz_banho, pres_sala, pres_cozinha, pres_lavanderia, pres_garagem, pres_quarto1, pres_quarto2, pres_cobertura, pres_corredor, pres_quarto3
 
 print("Classificação em andamento")
+"""
 rotula_base("Saidas/classif_sala.txt", 3, segmentacao.id_luz_sala, segmentacao.id_pres_sala, lista_estados_sala, lista_segmentos_sala) #Sala
 rotula_base("Saidas/classif_cozinha.txt", 4, segmentacao.id_luz_cozinha, segmentacao.id_pres_cozinha, lista_estados_cozi, lista_segmentos_cozi) #Cozinha
 rotula_base("Saidas/classif_lavanderia.txt", 5, segmentacao.id_luz_lavanderia, segmentacao.id_pres_lavanderia, lista_estados_lavnd, lista_segmentos_lavnd) #Lavanderia
@@ -319,6 +320,7 @@ rotula_base("Saidas/classif_quarto3.txt", 11, segmentacao.id_luz_quarto3, segmen
 
 rotula_base("Saidas/classif_cobertura.txt", 9, segmentacao.id_luz_cobertura, segmentacao.id_pres_cobertura, lista_estados_cobt, lista_segmentos_cobt) #Cobertura
 rotula_base("Saidas/classif_corredor.txt", 10, segmentacao.id_luz_corredor, segmentacao.id_pres_corredor, lista_estados_corr, lista_segmentos_corr) #Corredor
+"""
 
 for i in range(1,len(dados_acesso)):
     if match_acesso_casa(dados_casa, dados_acesso[i]) == None:

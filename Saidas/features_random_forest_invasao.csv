@@ -1,0 +1,359 @@
+Id Linha Base,Timestamp,Horario,Fim de Semana,Sensor Comodo,Comodo,lig_desl_luz,lig_desl_aparelho,tempo_lig_luz,tempo_lig_aparelho,Id Atividade,Atividade
+1,2019-05-27 0:11,00:11,False,16,Cozinha,0,0,1.0,0.0,5,Pres cozinha
+1,2019-05-27 0:11,00:11,False,15,Sala,0,0,1.0,1.0,7,Assistir TV
+1,2019-05-27 0:11,00:11,False,13,Banho,0,0,1.0,0,9,Banho aceso
+1,2019-05-27 0:11,00:11,False,20,Quarto 2,0,0,0.0,0.0,13,Pres quarto 2
+1,2019-05-27 0:11,00:11,False,23,Quarto 3,1,0,0.15384615384615385,0.0,14,Pres quarto 3
+2,2019-05-27 0:17,00:17,False,17,Lavanderia,1,0,0.5,0.0,12,Pres lavanderia
+2,2019-05-27 0:17,00:17,False,23,Quarto 3,1,0,0.08333333333333333,0.0,14,Pres quarto 3
+2,2019-05-27 0:17,00:17,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+3,2019-05-27 0:24,00:24,False,16,Cozinha,0,0,1.0,0.0,5,Pres cozinha
+3,2019-05-27 0:24,00:24,False,15,Sala,0,0,1.0,0.0,6,Pres sala
+3,2019-05-27 0:24,00:24,False,17,Lavanderia,0,0,0.0,0.0,12,Pres lavanderia
+3,2019-05-27 0:24,00:24,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+3,2019-05-27 0:24,00:24,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+5,2019-05-27 0:33,00:33,False,16,Cozinha,0,0,1.0,0.0,5,Pres cozinha
+5,2019-05-27 0:33,00:33,False,15,Sala,0,0,1.0,0.0,6,Pres sala
+5,2019-05-27 0:33,00:33,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+5,2019-05-27 0:33,00:33,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+6,2019-05-27 0:40,00:40,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+10,2019-05-27 0:53,00:53,False,16,Cozinha,0,0,1.0,0.0,5,Pres cozinha
+10,2019-05-27 0:53,00:53,False,15,Sala,0,0,1.0,1.0,7,Assistir TV
+10,2019-05-27 0:53,00:53,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+12,2019-05-27 0:59,00:59,False,20,Quarto 2,0,0,0.0,0.0,13,Pres quarto 2
+13,2019-05-27 1:02,01:02,False,16,Cozinha,0,0,1.0,0.0,5,Pres cozinha
+13,2019-05-27 1:02,01:02,False,15,Sala,0,0,1.0,1.0,7,Assistir TV
+13,2019-05-27 1:02,01:02,False,15,Sala,0,0,1.0,1.0,8,Indo dormir
+13,2019-05-27 1:02,01:02,False,16,Cozinha,0,0,1.0,0.0,8,Indo dormir
+14,2019-05-27 1:05,01:05,False,20,Quarto 2,0,0,0.0,0.0,13,Pres quarto 2
+16,2019-05-27 1:15,01:15,False,16,Cozinha,0,0,1.0,0.0,5,Pres cozinha
+16,2019-05-27 1:15,01:15,False,15,Sala,0,0,1.0,1.0,7,Assistir TV
+16,2019-05-27 1:15,01:15,False,15,Sala,0,0,1.0,1.0,8,Indo dormir
+16,2019-05-27 1:15,01:15,False,16,Cozinha,0,0,1.0,0.0,8,Indo dormir
+22,2019-05-27 1:37,01:37,False,15,Sala,0,0,1.0,1.0,7,Assistir TV
+22,2019-05-27 1:37,01:37,False,20,Quarto 2,0,0,0.0,0.0,13,Pres quarto 2
+22,2019-05-27 1:37,01:37,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+26,2019-05-27 1:53,01:53,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+27,2019-05-27 1:59,01:59,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+32,2019-05-27 2:15,02:15,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+37,2019-05-27 2:34,02:34,False,15,Sala,0,0,1.0,1.0,7,Assistir TV
+37,2019-05-27 2:34,02:34,False,20,Quarto 2,0,0,0.0,0.0,13,Pres quarto 2
+39,2019-05-27 3:00,03:00,False,18,Garagem,0,0,0.0,0,3,Entrada
+39,2019-05-27 3:00,03:00,False,18,Garagem,0,0,0.0,0,4,Saida
+39,2019-05-27 3:00,03:00,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+40,2019-05-27 3:03,03:03,False,18,Garagem,0,0,0.0,0,3,Entrada
+40,2019-05-27 3:03,03:03,False,18,Garagem,0,0,0.0,0,4,Saida
+40,2019-05-27 3:03,03:03,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+42,2019-05-27 3:09,03:09,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+42,2019-05-27 3:09,03:09,False,17,Lavanderia,0,0,0.0,0.0,12,Pres lavanderia
+43,2019-05-27 3:12,03:12,False,16,Cozinha,0,0,0.0,0.0,5,Pres cozinha
+44,2019-05-27 3:15,03:15,False,20,Quarto 2,0,0,0.0,0.0,13,Pres quarto 2
+44,2019-05-27 3:15,03:15,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+44,2019-05-27 3:15,03:15,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+46,2019-05-27 3:21,03:21,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+47,2019-05-27 3:24,03:24,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+48,2019-05-27 3:27,03:27,False,20,Quarto 2,0,0,0.0,0.0,13,Pres quarto 2
+49,2019-05-27 3:30,03:30,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+49,2019-05-27 3:30,03:30,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+51,2019-05-27 3:36,03:36,False,16,Cozinha,0,0,0.0,0.0,5,Pres cozinha
+51,2019-05-27 3:36,03:36,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+51,2019-05-27 3:36,03:36,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+53,2019-05-27 3:42,03:42,False,20,Quarto 2,0,0,0.0,0.0,13,Pres quarto 2
+53,2019-05-27 3:42,03:42,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+53,2019-05-27 3:42,03:42,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+55,2019-05-27 3:48,03:48,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+56,2019-05-27 3:51,03:51,False,16,Cozinha,0,0,0.0,0.0,5,Pres cozinha
+56,2019-05-27 3:51,03:51,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+56,2019-05-27 3:51,03:51,False,17,Lavanderia,0,0,0.0,0.0,12,Pres lavanderia
+57,2019-05-27 3:54,03:54,False,18,Garagem,0,0,0.0,0,3,Entrada
+57,2019-05-27 3:54,03:54,False,18,Garagem,0,0,0.0,0,4,Saida
+57,2019-05-27 3:54,03:54,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+60,2019-05-27 11:03,11:03,False,16,Cozinha,0,0,0.0,0.0,5,Pres cozinha
+60,2019-05-27 11:03,11:03,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+60,2019-05-27 11:03,11:03,False,17,Lavanderia,0,0,0.0,0.0,12,Pres lavanderia
+60,2019-05-27 11:03,11:03,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+60,2019-05-27 11:03,11:03,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+61,2019-05-27 11:06,11:06,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+61,2019-05-27 11:06,11:06,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+62,2019-05-27 11:09,11:09,False,18,Garagem,0,0,0.0,0,3,Entrada
+62,2019-05-27 11:09,11:09,False,18,Garagem,0,0,0.0,0,4,Saida
+62,2019-05-27 11:09,11:09,False,17,Lavanderia,0,1,0.0,0.2,12,Pres lavanderia
+62,2019-05-27 11:09,11:09,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+63,2019-05-27 11:12,11:12,False,16,Cozinha,2,1,0.5121951219512195,0.6585365853658537,5,Pres cozinha
+63,2019-05-27 11:12,11:12,False,20,Quarto 2,0,0,1.0,0.0,13,Pres quarto 2
+63,2019-05-27 11:12,11:12,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+64,2019-05-27 11:21,11:21,False,16,Cozinha,2,1,0.525,0.675,5,Pres cozinha
+64,2019-05-27 11:21,11:21,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+64,2019-05-27 11:21,11:21,False,13,Banho,0,0,1.0,0,9,Banho aceso
+64,2019-05-27 11:21,11:21,False,17,Lavanderia,0,1,0.0,0.3333333333333333,12,Pres lavanderia
+64,2019-05-27 11:21,11:21,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+66,2019-05-27 11:27,11:27,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+68,2019-05-27 11:33,11:33,False,16,Cozinha,2,1,0.5833333333333334,0.75,5,Pres cozinha
+68,2019-05-27 11:33,11:33,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+69,2019-05-27 11:36,11:36,False,20,Quarto 2,1,0,0.8,0.0,13,Pres quarto 2
+69,2019-05-27 11:36,11:36,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+71,2019-05-27 11:42,11:42,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+72,2019-05-27 11:45,11:45,False,18,Garagem,0,0,0.0,0,3,Entrada
+72,2019-05-27 11:45,11:45,False,18,Garagem,0,0,0.0,0,4,Saida
+72,2019-05-27 11:45,11:45,False,17,Lavanderia,0,0,0.0,1.0,11,Lavar roupa
+72,2019-05-27 11:45,11:45,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+73,2019-05-27 11:54,11:54,False,16,Cozinha,2,1,0.6774193548387096,0.8709677419354839,5,Pres cozinha
+73,2019-05-27 11:54,11:54,False,17,Lavanderia,0,0,0.0,1.0,11,Lavar roupa
+73,2019-05-27 11:54,11:54,False,20,Quarto 2,0,0,0.0,0.0,13,Pres quarto 2
+73,2019-05-27 11:54,11:54,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+74,2019-05-27 11:57,11:57,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+74,2019-05-27 11:57,11:57,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+76,2019-05-27 12:04,12:04,False,18,Garagem,0,0,0.0,0,3,Entrada
+76,2019-05-27 12:04,12:04,False,18,Garagem,0,0,0.0,0,4,Saida
+76,2019-05-27 12:04,12:04,False,16,Cozinha,2,1,0.75,0.9642857142857143,5,Pres cozinha
+76,2019-05-27 12:04,12:04,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+76,2019-05-27 12:04,12:04,False,17,Lavanderia,0,0,0.0,1.0,11,Lavar roupa
+76,2019-05-27 12:04,12:04,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+76,2019-05-27 12:04,12:04,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+78,2019-05-27 12:10,12:10,False,18,Garagem,0,0,0.0,0,3,Entrada
+78,2019-05-27 12:10,12:10,False,18,Garagem,0,0,0.0,0,4,Saida
+78,2019-05-27 12:10,12:10,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+78,2019-05-27 12:10,12:10,False,17,Lavanderia,0,0,0.0,1.0,11,Lavar roupa
+78,2019-05-27 12:10,12:10,False,20,Quarto 2,1,0,0.8,0.0,13,Pres quarto 2
+78,2019-05-27 12:10,12:10,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+81,2019-05-27 12:19,12:19,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+81,2019-05-27 12:19,12:19,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+82,2019-05-27 12:22,12:22,False,16,Cozinha,1,0,0.9545454545454546,1.0,10,Cozinhar
+83,2019-05-27 12:28,12:28,False,18,Garagem,0,0,0.0,0,3,Entrada
+83,2019-05-27 12:28,12:28,False,18,Garagem,0,0,0.0,0,4,Saida
+83,2019-05-27 12:28,12:28,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+83,2019-05-27 12:28,12:28,False,16,Cozinha,1,0,0.9523809523809523,1.0,10,Cozinhar
+83,2019-05-27 12:28,12:28,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+83,2019-05-27 12:28,12:28,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+83,2019-05-27 12:28,12:28,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+85,2019-05-27 12:35,12:35,False,18,Garagem,0,0,0.0,0,3,Entrada
+85,2019-05-27 12:35,12:35,False,18,Garagem,0,0,0.0,0,4,Saida
+85,2019-05-27 12:35,12:35,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+85,2019-05-27 12:35,12:35,False,17,Lavanderia,0,0,0.0,1.0,11,Lavar roupa
+85,2019-05-27 12:35,12:35,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+87,2019-05-27 12:44,12:44,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+87,2019-05-27 12:44,12:44,False,16,Cozinha,1,0,0.9411764705882353,1.0,10,Cozinhar
+87,2019-05-27 12:44,12:44,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+89,2019-05-27 12:53,12:53,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+89,2019-05-27 12:53,12:53,False,16,Cozinha,1,0,0.9333333333333333,1.0,10,Cozinhar
+89,2019-05-27 12:53,12:53,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+89,2019-05-27 12:53,12:53,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+90,2019-05-27 12:57,12:57,False,17,Lavanderia,0,0,0.0,1.0,11,Lavar roupa
+92,2019-05-27 13:03,13:03,False,18,Garagem,0,0,0.0,0,3,Entrada
+92,2019-05-27 13:03,13:03,False,18,Garagem,0,0,0.0,0,4,Saida
+92,2019-05-27 13:03,13:03,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+93,2019-05-27 13:06,13:06,False,16,Cozinha,1,0,0.9090909090909091,1.0,10,Cozinhar
+93,2019-05-27 13:06,13:06,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+94,2019-05-27 13:09,13:09,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+95,2019-05-27 13:12,13:12,False,18,Garagem,0,0,0.0,0,3,Entrada
+95,2019-05-27 13:12,13:12,False,18,Garagem,0,0,0.0,0,4,Saida
+95,2019-05-27 13:12,13:12,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+98,2019-05-27 13:22,13:22,False,18,Garagem,0,0,0.0,0,3,Entrada
+98,2019-05-27 13:22,13:22,False,18,Garagem,0,0,0.0,0,4,Saida
+98,2019-05-27 13:22,13:22,False,16,Cozinha,1,0,0.8333333333333334,1.0,10,Cozinhar
+98,2019-05-27 13:22,13:22,False,17,Lavanderia,0,0,0.0,0.0,12,Pres lavanderia
+98,2019-05-27 13:22,13:22,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+98,2019-05-27 13:22,13:22,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+100,2019-05-27 13:28,13:28,False,18,Garagem,0,0,0.0,0,3,Entrada
+100,2019-05-27 13:28,13:28,False,18,Garagem,0,0,0.0,0,4,Saida
+100,2019-05-27 13:28,13:28,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+102,2019-05-27 13:37,13:37,False,18,Garagem,0,0,0.0,0,3,Entrada
+102,2019-05-27 13:37,13:37,False,18,Garagem,0,0,0.0,0,4,Saida
+102,2019-05-27 13:37,13:37,False,16,Cozinha,1,0,0.5,1.0,10,Cozinhar
+102,2019-05-27 13:37,13:37,False,17,Lavanderia,0,0,0.0,0.0,12,Pres lavanderia
+102,2019-05-27 13:37,13:37,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+103,2019-05-27 13:41,13:41,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+105,2019-05-27 13:47,13:47,False,17,Lavanderia,0,0,0.0,0.0,12,Pres lavanderia
+106,2019-05-27 13:50,13:50,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+106,2019-05-27 13:50,13:50,False,16,Cozinha,0,1,0.0,0.2222222222222222,10,Cozinhar
+109,2019-05-27 14:03,14:03,False,16,Cozinha,0,0,0.0,0.0,5,Pres cozinha
+109,2019-05-27 14:03,14:03,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+109,2019-05-27 14:03,14:03,False,17,Lavanderia,0,0,0.0,0.0,12,Pres lavanderia
+110,2019-05-27 14:09,14:09,False,16,Cozinha,0,0,0.0,0.0,5,Pres cozinha
+110,2019-05-27 14:09,14:09,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+110,2019-05-27 14:09,14:09,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+111,2019-05-27 14:12,14:12,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+111,2019-05-27 14:12,14:12,False,17,Lavanderia,0,0,0.0,0.0,12,Pres lavanderia
+112,2019-05-27 14:15,14:15,False,18,Garagem,0,0,0.0,0,3,Entrada
+112,2019-05-27 14:15,14:15,False,18,Garagem,0,0,0.0,0,4,Saida
+112,2019-05-27 14:15,14:15,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+114,2019-05-27 14:21,14:21,False,15,Sala,1,0,0.6666666666666666,0.0,6,Pres sala
+115,2019-05-27 14:24,14:24,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+116,2019-05-27 14:28,14:28,False,18,Garagem,0,0,0.0,0,3,Entrada
+116,2019-05-27 14:28,14:28,False,18,Garagem,0,0,0.0,0,4,Saida
+116,2019-05-27 14:28,14:28,False,16,Cozinha,0,0,0.0,0.0,5,Pres cozinha
+116,2019-05-27 14:28,14:28,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+116,2019-05-27 14:28,14:28,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+119,2019-05-27 14:40,14:40,False,18,Garagem,0,0,0.0,0,3,Entrada
+119,2019-05-27 14:40,14:40,False,18,Garagem,0,0,0.0,0,4,Saida
+119,2019-05-27 14:40,14:40,False,16,Cozinha,0,0,0.0,0.0,5,Pres cozinha
+119,2019-05-27 14:40,14:40,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+119,2019-05-27 14:40,14:40,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+120,2019-05-27 14:43,14:43,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+120,2019-05-27 14:43,14:43,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+121,2019-05-27 14:46,14:46,False,18,Garagem,0,0,0.0,0,3,Entrada
+121,2019-05-27 14:46,14:46,False,18,Garagem,0,0,0.0,0,4,Saida
+121,2019-05-27 14:46,14:46,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+122,2019-05-27 14:49,14:49,False,16,Cozinha,0,0,0.0,0.0,5,Pres cozinha
+122,2019-05-27 14:49,14:49,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+123,2019-05-27 14:53,14:53,False,18,Garagem,0,0,0.0,0,3,Entrada
+123,2019-05-27 14:53,14:53,False,18,Garagem,0,0,0.0,0,4,Saida
+123,2019-05-27 14:53,14:53,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+123,2019-05-27 14:53,14:53,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+124,2019-05-27 14:56,14:56,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+126,2019-05-27 15:05,15:05,False,18,Garagem,0,0,0.0,0,3,Entrada
+126,2019-05-27 15:05,15:05,False,18,Garagem,0,0,0.0,0,4,Saida
+126,2019-05-27 15:05,15:05,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+128,2019-05-27 15:12,15:12,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+128,2019-05-27 15:12,15:12,False,17,Lavanderia,0,0,0.0,0.0,12,Pres lavanderia
+129,2019-05-27 15:15,15:15,False,16,Cozinha,0,0,0.0,0.0,5,Pres cozinha
+130,2019-05-27 15:24,15:24,False,16,Cozinha,0,0,0.0,0.0,5,Pres cozinha
+130,2019-05-27 15:24,15:24,False,20,Quarto 2,0,0,0.0,0.0,13,Pres quarto 2
+130,2019-05-27 15:24,15:24,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+130,2019-05-27 15:24,15:24,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+132,2019-05-27 15:30,15:30,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+133,2019-05-27 15:33,15:33,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+134,2019-05-27 15:36,15:36,False,20,Quarto 2,0,0,0.0,0.0,13,Pres quarto 2
+135,2019-05-27 15:40,15:40,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+135,2019-05-27 15:40,15:40,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+137,2019-05-27 15:46,15:46,False,16,Cozinha,0,0,0.0,0.0,5,Pres cozinha
+137,2019-05-27 15:46,15:46,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+137,2019-05-27 15:46,15:46,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+139,2019-05-27 15:52,15:52,False,20,Quarto 2,0,0,0.0,0.0,13,Pres quarto 2
+139,2019-05-27 15:52,15:52,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+139,2019-05-27 15:52,15:52,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+141,2019-05-27 15:58,15:58,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+142,2019-05-27 16:05,16:05,False,16,Cozinha,0,0,0.0,0.0,5,Pres cozinha
+142,2019-05-27 16:05,16:05,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+142,2019-05-27 16:05,16:05,False,17,Lavanderia,0,0,0.0,0.0,12,Pres lavanderia
+143,2019-05-27 16:08,16:08,False,18,Garagem,0,0,0.0,0,3,Entrada
+143,2019-05-27 16:08,16:08,False,18,Garagem,0,0,0.0,0,4,Saida
+143,2019-05-27 16:08,16:08,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+146,2019-05-27 16:20,16:20,False,16,Cozinha,0,0,1.0,1.0,10,Cozinhar
+146,2019-05-27 16:20,16:20,False,17,Lavanderia,0,0,0.0,0.0,12,Pres lavanderia
+146,2019-05-27 16:20,16:20,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+147,2019-05-27 16:23,16:23,False,18,Garagem,0,0,0.0,0,3,Entrada
+147,2019-05-27 16:23,16:23,False,18,Garagem,0,0,0.0,0,4,Saida
+147,2019-05-27 16:23,16:23,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+149,2019-05-27 16:30,16:30,False,18,Garagem,0,0,0.0,0,3,Entrada
+149,2019-05-27 16:30,16:30,False,18,Garagem,0,0,0.0,0,4,Saida
+149,2019-05-27 16:30,16:30,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+151,2019-05-27 16:36,16:36,False,16,Cozinha,0,0,1.0,1.0,10,Cozinhar
+153,2019-05-27 16:45,16:45,False,16,Cozinha,0,0,1.0,1.0,10,Cozinhar
+157,2019-05-27 16:58,16:58,False,18,Garagem,0,0,0.0,0,3,Entrada
+157,2019-05-27 16:58,16:58,False,18,Garagem,0,0,0.0,0,4,Saida
+157,2019-05-27 16:58,16:58,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+157,2019-05-27 16:58,16:58,False,16,Cozinha,0,0,1.0,1.0,10,Cozinhar
+157,2019-05-27 16:58,16:58,False,17,Lavanderia,0,0,0.0,0.0,12,Pres lavanderia
+157,2019-05-27 16:58,16:58,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+163,2019-05-27 17:17,17:17,False,18,Garagem,0,0,0.0,0,3,Entrada
+163,2019-05-27 17:17,17:17,False,18,Garagem,0,0,0.0,0,4,Saida
+163,2019-05-27 17:17,17:17,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+163,2019-05-27 17:17,17:17,False,16,Cozinha,0,0,1.0,1.0,10,Cozinhar
+163,2019-05-27 17:17,17:17,False,17,Lavanderia,0,0,1.0,0.0,12,Pres lavanderia
+163,2019-05-27 17:17,17:17,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+168,2019-05-27 17:32,17:32,False,18,Garagem,0,0,0.0,0,3,Entrada
+168,2019-05-27 17:32,17:32,False,18,Garagem,0,0,0.0,0,4,Saida
+168,2019-05-27 17:32,17:32,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+169,2019-05-27 17:39,17:39,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+169,2019-05-27 17:39,17:39,False,16,Cozinha,0,0,1.0,1.0,10,Cozinhar
+169,2019-05-27 17:39,17:39,False,17,Lavanderia,0,0,1.0,0.0,12,Pres lavanderia
+173,2019-05-27 17:51,17:51,False,16,Cozinha,0,0,1.0,1.0,10,Cozinhar
+177,2019-05-27 18:04,18:04,False,18,Garagem,0,0,0.0,0,3,Entrada
+177,2019-05-27 18:04,18:04,False,18,Garagem,0,0,0.0,0,4,Saida
+177,2019-05-27 18:04,18:04,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+177,2019-05-27 18:04,18:04,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+178,2019-05-27 18:07,18:07,False,16,Cozinha,0,0,1.0,1.0,10,Cozinhar
+178,2019-05-27 18:07,18:07,False,17,Lavanderia,0,0,0.0,0.0,12,Pres lavanderia
+180,2019-05-27 18:13,18:13,False,18,Garagem,0,0,0.0,0,3,Entrada
+180,2019-05-27 18:13,18:13,False,18,Garagem,0,0,0.0,0,4,Saida
+180,2019-05-27 18:13,18:13,False,17,Lavanderia,0,0,0.0,0.0,12,Pres lavanderia
+180,2019-05-27 18:13,18:13,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+183,2019-05-27 18:26,18:26,False,16,Cozinha,0,0,1.0,1.0,10,Cozinhar
+185,2019-05-27 18:32,18:32,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+186,2019-05-27 18:35,18:35,False,17,Lavanderia,0,0,1.0,0.0,12,Pres lavanderia
+187,2019-05-27 18:38,18:38,False,16,Cozinha,0,0,1.0,1.0,10,Cozinhar
+189,2019-05-27 18:44,18:44,False,18,Garagem,0,0,0.0,0,3,Entrada
+189,2019-05-27 18:44,18:44,False,18,Garagem,0,0,0.0,0,4,Saida
+189,2019-05-27 18:44,18:44,False,13,Banho,0,0,1.0,0,9,Banho aceso
+189,2019-05-27 18:44,18:44,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+189,2019-05-27 18:44,18:44,False,22,Corredor,0,0,1.0,0,15,Pres corredor
+189,2019-05-27 18:44,18:44,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+192,2019-05-27 18:56,18:56,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+192,2019-05-27 18:56,18:56,False,16,Cozinha,0,0,1.0,1.0,10,Cozinhar
+192,2019-05-27 18:56,18:56,False,17,Lavanderia,0,0,1.0,0.0,12,Pres lavanderia
+192,2019-05-27 18:56,18:56,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+192,2019-05-27 18:56,18:56,False,22,Corredor,0,0,1.0,0,15,Pres corredor
+194,2019-05-27 19:02,19:02,False,18,Garagem,0,0,0.0,0,3,Entrada
+194,2019-05-27 19:02,19:02,False,18,Garagem,0,0,0.0,0,4,Saida
+194,2019-05-27 19:02,19:02,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+196,2019-05-27 19:09,19:09,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+198,2019-05-27 19:15,19:15,False,16,Cozinha,0,0,1.0,1.0,10,Cozinhar
+202,2019-05-27 19:28,19:28,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+203,2019-05-27 19:31,19:31,False,16,Cozinha,0,0,1.0,1.0,10,Cozinhar
+205,2019-05-27 19:37,19:37,False,16,Cozinha,0,0,1.0,1.0,10,Cozinhar
+207,2019-05-27 19:43,19:43,False,18,Garagem,0,0,0.0,0,3,Entrada
+207,2019-05-27 19:43,19:43,False,18,Garagem,0,0,0.0,0,4,Saida
+207,2019-05-27 19:43,19:43,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+207,2019-05-27 19:43,19:43,False,16,Cozinha,0,0,1.0,1.0,10,Cozinhar
+207,2019-05-27 19:43,19:43,False,18,Garagem,0,0,0.0,0,16,Pres garagem
+208,2019-05-27 19:46,19:46,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+212,2019-05-27 19:59,19:59,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+212,2019-05-27 19:59,19:59,False,16,Cozinha,0,0,1.0,1.0,10,Cozinhar
+212,2019-05-27 19:59,19:59,False,22,Corredor,0,0,1.0,0,15,Pres corredor
+215,2019-05-27 20:08,20:08,False,18,Garagem,0,0,1.0,0,3,Entrada
+215,2019-05-27 20:08,20:08,False,18,Garagem,0,0,1.0,0,4,Saida
+215,2019-05-27 20:08,20:08,False,18,Garagem,0,0,1.0,0,16,Pres garagem
+216,2019-05-27 20:11,20:11,False,13,Banho,0,0,1.0,0,9,Banho aceso
+217,2019-05-27 20:15,20:15,False,15,Sala,0,0,1.0,0.0,6,Pres sala
+217,2019-05-27 20:15,20:15,False,17,Lavanderia,0,0,1.0,0.0,12,Pres lavanderia
+218,2019-05-27 20:18,20:18,False,16,Cozinha,0,0,1.0,1.0,10,Cozinhar
+219,2019-05-27 20:21,20:21,False,20,Quarto 2,0,0,1.0,0.0,13,Pres quarto 2
+219,2019-05-27 20:21,20:21,False,23,Quarto 3,0,0,1.0,0.0,14,Pres quarto 3
+219,2019-05-27 20:21,20:21,False,22,Corredor,0,0,1.0,0,15,Pres corredor
+221,2019-05-27 20:27,20:27,False,23,Quarto 3,0,0,1.0,0.0,14,Pres quarto 3
+222,2019-05-27 20:30,20:30,False,22,Corredor,0,0,1.0,0,15,Pres corredor
+223,2019-05-27 20:33,20:33,False,20,Quarto 2,0,0,1.0,0.0,13,Pres quarto 2
+224,2019-05-27 20:36,20:36,False,23,Quarto 3,0,0,1.0,0.0,14,Pres quarto 3
+224,2019-05-27 20:36,20:36,False,22,Corredor,0,0,1.0,0,15,Pres corredor
+226,2019-05-27 20:43,20:43,False,15,Sala,0,0,1.0,0.0,6,Pres sala
+226,2019-05-27 20:43,20:43,False,16,Cozinha,0,0,1.0,1.0,10,Cozinhar
+226,2019-05-27 20:43,20:43,False,22,Corredor,0,0,1.0,0,15,Pres corredor
+228,2019-05-27 20:49,20:49,False,20,Quarto 2,0,0,1.0,0.0,13,Pres quarto 2
+228,2019-05-27 20:49,20:49,False,23,Quarto 3,0,0,1.0,0.0,14,Pres quarto 3
+228,2019-05-27 20:49,20:49,False,22,Corredor,0,0,1.0,0,15,Pres corredor
+229,2019-05-27 20:55,20:55,False,20,Quarto 2,0,0,1.0,0.0,13,Pres quarto 2
+229,2019-05-27 20:55,20:55,False,23,Quarto 3,0,0,1.0,0.0,14,Pres quarto 3
+230,2019-05-27 20:58,20:58,False,22,Corredor,0,0,1.0,0,15,Pres corredor
+231,2019-05-27 21:01,21:01,False,15,Sala,0,0,1.0,0.0,6,Pres sala
+231,2019-05-27 21:01,21:01,False,16,Cozinha,0,0,1.0,1.0,10,Cozinhar
+231,2019-05-27 21:01,21:01,False,17,Lavanderia,0,0,1.0,0.0,12,Pres lavanderia
+232,2019-05-27 21:05,21:05,False,18,Garagem,0,0,1.0,0,3,Entrada
+232,2019-05-27 21:05,21:05,False,18,Garagem,0,0,1.0,0,4,Saida
+232,2019-05-27 21:05,21:05,False,18,Garagem,0,0,1.0,0,16,Pres garagem
+235,2019-05-27 21:17,21:17,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+235,2019-05-27 21:17,21:17,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+240,2019-05-27 21:32,21:32,False,16,Cozinha,0,0,0.0,0.0,5,Pres cozinha
+240,2019-05-27 21:32,21:32,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+241,2019-05-27 21:36,21:36,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+242,2019-05-27 21:42,21:42,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+247,2019-05-27 22:01,22:01,False,23,Quarto 3,0,0,0.0,0.0,14,Pres quarto 3
+249,2019-05-27 22:07,22:07,False,18,Garagem,0,0,1.0,0,3,Entrada
+249,2019-05-27 22:07,22:07,False,18,Garagem,0,0,1.0,0,4,Saida
+249,2019-05-27 22:07,22:07,False,18,Garagem,0,0,1.0,0,16,Pres garagem
+250,2019-05-27 22:10,22:10,False,16,Cozinha,0,0,1.0,0.0,5,Pres cozinha
+250,2019-05-27 22:10,22:10,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+252,2019-05-27 22:17,22:17,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+252,2019-05-27 22:17,22:17,False,17,Lavanderia,0,0,1.0,0.0,12,Pres lavanderia
+253,2019-05-27 22:23,22:23,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+254,2019-05-27 22:26,22:26,False,16,Cozinha,0,0,1.0,0.0,5,Pres cozinha
+254,2019-05-27 22:26,22:26,False,17,Lavanderia,0,0,1.0,0.0,12,Pres lavanderia
+258,2019-05-27 22:42,22:42,False,16,Cozinha,0,0,1.0,0.0,5,Pres cozinha
+258,2019-05-27 22:42,22:42,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+261,2019-05-27 22:51,22:51,False,22,Corredor,0,0,0.0,0,15,Pres corredor
+262,2019-05-27 22:54,22:54,False,16,Cozinha,0,0,1.0,0.0,5,Pres cozinha
+262,2019-05-27 22:54,22:54,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+263,2019-05-27 23:04,23:04,False,16,Cozinha,0,0,1.0,0.0,5,Pres cozinha
+263,2019-05-27 23:04,23:04,False,15,Sala,0,0,0.0,0.0,6,Pres sala
+263,2019-05-27 23:04,23:04,False,17,Lavanderia,0,0,1.0,0.0,12,Pres lavanderia
+263,2019-05-27 23:04,23:04,False,22,Corredor,0,0,0.0,0,15,Pres corredor
