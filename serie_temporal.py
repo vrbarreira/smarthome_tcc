@@ -576,7 +576,7 @@ def classificador2_0(start_end_vect, vetor_verificacao, lista_eventos):
         if sensor_avaliado in lista_eventos and sensor_avaliado != eventos_ocorridos[-1] and vetor_verificacao[i][-1] == "ON":
             eventos_ocorridos.append(sensor_avaliado)
             P_X = probabilidade_eventoX(probabilidade_ocorridos, eventos_ocorridos,lista_eventos,valores_anormais_busca, probabilidades_eventos)
-            timeStamp = vetor_verificacao[indice][2]
+            timeStamp = vetor_verificacao[i][2]
             if (1 - P_X) >= threshold_ocorrido:
                 classificacao.append([sensor_avaliado,timeStamp, P_X, 1 - P_X, "SIM"])
             else:
@@ -800,12 +800,15 @@ def analisa_resultado(resultado):
             valores_anormais.append(avaliacao)
         if avaliacao[-2] > 0.8 and avaliacao[-2] <= 0.89:
             numero_alertas[0] += 1
+            avaliacao[-1] = "baixo"
             log.append(avaliacao)
         elif avaliacao[-2] > 0.89 and avaliacao[-2] <= threshold:
             numero_alertas[1] += 1
+            avaliacao[-1] = "medio"
             log.append(avaliacao)
         elif avaliacao[-2] > threshold:
             numero_alertas[2] += 1
+            avaliacao[-1] = "alto"
             log.append(avaliacao)
         if avaliacao[-2] <= 0.2:
             valores_anormais_faixa[1][0] += 1
@@ -863,7 +866,7 @@ log_alertas_invasao = []
 log_alertas_visita = []
 
 avaliacao_anormal_N_1,valores_anormais_faixa_N_1,valores_anormais_N_1,numero_alertas_N_1, log_alertas_N_1 = analisa_resultado(resultado1)
-avaliacao_anormal_N_2,valores_anormais_faixa_N_2,valores_anormais_N_2,numero_alertas_N_2, log_alertas_N_2 = analisa_resultado(resultado2)
+avaliacao_anormal_N_2,valores_anormais_faixa_N_2,valores_anormais_N_2,numero_alertas_N_1, log_alertas_N_2 = analisa_resultado(resultado2)
 avaliacao_anormal_invasao,valores_anormais_faixa_invasao,valores_anormais_invasao,numero_alertas_invasao, log_alertas_invasao = analisa_resultado(resultado_invasao)
 avaliacao_anormal_visita,valores_anormais_faixa_visita,valores_anormais_visita,numero_alertas_visita, log_alertas_visita = analisa_resultado(resultado_visita)
 
@@ -883,6 +886,7 @@ media1 = np.mean(prob_result1)
 desv_pad2 = np.std(prob_result2)
 media2 = np.mean(prob_result2)
 '''
+
 '''
 avaliacao_anormais1 = []
 avaliacao_anormais2 = []
